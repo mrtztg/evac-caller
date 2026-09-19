@@ -1,7 +1,7 @@
 # Progress
 
-**Current milestone:** M0 (real phone call)
-**Status:** M0 acceptance met (call 2). Reviewer PASS, verifier PASS; reviewer majors fixed. Waiting for: user adds `end_call` + `voicemail_detection` tools in the SLNG dashboard, then one verification call on prompt v4, then the M0 gate.
+**Current milestone:** M1 (Telegram coordinator bot with approval + call outcome + escalation)
+**Status:** M0 done (gate 19:55). M1 not started. About 30 min behind plan.
 
 ## Done
 - Repo, rules (CLAUDE.md), plan, reviewer/verifier agents, /milestone /handoff /gate commands, check script + Stop hook.
@@ -16,12 +16,12 @@
 - Call 2 `987fd3a8-7a7f-4451-a01b-ca133cfb4b4b` (19:35, prompt v3, quiet room): key message in greeting; "Which road?" answered "I do not have information about roads... call 112" (no invention); asked for confirmation and help needed; recorded "I'm fine". 116 s. Latency avg: e2e 1.97 s, LLM 0.81 s, TTS 0.21 s. Issues fixed in v4: robotic "You asked: ..." when it didn't understand; said "End of call" without hanging up.
 
 ## Next
-- Read the tool IDs from `GET /v1/agents/{id}/config` after the user adds the tools, and keep them in `evacAgentConfig.tool_refs` so sync doesn't lose them.
-- One v4 call: check natural "can you repeat", goodbye + automatic hang-up.
-- M0 gate, then `/handoff`, then the user starts a new session inside `evac-caller/` (so hooks, commands and agents load).
+- M1 (see docs/PLAN.md): check Mastra docs (context7) for Telegram channel, human approval (suspend/resume workflow), memory, and Nebius as a model provider. Then build in `apps/agent`.
+- Needs from user: `TELEGRAM_BOT_TOKEN` (from @BotFather) and `NEBIUS_API_KEY` + `NEBIUS_MODEL` in `.env`.
+- Prompt v4 gets its first real test in the first M1 approval call.
 
 ## Blockers
-- None known. If the call doesn't ring: check Vonage trial test numbers and outbound country permissions.
+- M1 needs Telegram bot token + Nebius key in `.env`.
 
 ## Notes for a fresh session
 - Read CLAUDE.md, then PLAN.md, then this file.
