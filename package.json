@@ -14,7 +14,9 @@
     "agent:sync": "pnpm --filter @evac/agent agent:sync",
     "call:test": "pnpm --filter @evac/agent call:test",
     "call:status": "pnpm --filter @evac/agent call:status",
-    "bot": "pnpm --filter @evac/agent bot"
+    "bot": "pnpm --filter @evac/agent bot",
+    "data:fetch": "pnpm --filter @evac/core data:fetch",
+    "replay": "pnpm --filter @evac/core replay"
   },
   "devDependencies": {
     "@biomejs/biome": "^2",

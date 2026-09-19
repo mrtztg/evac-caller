@@ -1,0 +1,2689 @@
+{
+  "source": {
+    "name": "OpenStreetMap via Overpass API (© OpenStreetMap contributors, ODbL)",
+    "url": "https://overpass.private.coffee/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A90%5D%3B(%20nwr%5B%22amenity%22~%22%5E(hospital%7Cclinic%7Cschool%7Ckindergarten%7Cnursing_home)%24%22%5D(39.65%2C-0.7%2C40.1%2C0.05)%3B%20nwr%5B%22amenity%22%3D%22social_facility%22%5D(39.65%2C-0.7%2C40.1%2C0.05)%3B%20nwr%5B%22healthcare%22%3D%22centre%22%5D(39.65%2C-0.7%2C40.1%2C0.05)%3B%20)%3Bout%20tags%20center%3B",
+    "fetched_at": "2026-09-19T20:24:43.755Z"
+  },
+  "places": [
+    {
+      "id": "node/392063785",
+      "name": "Centre de Salut San Agustín",
+      "kind": "health centre",
+      "lat": 40.0020861,
+      "lon": -0.0468372,
+      "town": null
+    },
+    {
+      "id": "node/1129740720",
+      "name": "Centro de Salud de Altura",
+      "kind": "health centre",
+      "lat": 39.8500135,
+      "lon": -0.5111683,
+      "town": null
+    },
+    {
+      "id": "node/1239249262",
+      "name": "Guardería",
+      "kind": "nursery",
+      "lat": 39.6830149,
+      "lon": -0.4310848,
+      "town": null
+    },
+    {
+      "id": "node/1481422899",
+      "name": "Guardería Virgen Niño Perdido",
+      "kind": "nursery",
+      "lat": 39.8953962,
+      "lon": -0.1098713,
+      "town": null
+    },
+    {
+      "id": "node/1717024178",
+      "name": "Escuela de Oficios de Castellón",
+      "kind": "school",
+      "lat": 39.9892595,
+      "lon": -0.0557179,
+      "town": null
+    },
+    {
+      "id": "node/1923562431",
+      "name": "Centro de Salud",
+      "kind": "health centre",
+      "lat": 39.6604811,
+      "lon": -0.6728369,
+      "town": null
+    },
+    {
+      "id": "node/2195452232",
+      "name": "Instituto de Educación Secundaria Jérica-Viver",
+      "kind": "school",
+      "lat": 39.9182735,
+      "lon": -0.5857209,
+      "town": null
+    },
+    {
+      "id": "node/2195459679",
+      "name": "Centro de Salud Viver",
+      "kind": "health centre",
+      "lat": 39.9210341,
+      "lon": -0.6006454,
+      "town": null
+    },
+    {
+      "id": "node/2377285410",
+      "name": "Hospital Complementario de Segorbe",
+      "kind": "hospital",
+      "lat": 39.8482269,
+      "lon": -0.4917584,
+      "town": null
+    },
+    {
+      "id": "node/2646169584",
+      "name": "Centre Públic de Formació de Persones Adultes Tirant lo Blanc - Josep Miralles",
+      "kind": "school",
+      "lat": 40.0753411,
+      "lon": -0.2125327,
+      "town": null
+    },
+    {
+      "id": "node/2959903271",
+      "name": "Casa Escola Montornés",
+      "kind": "nursery",
+      "lat": 40.0497322,
+      "lon": 0.0190805,
+      "town": null
+    },
+    {
+      "id": "node/2961162381",
+      "name": "International English School of Castellón",
+      "kind": "school",
+      "lat": 40.001065,
+      "lon": -0.0296315,
+      "town": null
+    },
+    {
+      "id": "node/3092009800",
+      "name": "Colegio Rural Agrupado Sot de Ferrer-Azúebar-Chóvar - Aulario de Azuébar",
+      "kind": "school",
+      "lat": 39.8346187,
+      "lon": -0.3672462,
+      "town": null
+    },
+    {
+      "id": "node/3391118279",
+      "name": "Clínica Náquera",
+      "kind": "health centre",
+      "lat": 39.6561966,
+      "lon": -0.4239371,
+      "town": "Náquera"
+    },
+    {
+      "id": "node/4016142766",
+      "name": "Carenes",
+      "kind": "nursery",
+      "lat": 39.9808904,
+      "lon": -0.0477283,
+      "town": null
+    },
+    {
+      "id": "node/4016142781",
+      "name": "Dr. Giner",
+      "kind": "health centre",
+      "lat": 39.9793787,
+      "lon": -0.0438805,
+      "town": null
+    },
+    {
+      "id": "node/4016148799",
+      "name": "Kine Avant",
+      "kind": "health centre",
+      "lat": 39.9802269,
+      "lon": -0.0443323,
+      "town": null
+    },
+    {
+      "id": "node/4016148845",
+      "name": "Vitalbed",
+      "kind": "health centre",
+      "lat": 39.9791306,
+      "lon": -0.0452736,
+      "town": null
+    },
+    {
+      "id": "node/4433375086",
+      "name": "Ludoteca Sol Solet",
+      "kind": "nursery",
+      "lat": 39.6617687,
+      "lon": -0.2159225,
+      "town": null
+    },
+    {
+      "id": "node/4777553885",
+      "name": "Centre de Salut de la Vall d'Uixó I",
+      "kind": "health centre",
+      "lat": 39.8225158,
+      "lon": -0.2273868,
+      "town": "Vall de Uxó"
+    },
+    {
+      "id": "node/5107702421",
+      "name": "Centre Sanitari Integrat d'Onda II",
+      "kind": "health centre",
+      "lat": 39.9671329,
+      "lon": -0.25655,
+      "town": null
+    },
+    {
+      "id": "node/5239447612",
+      "name": "William Einstein",
+      "kind": "school",
+      "lat": 39.9936752,
+      "lon": -0.036934,
+      "town": null
+    },
+    {
+      "id": "node/5535627676",
+      "name": "Asiger Playa de Canet",
+      "kind": "care home",
+      "lat": 39.6805162,
+      "lon": -0.2089957,
+      "town": "Playa de Canet d'en Berenguer"
+    },
+    {
+      "id": "node/6060228655",
+      "name": "CLINICA PODOLÓGICA DEALBERT",
+      "kind": "health centre",
+      "lat": 39.986972,
+      "lon": -0.0340499,
+      "town": null
+    },
+    {
+      "id": "node/6060247400",
+      "name": "Hospital de Día de Salud Mental Cardenal Costa",
+      "kind": "hospital",
+      "lat": 39.9899471,
+      "lon": -0.0462162,
+      "town": null
+    },
+    {
+      "id": "node/6855696163",
+      "name": "Centre Sanitari Integrat Grau",
+      "kind": "health centre",
+      "lat": 39.9768164,
+      "lon": 0.0152673,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "node/6865098923",
+      "name": "Centro Médico Morvedre",
+      "kind": "health centre",
+      "lat": 39.6573088,
+      "lon": -0.2291924,
+      "town": null
+    },
+    {
+      "id": "node/6865098924",
+      "name": "Umivale - Port de Sagunt",
+      "kind": "health centre",
+      "lat": 39.6556105,
+      "lon": -0.227284,
+      "town": "Sagunt"
+    },
+    {
+      "id": "node/7595174066",
+      "name": "Clínica Medicina Estética Barberá",
+      "kind": "health centre",
+      "lat": 39.8197472,
+      "lon": -0.2268001,
+      "town": "La Vall d'Uixó"
+    },
+    {
+      "id": "node/7973248946",
+      "name": "Centre de Salut Illes Columbretes",
+      "kind": "health centre",
+      "lat": 39.9924803,
+      "lon": -0.03807,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "node/8345780750",
+      "name": "Clínica Ennova",
+      "kind": "health centre",
+      "lat": 39.9813738,
+      "lon": -0.0281283,
+      "town": null
+    },
+    {
+      "id": "node/9248545212",
+      "name": "Centro de la Naturaleza Tarihuel",
+      "kind": "school",
+      "lat": 39.9050737,
+      "lon": -0.5297258,
+      "town": null
+    },
+    {
+      "id": "node/9464415134",
+      "name": "Centre d'Especialitats Jaume I",
+      "kind": "health centre",
+      "lat": 39.9864525,
+      "lon": -0.0409634,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "node/9464415135",
+      "name": "Centre de Salut 9 d'Octubre",
+      "kind": "health centre",
+      "lat": 39.9864196,
+      "lon": -0.0409647,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "node/9468603239",
+      "name": "Clínica Miquel",
+      "kind": "health centre",
+      "lat": 39.819521,
+      "lon": -0.2282425,
+      "town": "La Vall d'Uixó"
+    },
+    {
+      "id": "node/9867819756",
+      "name": "Residència Tercera Edat i Centre de Dia El Pinar",
+      "kind": "care home",
+      "lat": 39.9866688,
+      "lon": 0.0232842,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "node/10276787931",
+      "name": "Centre d'Educació Especial Penyeta Roja",
+      "kind": "school",
+      "lat": 40.0145651,
+      "lon": -0.0548865,
+      "town": null
+    },
+    {
+      "id": "node/10299652803",
+      "name": "Centre de Formació de Persones Adultes Antiga Panderola",
+      "kind": "school",
+      "lat": 39.9381483,
+      "lon": -0.0965124,
+      "town": null
+    },
+    {
+      "id": "node/10707893324",
+      "name": "Consultori Auxiliar Grau de Castelló",
+      "kind": "health centre",
+      "lat": 39.970414,
+      "lon": 0.011996,
+      "town": null
+    },
+    {
+      "id": "node/10855645888",
+      "name": "CENTRO RECONOCIMIENTO MÉDICO CONDUCTORES",
+      "kind": "health centre",
+      "lat": 39.9634872,
+      "lon": -0.2619948,
+      "town": null
+    },
+    {
+      "id": "node/11052486964",
+      "name": "Institut d'Educació Secundària Crémor",
+      "kind": "school",
+      "lat": 39.9944955,
+      "lon": -0.0573999,
+      "town": null
+    },
+    {
+      "id": "node/11330828899",
+      "name": "Agencia Valenciana de Salut",
+      "kind": "health centre",
+      "lat": 39.9918637,
+      "lon": -0.0614148,
+      "town": null
+    },
+    {
+      "id": "node/11702101823",
+      "name": "Centre de Salut de Faura",
+      "kind": "health centre",
+      "lat": 39.7279577,
+      "lon": -0.2606557,
+      "town": null
+    },
+    {
+      "id": "node/11966768606",
+      "name": "Centre de Salut Barranquet - Perpetuo Socorro",
+      "kind": "health centre",
+      "lat": 39.9580839,
+      "lon": -0.0612454,
+      "town": null
+    },
+    {
+      "id": "node/12081380322",
+      "name": "Clínica Medefis",
+      "kind": "health centre",
+      "lat": 39.9415284,
+      "lon": -0.0938406,
+      "town": null
+    },
+    {
+      "id": "node/12081380323",
+      "name": "Clínica Robles",
+      "kind": "health centre",
+      "lat": 39.931244,
+      "lon": -0.1075776,
+      "town": null
+    },
+    {
+      "id": "node/12081380324",
+      "name": "Centro Médico Manebas Burriana",
+      "kind": "health centre",
+      "lat": 39.8856657,
+      "lon": -0.0875912,
+      "town": null
+    },
+    {
+      "id": "node/12081380325",
+      "name": "Policlínica Medinul",
+      "kind": "health centre",
+      "lat": 39.8528418,
+      "lon": -0.1575825,
+      "town": null
+    },
+    {
+      "id": "node/12081470582",
+      "name": "Centro Médico Manebas Onda",
+      "kind": "health centre",
+      "lat": 39.9637062,
+      "lon": -0.2655488,
+      "town": null
+    },
+    {
+      "id": "node/12081470583",
+      "name": "Policlínica Prades",
+      "kind": "health centre",
+      "lat": 39.9666876,
+      "lon": -0.260331,
+      "town": null
+    },
+    {
+      "id": "node/12081621437",
+      "name": "Centro Médico Plana Baixa",
+      "kind": "health centre",
+      "lat": 39.8215706,
+      "lon": -0.2268352,
+      "town": null
+    },
+    {
+      "id": "node/12081621438",
+      "name": "Clínica Sanchis",
+      "kind": "health centre",
+      "lat": 39.8219227,
+      "lon": -0.2273039,
+      "town": null
+    },
+    {
+      "id": "node/12467989807",
+      "name": "Clínica Laura Baduy",
+      "kind": "health centre",
+      "lat": 39.9816772,
+      "lon": -0.0325576,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "node/12596008630",
+      "name": "Secció d'Educació Secundària de l'IES Gilabert de Centelles",
+      "kind": "school",
+      "lat": 39.8594976,
+      "lon": -0.1875304,
+      "town": "la Vilavella"
+    },
+    {
+      "id": "node/12644882644",
+      "name": "Centre Públic de Formació de Persones Adultes Jordi de Sant Jordi",
+      "kind": "school",
+      "lat": 39.8202116,
+      "lon": -0.238907,
+      "town": null
+    },
+    {
+      "id": "node/13300157385",
+      "name": "Cliniplus",
+      "kind": "health centre",
+      "lat": 39.9874979,
+      "lon": -0.0414439,
+      "town": null
+    },
+    {
+      "id": "node/13391848319",
+      "name": "Centre d'Educació Especial Glorieta",
+      "kind": "school",
+      "lat": 39.8506377,
+      "lon": -0.4910626,
+      "town": "Segorbe"
+    },
+    {
+      "id": "node/13579960444",
+      "name": "Clínica Port Salud",
+      "kind": "health centre",
+      "lat": 39.6595701,
+      "lon": -0.219847,
+      "town": null
+    },
+    {
+      "id": "node/13633302403",
+      "name": "CEIP Alt Carraixet (Mestre Ferran Zurriaga)",
+      "kind": "school",
+      "lat": 39.7043638,
+      "lon": -0.5310621,
+      "town": null
+    },
+    {
+      "id": "node/13874323763",
+      "name": "Aula de Respir",
+      "kind": "care home",
+      "lat": 39.6857139,
+      "lon": -0.4309722,
+      "town": "Serra"
+    },
+    {
+      "id": "node/13894655328",
+      "name": "Asociación de Jubilados y Pensionistas Cristo del Calvario",
+      "kind": "care home",
+      "lat": 40.0224097,
+      "lon": -0.2771861,
+      "town": null
+    },
+    {
+      "id": "way/24739200",
+      "name": "Col·legi d'Educació Infantil i Primària Palmerar",
+      "kind": "school",
+      "lat": 40.0304901,
+      "lon": 0.0383674,
+      "town": null
+    },
+    {
+      "id": "way/24751176",
+      "name": "Hospital de La Magdalena",
+      "kind": "hospital",
+      "lat": 40.0043187,
+      "lon": -0.0728363,
+      "town": null
+    },
+    {
+      "id": "way/26185095",
+      "name": "Mas de la Bartola",
+      "kind": "care home",
+      "lat": 40.071169,
+      "lon": 0.0240348,
+      "town": null
+    },
+    {
+      "id": "way/28706549",
+      "name": "Institut d'Educació Secundària Miquel Peris i Segarra",
+      "kind": "school",
+      "lat": 39.9776083,
+      "lon": 0.0083946,
+      "town": null
+    },
+    {
+      "id": "way/29192535",
+      "name": "Hospital Vithas Castellón",
+      "kind": "hospital",
+      "lat": 39.9972777,
+      "lon": -0.0364355,
+      "town": "Castellón de la Plana"
+    },
+    {
+      "id": "way/29385973",
+      "name": "Institut d'Educació Secundària la Plana",
+      "kind": "school",
+      "lat": 39.9948557,
+      "lon": -0.0321841,
+      "town": null
+    },
+    {
+      "id": "way/29385975",
+      "name": "Col·legi d'Educació Infantil i Primària Isabel Ferrer",
+      "kind": "school",
+      "lat": 39.9949181,
+      "lon": -0.0343881,
+      "town": null
+    },
+    {
+      "id": "way/33884244",
+      "name": "Institut d'Educació Secundària Francesc Ribalta",
+      "kind": "school",
+      "lat": 39.9885445,
+      "lon": -0.0398982,
+      "town": null
+    },
+    {
+      "id": "way/33884338",
+      "name": "Col·legi d'Educació Infantil i Primària Bisbe Climent",
+      "kind": "school",
+      "lat": 39.99071,
+      "lon": -0.035636,
+      "town": null
+    },
+    {
+      "id": "way/33888124",
+      "name": "Institut d'Educació Secundària el Caminàs",
+      "kind": "school",
+      "lat": 39.9804695,
+      "lon": -0.0278105,
+      "town": null
+    },
+    {
+      "id": "way/33888125",
+      "name": "Col·legi d'Educació Infantil i Primària Blasco Ibáñez",
+      "kind": "school",
+      "lat": 39.9794993,
+      "lon": -0.0283062,
+      "town": null
+    },
+    {
+      "id": "way/33969381",
+      "name": "Colegio Sagrado Corazón de Jesús",
+      "kind": "school",
+      "lat": 39.9798141,
+      "lon": -0.0371908,
+      "town": null
+    },
+    {
+      "id": "way/33970240",
+      "name": "Col·legi d'Educació Infantil i Primària Censal",
+      "kind": "school",
+      "lat": 39.9773191,
+      "lon": -0.0390665,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/33970241",
+      "name": "Col·legi d'Educació Infantil i Primària Herrero",
+      "kind": "school",
+      "lat": 39.9826651,
+      "lon": -0.0380323,
+      "town": null
+    },
+    {
+      "id": "way/33970242",
+      "name": "Institut d'Educació Secundària Politècnic",
+      "kind": "school",
+      "lat": 39.9796884,
+      "lon": -0.0459197,
+      "town": null
+    },
+    {
+      "id": "way/33971739",
+      "name": "Institut d'Educació Secundària Matilde Salvador",
+      "kind": "school",
+      "lat": 39.9737389,
+      "lon": -0.0482259,
+      "town": null
+    },
+    {
+      "id": "way/33996797",
+      "name": "Colegio Escuelas Pías",
+      "kind": "school",
+      "lat": 39.9837923,
+      "lon": -0.0425886,
+      "town": null
+    },
+    {
+      "id": "way/34008415",
+      "name": "Institut d'Educació Secundària Vicent Castell i Doménecha",
+      "kind": "school",
+      "lat": 39.9753179,
+      "lon": -0.0538059,
+      "town": null
+    },
+    {
+      "id": "way/34078921",
+      "name": "Col·legi d'Educació Infantil i Primària Castàlia",
+      "kind": "school",
+      "lat": 39.9940626,
+      "lon": -0.0405885,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/34103766",
+      "name": "Col·legi d'Educació Infantil i Primària Jaume I",
+      "kind": "school",
+      "lat": 39.9869714,
+      "lon": -0.0541785,
+      "town": null
+    },
+    {
+      "id": "way/34106810",
+      "name": "Col·legi d'Educació Infantil i Primària Maestro Carlos Selma",
+      "kind": "school",
+      "lat": 39.9823138,
+      "lon": -0.0703105,
+      "town": null
+    },
+    {
+      "id": "way/34176757",
+      "name": "Col·legi d'Educació Infantil i Primària San Agustín",
+      "kind": "school",
+      "lat": 40.0026975,
+      "lon": -0.0480853,
+      "town": null
+    },
+    {
+      "id": "way/34250570",
+      "name": "Col·legi d'Educació Infantil i Primària Ejército",
+      "kind": "school",
+      "lat": 39.9808788,
+      "lon": -0.043635,
+      "town": null
+    },
+    {
+      "id": "way/34250573",
+      "name": "Colegio Ramiro Izquierdo",
+      "kind": "school",
+      "lat": 39.9911731,
+      "lon": -0.0214474,
+      "town": null
+    },
+    {
+      "id": "way/34250574",
+      "name": "Col·legi d'Educació Infantil i Primària Enriqueta Agut",
+      "kind": "school",
+      "lat": 39.9905569,
+      "lon": -0.0296344,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/34250575",
+      "name": "Col·legi d'Educació Infantil i Primària Illes Columbretes",
+      "kind": "school",
+      "lat": 39.9965601,
+      "lon": -0.0487493,
+      "town": null
+    },
+    {
+      "id": "way/34250576",
+      "name": "Col·legi d'Educació Infantil i Primària Enric Soler i Godes",
+      "kind": "school",
+      "lat": 39.993422,
+      "lon": -0.0453667,
+      "town": null
+    },
+    {
+      "id": "way/34250578",
+      "name": "Col·legi d'Educació Infantil i Primària Bernat Artola",
+      "kind": "school",
+      "lat": 39.9872313,
+      "lon": -0.0276948,
+      "town": null
+    },
+    {
+      "id": "way/34250579",
+      "name": "Institut d'Educació Secundària Penyagolosa",
+      "kind": "school",
+      "lat": 39.9868875,
+      "lon": -0.0297104,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/34250580",
+      "name": "Colegio Nuestra Señora de la Consolación",
+      "kind": "school",
+      "lat": 39.9912722,
+      "lon": -0.031272,
+      "town": null
+    },
+    {
+      "id": "way/34250581",
+      "name": "Col·legi d'Educació Infantil i Primària Cervantes",
+      "kind": "school",
+      "lat": 39.9891606,
+      "lon": -0.0414444,
+      "town": null
+    },
+    {
+      "id": "way/34250582",
+      "name": "Col·legi d'Educació Infantil i Primària Sanchis Yago",
+      "kind": "school",
+      "lat": 39.9892388,
+      "lon": -0.0293213,
+      "town": null
+    },
+    {
+      "id": "way/34250583",
+      "name": "Institut d'Educació Secundària Vicent Sos Baynat",
+      "kind": "school",
+      "lat": 39.9860585,
+      "lon": -0.0298496,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/34250584",
+      "name": "Col·legi d'Educació Infantil i Primària Mestre Canós Sanmartín",
+      "kind": "school",
+      "lat": 39.9852262,
+      "lon": -0.0301582,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/34250585",
+      "name": "Col·legi d'Educació Infantil i Primària Pintor Castell",
+      "kind": "school",
+      "lat": 39.9775912,
+      "lon": -0.0348258,
+      "town": null
+    },
+    {
+      "id": "way/34250586",
+      "name": "Institut d'Educació Secundària Juan Bautista Porcar",
+      "kind": "school",
+      "lat": 39.9770326,
+      "lon": -0.0436042,
+      "town": null
+    },
+    {
+      "id": "way/34250587",
+      "name": "Col·legi Grans i Menuts",
+      "kind": "school",
+      "lat": 39.9866029,
+      "lon": -0.0777097,
+      "town": null
+    },
+    {
+      "id": "way/34250588",
+      "name": "Col·legi d'Educació Infantil i Primària Estepar",
+      "kind": "school",
+      "lat": 39.9740568,
+      "lon": -0.0532974,
+      "town": null
+    },
+    {
+      "id": "way/34250590",
+      "name": "Col·legi d'Educació Infantil i Primària l'Illa",
+      "kind": "school",
+      "lat": 39.9745359,
+      "lon": 0.0072014,
+      "town": null
+    },
+    {
+      "id": "way/34250591",
+      "name": "Col·legi d'Educació Infantil i Primària la Marina",
+      "kind": "school",
+      "lat": 39.9694343,
+      "lon": 0.009802,
+      "town": null
+    },
+    {
+      "id": "way/34250592",
+      "name": "Col·legi d'Educació Infantil i Primària Sebastián Elcano",
+      "kind": "school",
+      "lat": 39.9742,
+      "lon": 0.0129831,
+      "town": null
+    },
+    {
+      "id": "way/34250593",
+      "name": "Ágora Lledó International School",
+      "kind": "school",
+      "lat": 40.0005032,
+      "lon": -0.0228237,
+      "town": null
+    },
+    {
+      "id": "way/34564985",
+      "name": "Institut d'Educació Secundària Álvaro Falomir",
+      "kind": "school",
+      "lat": 39.9524138,
+      "lon": -0.0651754,
+      "town": null
+    },
+    {
+      "id": "way/34564986",
+      "name": "Col·legi d'Educació Infantil i Primària Boqueres",
+      "kind": "school",
+      "lat": 39.9512014,
+      "lon": -0.0644865,
+      "town": "Almassora"
+    },
+    {
+      "id": "way/34565015",
+      "name": "Col·legi d'Educació Infantil i Primària Regina Violant",
+      "kind": "school",
+      "lat": 39.9505578,
+      "lon": -0.0611078,
+      "town": null
+    },
+    {
+      "id": "way/34573868",
+      "name": "Col·legi d'Educació Infantil i Primària Riu Millars",
+      "kind": "school",
+      "lat": 39.9488551,
+      "lon": -0.0663475,
+      "town": null
+    },
+    {
+      "id": "way/34573899",
+      "name": "Col·legi d'Educació Infantil i Primària Cardenal Cisneros",
+      "kind": "school",
+      "lat": 39.9425145,
+      "lon": -0.0657174,
+      "town": null
+    },
+    {
+      "id": "way/34573949",
+      "name": "Institut d'Educació Secundària Vila-roja",
+      "kind": "school",
+      "lat": 39.9447792,
+      "lon": -0.0577655,
+      "town": "Almassora"
+    },
+    {
+      "id": "way/34573951",
+      "name": "Vicente Vilar Morella",
+      "kind": "care home",
+      "lat": 39.945338,
+      "lon": -0.0585772,
+      "town": null
+    },
+    {
+      "id": "way/34573976",
+      "name": "Col·legi d'Educació Infantil i Primària Germans Ochando",
+      "kind": "school",
+      "lat": 39.9439345,
+      "lon": -0.059455,
+      "town": "Almassora"
+    },
+    {
+      "id": "way/35558796",
+      "name": "Colegio Público Virgen de la Luz",
+      "kind": "school",
+      "lat": 39.8759237,
+      "lon": -0.5052127,
+      "town": null
+    },
+    {
+      "id": "way/35559344",
+      "name": "Centro de Salud de Navajas",
+      "kind": "health centre",
+      "lat": 39.8787323,
+      "lon": -0.5049399,
+      "town": null
+    },
+    {
+      "id": "way/37961748",
+      "name": "Col·legi Salesià",
+      "kind": "school",
+      "lat": 39.8934352,
+      "lon": -0.0887792,
+      "town": "Borriana / Burriana"
+    },
+    {
+      "id": "way/37961749",
+      "name": "Col·legi d'Educació Infantil i Primària Penyagolosa",
+      "kind": "school",
+      "lat": 39.8939672,
+      "lon": -0.0869792,
+      "town": "Borriana"
+    },
+    {
+      "id": "way/37961750",
+      "name": "Col·legi Villa Fàtima",
+      "kind": "school",
+      "lat": 39.894481,
+      "lon": -0.085561,
+      "town": null
+    },
+    {
+      "id": "way/37961860",
+      "name": "Col·legi d'Educació Infantil i Primària Pare Vilallonga",
+      "kind": "school",
+      "lat": 39.887312,
+      "lon": -0.0781203,
+      "town": "Borriana / Burriana"
+    },
+    {
+      "id": "way/37961869",
+      "name": "Centre d'Educació Especial Pla d'Hortolans",
+      "kind": "school",
+      "lat": 39.8948719,
+      "lon": -0.0879044,
+      "town": null
+    },
+    {
+      "id": "way/37979974",
+      "name": "Col·legi Nostra Senyora de la Consolació",
+      "kind": "school",
+      "lat": 39.8893522,
+      "lon": -0.0800084,
+      "town": null
+    },
+    {
+      "id": "way/37983569",
+      "name": "Centre de salut Borriana I",
+      "kind": "health centre",
+      "lat": 39.886975,
+      "lon": -0.0904034,
+      "town": "Borriana / Burriana"
+    },
+    {
+      "id": "way/38001750",
+      "name": "Institut d'Educació Secundària Jaume I",
+      "kind": "school",
+      "lat": 39.8868619,
+      "lon": -0.0948071,
+      "town": null
+    },
+    {
+      "id": "way/38001764",
+      "name": "Col·legi d'Educació Infantil i Primària Francesc Roca i Alcaide",
+      "kind": "school",
+      "lat": 39.8886784,
+      "lon": -0.0945288,
+      "town": "Borriana"
+    },
+    {
+      "id": "way/38036198",
+      "name": "Col·legi Illes Columbretes",
+      "kind": "school",
+      "lat": 39.8904653,
+      "lon": -0.0862775,
+      "town": null
+    },
+    {
+      "id": "way/40753327",
+      "name": "Col·legi d'Educació Infantil i Primària Pío XII",
+      "kind": "school",
+      "lat": 39.9314718,
+      "lon": -0.0994425,
+      "town": null
+    },
+    {
+      "id": "way/40753328",
+      "name": "Col·legi d'Educació Infantil i Primària Pascual Nácher",
+      "kind": "school",
+      "lat": 39.9308587,
+      "lon": -0.1025985,
+      "town": null
+    },
+    {
+      "id": "way/40753347",
+      "name": "Colegio Nuestra Señora de la Consolación",
+      "kind": "school",
+      "lat": 39.9328165,
+      "lon": -0.1034095,
+      "town": null
+    },
+    {
+      "id": "way/40753373",
+      "name": "Col·legi d'Educació Infantil i Primària Botànic Calduch",
+      "kind": "school",
+      "lat": 39.9453835,
+      "lon": -0.0939826,
+      "town": null
+    },
+    {
+      "id": "way/40753427",
+      "name": "Colegio Virgen del Carmen",
+      "kind": "school",
+      "lat": 39.9451395,
+      "lon": -0.1052002,
+      "town": "Vila-real"
+    },
+    {
+      "id": "way/40778487",
+      "name": "Col·legi Santa Maria",
+      "kind": "school",
+      "lat": 39.9260201,
+      "lon": -0.1045198,
+      "town": null
+    },
+    {
+      "id": "way/40778539",
+      "name": "Col·legi d'Educació Infantil i Primària Cervantes",
+      "kind": "school",
+      "lat": 39.9382465,
+      "lon": -0.0941975,
+      "town": null
+    },
+    {
+      "id": "way/40778540",
+      "name": "Institut d'Educació Secundària Francesc Tàrrega",
+      "kind": "school",
+      "lat": 39.9379777,
+      "lon": -0.0952219,
+      "town": null
+    },
+    {
+      "id": "way/40984876",
+      "name": "Col·legi d'Educació Infantil i Primària Escultor Ortells",
+      "kind": "school",
+      "lat": 39.9407719,
+      "lon": -0.0929776,
+      "town": null
+    },
+    {
+      "id": "way/40984910",
+      "name": "Col·legi d'Educació Infantil i Primària Pintor Gimeno Barón",
+      "kind": "school",
+      "lat": 39.9423769,
+      "lon": -0.0984973,
+      "town": null
+    },
+    {
+      "id": "way/40984915",
+      "name": "Col·legi d'Educació Infantil i Primària Concepción Arenal",
+      "kind": "school",
+      "lat": 39.9381867,
+      "lon": -0.10729,
+      "town": null
+    },
+    {
+      "id": "way/40986909",
+      "name": "Institut d'Educació Secundària Professor Broch i Llop",
+      "kind": "school",
+      "lat": 39.9290788,
+      "lon": -0.1018393,
+      "town": null
+    },
+    {
+      "id": "way/40993624",
+      "name": "Col·legi d'Educació Infantil i Primària Carlos Sarthou Carreres",
+      "kind": "school",
+      "lat": 39.9426554,
+      "lon": -0.1065262,
+      "town": null
+    },
+    {
+      "id": "way/40993625",
+      "name": "Centre d'Educació Especial la Panderola",
+      "kind": "school",
+      "lat": 39.9433957,
+      "lon": -0.1073192,
+      "town": null
+    },
+    {
+      "id": "way/41039756",
+      "name": "Institut d'Educació Secundària Miralcamp",
+      "kind": "school",
+      "lat": 39.9390789,
+      "lon": -0.1148781,
+      "town": null
+    },
+    {
+      "id": "way/41085315",
+      "name": "Centro Comarcal de la Salud",
+      "kind": "health centre",
+      "lat": 39.9431371,
+      "lon": -0.1074142,
+      "town": null
+    },
+    {
+      "id": "way/41085316",
+      "name": "Residencia de la Tercera Edad Virgen de Gracia",
+      "kind": "care home",
+      "lat": 39.9455644,
+      "lon": -0.1067479,
+      "town": null
+    },
+    {
+      "id": "way/41085319",
+      "name": "Colegio Obispo Pont",
+      "kind": "school",
+      "lat": 39.9459691,
+      "lon": -0.0973497,
+      "town": null
+    },
+    {
+      "id": "way/41361829",
+      "name": "Col·legi d'Educació Infantil i Primària l'Hereu",
+      "kind": "school",
+      "lat": 40.0418609,
+      "lon": -0.0690045,
+      "town": null
+    },
+    {
+      "id": "way/41361887",
+      "name": "Centro de salud de Borriol",
+      "kind": "health centre",
+      "lat": 40.0401407,
+      "lon": -0.0740565,
+      "town": null
+    },
+    {
+      "id": "way/41756285",
+      "name": "Col·legi d'Educació Infantil i Primària Mestre Vicent Artero",
+      "kind": "school",
+      "lat": 39.9870136,
+      "lon": -0.0520584,
+      "town": null
+    },
+    {
+      "id": "way/42134250",
+      "name": "Hospital Provincial de Castelló",
+      "kind": "hospital",
+      "lat": 39.9840763,
+      "lon": -0.0463793,
+      "town": null
+    },
+    {
+      "id": "way/46039131",
+      "name": "Guardería-Ludoteca Xiquets",
+      "kind": "nursery",
+      "lat": 40.0191312,
+      "lon": -0.2790128,
+      "town": "Ribesalbes"
+    },
+    {
+      "id": "way/46039176",
+      "name": "Col·legi d'Educació Infantil i Primària Riu Millars",
+      "kind": "school",
+      "lat": 40.0210792,
+      "lon": -0.2759737,
+      "town": null
+    },
+    {
+      "id": "way/46150046",
+      "name": "Centre de Salut de l'Alcora",
+      "kind": "health centre",
+      "lat": 40.0733661,
+      "lon": -0.2113282,
+      "town": null
+    },
+    {
+      "id": "way/46150047",
+      "name": "Fundación Colegio Puertolas Pardo",
+      "kind": "school",
+      "lat": 40.0744787,
+      "lon": -0.2117115,
+      "town": null
+    },
+    {
+      "id": "way/46150217",
+      "name": "Colegio La Salle",
+      "kind": "school",
+      "lat": 40.0788722,
+      "lon": -0.2124553,
+      "town": null
+    },
+    {
+      "id": "way/46195255",
+      "name": "Col·legi d'Educació Infantil i Primària Francisco Grangel Mascarós",
+      "kind": "school",
+      "lat": 40.0738391,
+      "lon": -0.2161965,
+      "town": null
+    },
+    {
+      "id": "way/46195280",
+      "name": "Col·legi d'Educació Infantil i Primària Comte d'Aranda",
+      "kind": "school",
+      "lat": 40.0770016,
+      "lon": -0.2154791,
+      "town": null
+    },
+    {
+      "id": "way/46201464",
+      "name": "Institut d'Educació Secundària Ximén d'Urrea",
+      "kind": "school",
+      "lat": 40.0717611,
+      "lon": -0.2074374,
+      "town": null
+    },
+    {
+      "id": "way/47333763",
+      "name": "Centre de Salut d'Onda",
+      "kind": "health centre",
+      "lat": 39.962615,
+      "lon": -0.2682279,
+      "town": null
+    },
+    {
+      "id": "way/47378583",
+      "name": "Col·legi d'Educació Infantil i Primària Pío XII",
+      "kind": "school",
+      "lat": 39.9611865,
+      "lon": -0.267899,
+      "town": null
+    },
+    {
+      "id": "way/47378584",
+      "name": "Col·legi d'Educació Infantil i Primària Baltasar Rull",
+      "kind": "school",
+      "lat": 39.9657325,
+      "lon": -0.2685927,
+      "town": null
+    },
+    {
+      "id": "way/47378587",
+      "name": "Institut d'Educació Secundària el Torrelló",
+      "kind": "school",
+      "lat": 39.9686815,
+      "lon": -0.2583287,
+      "town": "Onda"
+    },
+    {
+      "id": "way/47378656",
+      "name": "Colegio Virgen del Carmen",
+      "kind": "school",
+      "lat": 39.9674906,
+      "lon": -0.2629354,
+      "town": null
+    },
+    {
+      "id": "way/47378663",
+      "name": "Col·legi d'Educació Infantil i Primària Mestre Caballero",
+      "kind": "school",
+      "lat": 39.9674309,
+      "lon": -0.2555678,
+      "town": null
+    },
+    {
+      "id": "way/50295787",
+      "name": "Col·legi d'Educació Infantil i Primària Recaredo Centelles",
+      "kind": "school",
+      "lat": 39.8251666,
+      "lon": -0.2399508,
+      "town": null
+    },
+    {
+      "id": "way/50295811",
+      "name": "Col·legi d'Educació Infantil i Primària Blasco Ibáñez",
+      "kind": "school",
+      "lat": 39.8179473,
+      "lon": -0.2425894,
+      "town": null
+    },
+    {
+      "id": "way/50295812",
+      "name": "Escuela Infantil La Parreta",
+      "kind": "nursery",
+      "lat": 39.8176316,
+      "lon": -0.2421296,
+      "town": null
+    },
+    {
+      "id": "way/50295828",
+      "name": "Institut d'Educació Secundària Honori Garcia",
+      "kind": "school",
+      "lat": 39.8194474,
+      "lon": -0.2312323,
+      "town": "la Vall d'Uixó"
+    },
+    {
+      "id": "way/50295830",
+      "name": "Col·legi d'Educació Infantil i Primària Eleuterio Pérez",
+      "kind": "school",
+      "lat": 39.8195531,
+      "lon": -0.2292798,
+      "town": null
+    },
+    {
+      "id": "way/50295831",
+      "name": "Col·legi d'Educació Infantil i Primària Ausiàs March",
+      "kind": "school",
+      "lat": 39.8203772,
+      "lon": -0.2348091,
+      "town": null
+    },
+    {
+      "id": "way/50295832",
+      "name": "Institut d'Educació Secundària Botànic Cavanilles",
+      "kind": "school",
+      "lat": 39.819727,
+      "lon": -0.2336046,
+      "town": "La Vall d'Uixó"
+    },
+    {
+      "id": "way/50295845",
+      "name": "Col·legi d'Educació Infantil i Primària la Cova",
+      "kind": "school",
+      "lat": 39.8168546,
+      "lon": -0.2368113,
+      "town": null
+    },
+    {
+      "id": "way/50295920",
+      "name": "Col·legi d'Educació Infantil i Primària Colonia Segarra",
+      "kind": "school",
+      "lat": 39.8163323,
+      "lon": -0.2328637,
+      "town": null
+    },
+    {
+      "id": "way/50295943",
+      "name": "Col·legi d'Educació Infantil i Primària la Moleta",
+      "kind": "school",
+      "lat": 39.8208861,
+      "lon": -0.2387468,
+      "town": null
+    },
+    {
+      "id": "way/50295944",
+      "name": "Col·legi d'Educació Infantil Sagrado Corazón",
+      "kind": "nursery",
+      "lat": 39.8236411,
+      "lon": -0.2314273,
+      "town": null
+    },
+    {
+      "id": "way/50295945",
+      "name": "Col·legi d'Educació Infantil i Primària Sant Vicent Ferrer",
+      "kind": "school",
+      "lat": 39.821664,
+      "lon": -0.224476,
+      "town": null
+    },
+    {
+      "id": "way/50295946",
+      "name": "Institut d'Educació Secundària Benigasló",
+      "kind": "school",
+      "lat": 39.8214726,
+      "lon": -0.2240998,
+      "town": null
+    },
+    {
+      "id": "way/50295947",
+      "name": "Col·legi d'Educació Infantil i Primària Rosario Pérez",
+      "kind": "school",
+      "lat": 39.8293362,
+      "lon": -0.2374134,
+      "town": null
+    },
+    {
+      "id": "way/50295948",
+      "name": "Col·legi d'Educació Infantil i Primària Cervantes",
+      "kind": "school",
+      "lat": 39.8274752,
+      "lon": -0.2335831,
+      "town": "la Vall d'Uixó"
+    },
+    {
+      "id": "way/50295949",
+      "name": "Escuela Infantil Carbonaire",
+      "kind": "nursery",
+      "lat": 39.8285236,
+      "lon": -0.2353811,
+      "town": null
+    },
+    {
+      "id": "way/50295950",
+      "name": "Col·legi d'Educació Infantil i Primària Leonardo Mingarro",
+      "kind": "school",
+      "lat": 39.8275929,
+      "lon": -0.222673,
+      "town": null
+    },
+    {
+      "id": "way/78164155",
+      "name": "Centre Integrat Públic de Formació Professional La Laboral",
+      "kind": "nursery",
+      "lat": 39.6740815,
+      "lon": -0.2506295,
+      "town": null
+    },
+    {
+      "id": "way/78286125",
+      "name": "Institut d'Educació Secundària Clot del Moro",
+      "kind": "school",
+      "lat": 39.6757737,
+      "lon": -0.291561,
+      "town": null
+    },
+    {
+      "id": "way/84964108",
+      "name": "Centre de Salut Palleter",
+      "kind": "health centre",
+      "lat": 39.9742824,
+      "lon": -0.0489824,
+      "town": null
+    },
+    {
+      "id": "way/84964109",
+      "name": "Col·legi d'Educació Infantil i Primària Isidoro Andrés Villaroya",
+      "kind": "school",
+      "lat": 39.9741047,
+      "lon": -0.0456266,
+      "town": null
+    },
+    {
+      "id": "way/97870981",
+      "name": "Colegio Público Virgen de Gracia",
+      "kind": "school",
+      "lat": 39.8525291,
+      "lon": -0.5182161,
+      "town": null
+    },
+    {
+      "id": "way/119033807",
+      "name": "Col·legi d'Educació Infantil i Primària Nuestra Señora de Begoña",
+      "kind": "school",
+      "lat": 39.6604746,
+      "lon": -0.2167722,
+      "town": null
+    },
+    {
+      "id": "way/126348146",
+      "name": "Col·legi d'Educació Infantil i Primària Tombatossals",
+      "kind": "school",
+      "lat": 39.9993888,
+      "lon": -0.0319031,
+      "town": null
+    },
+    {
+      "id": "way/128284133",
+      "name": "Colegio San Cristóbal",
+      "kind": "school",
+      "lat": 39.9819471,
+      "lon": -0.0229944,
+      "town": null
+    },
+    {
+      "id": "way/132510214",
+      "name": "Col·legi d'Educació Infantil i Primària Luis Vives",
+      "kind": "school",
+      "lat": 39.7832743,
+      "lon": -0.1877904,
+      "town": null
+    },
+    {
+      "id": "way/132523933",
+      "name": "Centro de salud",
+      "kind": "health centre",
+      "lat": 39.7825768,
+      "lon": -0.1892572,
+      "town": null
+    },
+    {
+      "id": "way/134765661",
+      "name": "Institut d'Educació Secundària l'Alcalatén",
+      "kind": "school",
+      "lat": 40.0724647,
+      "lon": -0.216,
+      "town": null
+    },
+    {
+      "id": "way/135037758",
+      "name": "Col·legi d'Educació Infantil i Primària Fadrell",
+      "kind": "school",
+      "lat": 39.9789603,
+      "lon": -0.0323811,
+      "town": null
+    },
+    {
+      "id": "way/143912608",
+      "name": "Escola Infantil Municipal Pintor Tasio Flors Meliá",
+      "kind": "nursery",
+      "lat": 40.0390544,
+      "lon": 0.0395981,
+      "town": null
+    },
+    {
+      "id": "way/157294092",
+      "name": "Col·legi d'Educació Infantil i Primària Profesor Tierno Galván",
+      "kind": "school",
+      "lat": 39.6651021,
+      "lon": -0.2314483,
+      "town": null
+    },
+    {
+      "id": "way/166245671",
+      "name": "Institut d'Educació Secundària Almenara",
+      "kind": "school",
+      "lat": 39.7519621,
+      "lon": -0.2308414,
+      "town": null
+    },
+    {
+      "id": "way/166245674",
+      "name": "Col·legi d'Educació Infantil i Primària l'Ereta",
+      "kind": "school",
+      "lat": 39.7543628,
+      "lon": -0.222044,
+      "town": null
+    },
+    {
+      "id": "way/166687005",
+      "name": "Centre de Salut - Almenara",
+      "kind": "health centre",
+      "lat": 39.7510056,
+      "lon": -0.2257244,
+      "town": null
+    },
+    {
+      "id": "way/198680996",
+      "name": "Col·legi d'Educació Infantil i Primària Carles Salvador",
+      "kind": "school",
+      "lat": 39.9769766,
+      "lon": -0.0394963,
+      "town": null
+    },
+    {
+      "id": "way/208427335",
+      "name": "Col·legi d'Educació Infantil i Primària Manel García Grau",
+      "kind": "school",
+      "lat": 39.9924008,
+      "lon": -0.0573465,
+      "town": null
+    },
+    {
+      "id": "way/208427336",
+      "name": "Institut d'Educació Secundària Bovalar",
+      "kind": "school",
+      "lat": 39.9921525,
+      "lon": -0.0566421,
+      "town": null
+    },
+    {
+      "id": "way/211995122",
+      "name": "Col·legi d'Educació Infantil i Primària Historiador Diago",
+      "kind": "school",
+      "lat": 39.921664,
+      "lon": -0.5951878,
+      "town": null
+    },
+    {
+      "id": "way/226279959",
+      "name": "Col·legi d'Educació Infantil i Primària Sant Joan de Moró",
+      "kind": "school",
+      "lat": 40.0593217,
+      "lon": -0.1350743,
+      "town": null
+    },
+    {
+      "id": "way/229083589",
+      "name": "Instituto de Educación Secundaria Cueva Santa",
+      "kind": "school",
+      "lat": 39.8475583,
+      "lon": -0.4882937,
+      "town": "Segorbe"
+    },
+    {
+      "id": "way/229088832",
+      "name": "Instituto de Educación Secundaria Alto Palancia",
+      "kind": "school",
+      "lat": 39.842787,
+      "lon": -0.4903203,
+      "town": "Segorbe"
+    },
+    {
+      "id": "way/230556487",
+      "name": "Centro Especializado de Atención a Mayores",
+      "kind": "care home",
+      "lat": 39.8501873,
+      "lon": -0.4904764,
+      "town": null
+    },
+    {
+      "id": "way/230723972",
+      "name": "Colegio La Magdalena",
+      "kind": "school",
+      "lat": 40.0365334,
+      "lon": -0.0080026,
+      "town": null
+    },
+    {
+      "id": "way/237820969",
+      "name": "Escola Infantil de 1r Cicle",
+      "kind": "nursery",
+      "lat": 39.7504293,
+      "lon": -0.2216945,
+      "town": null
+    },
+    {
+      "id": "way/242314124",
+      "name": "Escola Infantil Municipal el Solet",
+      "kind": "nursery",
+      "lat": 39.9303046,
+      "lon": -0.102451,
+      "town": "Vila-real"
+    },
+    {
+      "id": "way/243490622",
+      "name": "Col·legi d'Educació Infantil i Primària Novenes de Calatrava",
+      "kind": "school",
+      "lat": 39.8800002,
+      "lon": -0.0776692,
+      "town": null
+    },
+    {
+      "id": "way/264757699",
+      "name": "Centre de Salut Carinyena",
+      "kind": "health centre",
+      "lat": 39.9312427,
+      "lon": -0.1033403,
+      "town": null
+    },
+    {
+      "id": "way/264760858",
+      "name": "Residència de Discapacitats psiquics de Vila-real",
+      "kind": "care home",
+      "lat": 39.9428986,
+      "lon": -0.1083246,
+      "town": null
+    },
+    {
+      "id": "way/264760859",
+      "name": "Col·legi d'Educació Infantil i Primària Angelina Abad",
+      "kind": "school",
+      "lat": 39.9433836,
+      "lon": -0.0915302,
+      "town": null
+    },
+    {
+      "id": "way/293573684",
+      "name": "Col·legi d'Educació Infantil i Primària Don José Alba",
+      "kind": "school",
+      "lat": 39.8594339,
+      "lon": -0.1874738,
+      "town": null
+    },
+    {
+      "id": "way/299142585",
+      "name": "Hospital Doctor Moliner",
+      "kind": "hospital",
+      "lat": 39.6558712,
+      "lon": -0.4742944,
+      "town": null
+    },
+    {
+      "id": "way/299453170",
+      "name": "Col·legi d'Educació Infantil i Primària Juan García Ripollés",
+      "kind": "school",
+      "lat": 39.9778988,
+      "lon": -0.0524787,
+      "town": null
+    },
+    {
+      "id": "way/303355526",
+      "name": "Col·legi d'Educació Infantil i Primària Carme Martín",
+      "kind": "school",
+      "lat": 39.8891785,
+      "lon": -0.2560611,
+      "town": null
+    },
+    {
+      "id": "way/305000693",
+      "name": "Col·legi d'Educació Infantil i Primària \"Castro\"",
+      "kind": "school",
+      "lat": 39.8340405,
+      "lon": -0.2725142,
+      "town": null
+    },
+    {
+      "id": "way/307053094",
+      "name": "Col·legi d'Educació Infantil i Primària Algimia de Almonacid",
+      "kind": "school",
+      "lat": 39.9132491,
+      "lon": -0.444962,
+      "town": null
+    },
+    {
+      "id": "way/314102150",
+      "name": "Col·legi d'Educació Infantil i Primària Científic Avel·lí Corma",
+      "kind": "school",
+      "lat": 39.8057867,
+      "lon": -0.1427628,
+      "town": null
+    },
+    {
+      "id": "way/320407227",
+      "name": "Col·legi d'Educació Infantil i Primària Gaetà Huguet",
+      "kind": "school",
+      "lat": 39.9900793,
+      "lon": -0.0446305,
+      "town": null
+    },
+    {
+      "id": "way/332153497",
+      "name": "Colegio Público Pintor Camarón",
+      "kind": "school",
+      "lat": 39.8512033,
+      "lon": -0.4821422,
+      "town": "Segorbe"
+    },
+    {
+      "id": "way/336495427",
+      "name": "Colegio Rural Agrupado Sot de Ferrer-Azuébar-Chóvar - Aulario de Chóvar",
+      "kind": "school",
+      "lat": 39.849814,
+      "lon": -0.3196024,
+      "town": null
+    },
+    {
+      "id": "way/343218081",
+      "name": "Colegio Público Pintor Camarón (Educación Infantil)",
+      "kind": "school",
+      "lat": 39.8481698,
+      "lon": -0.4875757,
+      "town": "Segorbe"
+    },
+    {
+      "id": "way/344090567",
+      "name": "Colegio Mater Dei",
+      "kind": "school",
+      "lat": 40.0278799,
+      "lon": -0.0048165,
+      "town": null
+    },
+    {
+      "id": "way/373768584",
+      "name": "Institut d'Educació Secundària Serra d'Espadà",
+      "kind": "school",
+      "lat": 39.9628493,
+      "lon": -0.2744842,
+      "town": null
+    },
+    {
+      "id": "way/379091189",
+      "name": "Col·legi d'Educació Infantil i Primària Lope de Vega",
+      "kind": "school",
+      "lat": 39.976122,
+      "lon": -0.0500784,
+      "town": null
+    },
+    {
+      "id": "way/379091190",
+      "name": "Centre de Formació de Persones Adultes Josep Pasqual i Tirado",
+      "kind": "school",
+      "lat": 39.9826736,
+      "lon": -0.0312904,
+      "town": null
+    },
+    {
+      "id": "way/379091192",
+      "name": "Escola Infantil Nostra Senyora de Lourdes",
+      "kind": "nursery",
+      "lat": 39.9948004,
+      "lon": -0.0380713,
+      "town": "Castellón de la Plana"
+    },
+    {
+      "id": "way/380258001",
+      "name": "Col·legi d'Educació Infantil i Primària el Pinar",
+      "kind": "school",
+      "lat": 39.9848427,
+      "lon": 0.0176205,
+      "town": null
+    },
+    {
+      "id": "way/396206598",
+      "name": "Centre Sanitari Integrat de Gran Via",
+      "kind": "health centre",
+      "lat": 39.9791559,
+      "lon": -0.0522435,
+      "town": null
+    },
+    {
+      "id": "way/409291789",
+      "name": "Aulari d'Olocau",
+      "kind": "school",
+      "lat": 39.700937,
+      "lon": -0.5301064,
+      "town": null
+    },
+    {
+      "id": "way/437441829",
+      "name": "Col·legi d'Educació Infantil i Primària Maestro Tarazona",
+      "kind": "school",
+      "lat": 39.6696057,
+      "lon": -0.2347222,
+      "town": null
+    },
+    {
+      "id": "way/437447368",
+      "name": "Escola Infantil Isabel González Torres",
+      "kind": "nursery",
+      "lat": 39.7816797,
+      "lon": -0.1833478,
+      "town": null
+    },
+    {
+      "id": "way/437573832",
+      "name": "Centre Integrat Públic de Formació Professional Eduardo Merello",
+      "kind": "nursery",
+      "lat": 39.6649911,
+      "lon": -0.2275894,
+      "town": "Port de Sagunt"
+    },
+    {
+      "id": "way/438371854",
+      "name": "Institut d'Educació Secundària María Moliner",
+      "kind": "school",
+      "lat": 39.6640056,
+      "lon": -0.2231018,
+      "town": "Port de Sagunt"
+    },
+    {
+      "id": "way/438436828",
+      "name": "Centro de Especialidades",
+      "kind": "health centre",
+      "lat": 39.6652555,
+      "lon": -0.2284093,
+      "town": null
+    },
+    {
+      "id": "way/438524765",
+      "name": "Institut d'Educació Secundària Camp de Morvedre",
+      "kind": "school",
+      "lat": 39.6709319,
+      "lon": -0.2471275,
+      "town": null
+    },
+    {
+      "id": "way/443200935",
+      "name": "Centre de Salut Port de Sagunt II",
+      "kind": "health centre",
+      "lat": 39.6636682,
+      "lon": -0.2198932,
+      "town": null
+    },
+    {
+      "id": "way/443200937",
+      "name": "Centre de Salut del Port de Sagunt",
+      "kind": "health centre",
+      "lat": 39.6653733,
+      "lon": -0.2275662,
+      "town": null
+    },
+    {
+      "id": "way/443202131",
+      "name": "Col·legi d'Educació Infantil i Primària Mediterráneo",
+      "kind": "school",
+      "lat": 39.6625285,
+      "lon": -0.2221341,
+      "town": null
+    },
+    {
+      "id": "way/443353657",
+      "name": "Col·legi d'Educació Infantil i Primària Vilamar",
+      "kind": "school",
+      "lat": 39.6666853,
+      "lon": -0.2153036,
+      "town": null
+    },
+    {
+      "id": "way/443355718",
+      "name": "Col·legi d'Educació Infantil i Primària María Yocasta Ruiz Aguilera",
+      "kind": "school",
+      "lat": 39.6694457,
+      "lon": -0.2187758,
+      "town": null
+    },
+    {
+      "id": "way/445490852",
+      "name": "Col·legi d'Educació Infantil i Primària Cervantes",
+      "kind": "school",
+      "lat": 39.6603439,
+      "lon": -0.224917,
+      "town": null
+    },
+    {
+      "id": "way/445490856",
+      "name": "Residencia 3º Edad",
+      "kind": "care home",
+      "lat": 39.6664045,
+      "lon": -0.2294422,
+      "town": "port de sagunt"
+    },
+    {
+      "id": "way/445490857",
+      "name": "Residència de Tercera Edat de Sagunt",
+      "kind": "care home",
+      "lat": 39.6664461,
+      "lon": -0.2294076,
+      "town": null
+    },
+    {
+      "id": "way/446053744",
+      "name": "Residencia Monte Arse",
+      "kind": "care home",
+      "lat": 39.6748381,
+      "lon": -0.2627928,
+      "town": null
+    },
+    {
+      "id": "way/446555885",
+      "name": "Col·legi d'Educació Infantil i Primària Benadressa",
+      "kind": "school",
+      "lat": 39.9886014,
+      "lon": -0.1021114,
+      "town": null
+    },
+    {
+      "id": "way/447497347",
+      "name": "Col·legi d'Educació Infantil i Primària Joaquín Rodrigo",
+      "kind": "school",
+      "lat": 39.6646464,
+      "lon": -0.2359606,
+      "town": null
+    },
+    {
+      "id": "way/448959448",
+      "name": "Residencia y Centro de día La Magdalena",
+      "kind": "care home",
+      "lat": 40.0383345,
+      "lon": -0.0089218,
+      "town": null
+    },
+    {
+      "id": "way/449184084",
+      "name": "Hospital de Sagunt",
+      "kind": "hospital",
+      "lat": 39.67438,
+      "lon": -0.2311177,
+      "town": "Sagunt / Sagunto"
+    },
+    {
+      "id": "way/449893564",
+      "name": "Formació de Persones Adultes Miguel Hernández",
+      "kind": "school",
+      "lat": 39.6644323,
+      "lon": -0.224515,
+      "town": null
+    },
+    {
+      "id": "way/451568090",
+      "name": "Residencial Oasis Palace",
+      "kind": "care home",
+      "lat": 40.044823,
+      "lon": 0.024198,
+      "town": null
+    },
+    {
+      "id": "way/451568237",
+      "name": "Residencia de tercera edad Montornés",
+      "kind": "care home",
+      "lat": 40.0509032,
+      "lon": 0.0163145,
+      "town": null
+    },
+    {
+      "id": "way/455580599",
+      "name": "Centre de Salut Fernando el Católico",
+      "kind": "health centre",
+      "lat": 39.9794489,
+      "lon": -0.0300652,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/455756724",
+      "name": "Escuela Infantil San Cristóbal",
+      "kind": "nursery",
+      "lat": 39.9871058,
+      "lon": -0.0285612,
+      "town": null
+    },
+    {
+      "id": "way/459145641",
+      "name": "Col·legi San Pedro Apóstol",
+      "kind": "school",
+      "lat": 39.6604857,
+      "lon": -0.2262404,
+      "town": "Port de Sagunt"
+    },
+    {
+      "id": "way/460560705",
+      "name": "Col·legi d'Educació Infantil i Primària El Baladre",
+      "kind": "school",
+      "lat": 39.6714645,
+      "lon": -0.2417099,
+      "town": null
+    },
+    {
+      "id": "way/474206337",
+      "name": "Sección del Instituto de Educación Secundaria Obligatoria Nuestra Señora de la Cueva Santa en Montanejos",
+      "kind": "school",
+      "lat": 40.06706,
+      "lon": -0.5258224,
+      "town": "Montanejos"
+    },
+    {
+      "id": "way/512927798",
+      "name": "Col·legi d'Educació Infantil i Primària l'Assumpció",
+      "kind": "school",
+      "lat": 39.8241676,
+      "lon": -0.2273811,
+      "town": null
+    },
+    {
+      "id": "way/513754959",
+      "name": "Institut d'Educació Secundària Llombai",
+      "kind": "school",
+      "lat": 39.8837478,
+      "lon": -0.0779869,
+      "town": null
+    },
+    {
+      "id": "way/547505033",
+      "name": "Centre de Salut Borriana II",
+      "kind": "health centre",
+      "lat": 39.8790652,
+      "lon": -0.0762301,
+      "town": "Burriana"
+    },
+    {
+      "id": "way/556234544",
+      "name": "Centre de Salut la Vall d'Uixó 2",
+      "kind": "health centre",
+      "lat": 39.826349,
+      "lon": -0.2412722,
+      "town": null
+    },
+    {
+      "id": "way/578869911",
+      "name": "Residència de Caritas",
+      "kind": "care home",
+      "lat": 39.8898339,
+      "lon": -0.0790957,
+      "town": "Borriana / Burriana"
+    },
+    {
+      "id": "way/579543534",
+      "name": "Col·legi d'Educació Infantil i Primària Cardenal Tarancón",
+      "kind": "school",
+      "lat": 39.8792644,
+      "lon": -0.0770205,
+      "town": null
+    },
+    {
+      "id": "way/588980403",
+      "name": "Laude British School Of Vilareal",
+      "kind": "school",
+      "lat": 39.9209096,
+      "lon": -0.094494,
+      "town": "Vila-real"
+    },
+    {
+      "id": "way/600745072",
+      "name": "Centro de Salud Dolores Cano Royo \"El Pilar\"",
+      "kind": "health centre",
+      "lat": 39.944801,
+      "lon": -0.0952736,
+      "town": null
+    },
+    {
+      "id": "way/608122991",
+      "name": "Hogar Virgen de Lledó",
+      "kind": "care home",
+      "lat": 39.9981388,
+      "lon": -0.0214509,
+      "town": null
+    },
+    {
+      "id": "way/612142098",
+      "name": "Escola Infantil de Primer Cicle Sambori",
+      "kind": "nursery",
+      "lat": 39.9636219,
+      "lon": -0.2683769,
+      "town": "Onda"
+    },
+    {
+      "id": "way/614213886",
+      "name": "Colegio de Educación Infantil y Primaria Ramón Rubio Silvestre",
+      "kind": "school",
+      "lat": 39.8372318,
+      "lon": -0.4659578,
+      "town": "Geldo"
+    },
+    {
+      "id": "way/668231215",
+      "name": "Nostra Senyora del Carmen",
+      "kind": "care home",
+      "lat": 39.6812956,
+      "lon": -0.2844099,
+      "town": "Sagunt / Sagunto"
+    },
+    {
+      "id": "way/686911354",
+      "name": "Col·legi d'Educació Infantil i Primària Palància",
+      "kind": "school",
+      "lat": 39.7512088,
+      "lon": -0.365718,
+      "town": null
+    },
+    {
+      "id": "way/726093317",
+      "name": "Col·legi d'Educació Infantil i Primària Emilio Lluch",
+      "kind": "school",
+      "lat": 39.6605809,
+      "lon": -0.429136,
+      "town": "Nàquera"
+    },
+    {
+      "id": "way/729333784",
+      "name": "Centre de Salut Rafalafena",
+      "kind": "health centre",
+      "lat": 39.988147,
+      "lon": -0.0288969,
+      "town": null
+    },
+    {
+      "id": "way/733193593",
+      "name": "Centre de Salut Sagunt",
+      "kind": "health centre",
+      "lat": 39.6825349,
+      "lon": -0.2802714,
+      "town": null
+    },
+    {
+      "id": "way/733271570",
+      "name": "Col·legi d'Educació Infantil i Primària José Romeu",
+      "kind": "school",
+      "lat": 39.6801619,
+      "lon": -0.2714437,
+      "town": null
+    },
+    {
+      "id": "way/733325337",
+      "name": "Centre per Ancians de l'Antic Hopital",
+      "kind": "care home",
+      "lat": 39.6802324,
+      "lon": -0.280615,
+      "town": null
+    },
+    {
+      "id": "way/733416390",
+      "name": "Col·legi d'Educació Infantil i Primària Les Palmeres",
+      "kind": "school",
+      "lat": 39.6773583,
+      "lon": -0.2216043,
+      "town": null
+    },
+    {
+      "id": "way/733416406",
+      "name": "Colegio Camarena Canet",
+      "kind": "nursery",
+      "lat": 39.6775724,
+      "lon": -0.2148535,
+      "town": null
+    },
+    {
+      "id": "way/733633408",
+      "name": "Col·legi d'Educació Infantil i Primària Pio XII",
+      "kind": "school",
+      "lat": 39.850485,
+      "lon": -0.1593655,
+      "town": "Nules"
+    },
+    {
+      "id": "way/736651110",
+      "name": "Secció d'Educació Secundària de l'Institut d'Educació Secundària Clot del Moro",
+      "kind": "school",
+      "lat": 39.6848114,
+      "lon": -0.2744315,
+      "town": null
+    },
+    {
+      "id": "way/736987537",
+      "name": "Centre de Salut de Betxí",
+      "kind": "health centre",
+      "lat": 39.9284611,
+      "lon": -0.2030096,
+      "town": null
+    },
+    {
+      "id": "way/736987538",
+      "name": "Col·legi d'Educació Infantil i Primària Cervantes-Dualde",
+      "kind": "school",
+      "lat": 39.927753,
+      "lon": -0.2023849,
+      "town": null
+    },
+    {
+      "id": "way/736987542",
+      "name": "Institut d'Educació Secundària Betxí",
+      "kind": "school",
+      "lat": 39.9312359,
+      "lon": -0.20321,
+      "town": null
+    },
+    {
+      "id": "way/763583909",
+      "name": "Els Àngels",
+      "kind": "school",
+      "lat": 39.8957671,
+      "lon": -0.0966617,
+      "town": "Borriana / Burriana"
+    },
+    {
+      "id": "way/782551941",
+      "name": "Colegio San Vicente Ferrer",
+      "kind": "school",
+      "lat": 39.6932131,
+      "lon": -0.2999475,
+      "town": "Sagunt / Sagunto"
+    },
+    {
+      "id": "way/801981054",
+      "name": "Residencia para mayores DOMUS",
+      "kind": "care home",
+      "lat": 39.9191818,
+      "lon": -0.0991595,
+      "town": "Vila-Real"
+    },
+    {
+      "id": "way/816052236",
+      "name": "Alqueria Mossén Sol",
+      "kind": "care home",
+      "lat": 39.8936332,
+      "lon": -0.1039723,
+      "town": "les Alqueries / Alquerías del Niño Perdido"
+    },
+    {
+      "id": "way/853868003",
+      "name": "Col·legi d'Educació Infantil i Primària Vicent Marçà",
+      "kind": "school",
+      "lat": 39.9933185,
+      "lon": -0.0599203,
+      "town": "Castellón de la Plana"
+    },
+    {
+      "id": "way/854223203",
+      "name": "Col·legi d'Educació Infantil i Primària Pintor Sorolla",
+      "kind": "school",
+      "lat": 39.8949498,
+      "lon": -0.116697,
+      "town": "les Alqueries / Alquerías del Niño Perdido"
+    },
+    {
+      "id": "way/891003722",
+      "name": "Centro Desplazados Marjaleria-Grao",
+      "kind": "health centre",
+      "lat": 39.9977746,
+      "lon": 0.0158423,
+      "town": null
+    },
+    {
+      "id": "way/893714291",
+      "name": "Residencia Centro de Día Maset de Frater",
+      "kind": "care home",
+      "lat": 39.980924,
+      "lon": 0.0153301,
+      "town": null
+    },
+    {
+      "id": "way/936265176",
+      "name": "Col·legi d'Educació Infantil i Primària Josep Iturbi",
+      "kind": "school",
+      "lat": 39.8825291,
+      "lon": -0.0869646,
+      "town": "Borriana / Burriana"
+    },
+    {
+      "id": "way/938876102",
+      "name": "Col·legi d'Educació Infantil i Primària Domínguez Roca",
+      "kind": "school",
+      "lat": 39.6870119,
+      "lon": -0.3120683,
+      "town": null
+    },
+    {
+      "id": "way/944612101",
+      "name": "Colegio Público Hermanos Gil Sorribes",
+      "kind": "school",
+      "lat": 39.9137881,
+      "lon": -0.5761717,
+      "town": null
+    },
+    {
+      "id": "way/997723206",
+      "name": "Colegio de Fomento Torranova",
+      "kind": "school",
+      "lat": 39.9383954,
+      "lon": -0.1812395,
+      "town": null
+    },
+    {
+      "id": "way/1002665486",
+      "name": "Aulario de Gátova",
+      "kind": "school",
+      "lat": 39.7684553,
+      "lon": -0.5189017,
+      "town": null
+    },
+    {
+      "id": "way/1008161699",
+      "name": "Escola Infantil El Tabalet",
+      "kind": "nursery",
+      "lat": 39.7287693,
+      "lon": -0.28275,
+      "town": null
+    },
+    {
+      "id": "way/1008167255",
+      "name": "Institut d'Educació Secundària la Vall de Segó",
+      "kind": "school",
+      "lat": 39.7335833,
+      "lon": -0.2658607,
+      "town": null
+    },
+    {
+      "id": "way/1011042078",
+      "name": "Centro de Fomento Miralvent",
+      "kind": "school",
+      "lat": 39.9138574,
+      "lon": -0.19899,
+      "town": null
+    },
+    {
+      "id": "way/1070001951",
+      "name": "el Raval",
+      "kind": "health centre",
+      "lat": 39.678016,
+      "lon": -0.2718135,
+      "town": "Sagunt"
+    },
+    {
+      "id": "way/1081651812",
+      "name": "Centro Especializado de Atención a los Mayores",
+      "kind": "care home",
+      "lat": 39.9852221,
+      "lon": -0.0308495,
+      "town": "Castelló de la Plana"
+    },
+    {
+      "id": "way/1105620393",
+      "name": "Centre de Dia Molí la Vila",
+      "kind": "care home",
+      "lat": 39.9311773,
+      "lon": -0.1002713,
+      "town": null
+    },
+    {
+      "id": "way/1124884933",
+      "name": "Centre de Dia d'Onda",
+      "kind": "care home",
+      "lat": 39.9696087,
+      "lon": -0.263677,
+      "town": null
+    },
+    {
+      "id": "way/1124887720",
+      "name": "Hospital Universitari La Plana",
+      "kind": "hospital",
+      "lat": 39.9245097,
+      "lon": -0.0971721,
+      "town": null
+    },
+    {
+      "id": "way/1131040864",
+      "name": "Col·legi d'Educació Infantil i Primària José Soriano Ramos",
+      "kind": "school",
+      "lat": 39.9472243,
+      "lon": -0.0982379,
+      "town": "Vila-real"
+    },
+    {
+      "id": "way/1134052641",
+      "name": "Centre de Salut Nules",
+      "kind": "health centre",
+      "lat": 39.8487056,
+      "lon": -0.1648189,
+      "town": null
+    },
+    {
+      "id": "way/1146934198",
+      "name": "Colegio Liceo",
+      "kind": "school",
+      "lat": 40.0333905,
+      "lon": 0.0171553,
+      "town": null
+    },
+    {
+      "id": "way/1146935593",
+      "name": "Col·legi d'Educació Infantil i Primària el Braçal",
+      "kind": "school",
+      "lat": 39.7163397,
+      "lon": -0.3488039,
+      "town": null
+    },
+    {
+      "id": "way/1146936897",
+      "name": "Secció d'Educació Secundària de l'Institut d'Educació Secundària Clot del Moro a Algímia d'Alfara",
+      "kind": "school",
+      "lat": 39.7487049,
+      "lon": -0.3668585,
+      "town": null
+    },
+    {
+      "id": "way/1146962267",
+      "name": "Col·legi d'Educació Infantil i Primària Vicente Faubell Zapata",
+      "kind": "school",
+      "lat": 39.7670265,
+      "lon": -0.2049837,
+      "town": null
+    },
+    {
+      "id": "way/1154853811",
+      "name": "Colegio Rural Agrupado Palancia-Espadán - Aulario Castellnovo",
+      "kind": "school",
+      "lat": 39.8594341,
+      "lon": -0.4564923,
+      "town": "Castellnovo"
+    },
+    {
+      "id": "way/1167320534",
+      "name": "Colegio Madre María Rosa Molas",
+      "kind": "school",
+      "lat": 39.961956,
+      "lon": -0.2687094,
+      "town": "Onda"
+    },
+    {
+      "id": "way/1180105716",
+      "name": "L'Escoleta Infant Felip",
+      "kind": "nursery",
+      "lat": 39.88767,
+      "lon": -0.0786746,
+      "town": null
+    },
+    {
+      "id": "way/1185696337",
+      "name": "Institut d'Educació Secundària Jaume I \"provisional\"",
+      "kind": "school",
+      "lat": 39.8822713,
+      "lon": -0.0890919,
+      "town": null
+    },
+    {
+      "id": "way/1190385437",
+      "name": "Institut d'Educació Secundària Altos Hornos",
+      "kind": "school",
+      "lat": 39.6676943,
+      "lon": -0.2231064,
+      "town": null
+    },
+    {
+      "id": "way/1190390955",
+      "name": "Escola d’Educació Infantil de Primer Cicle Pequelar",
+      "kind": "nursery",
+      "lat": 39.9321241,
+      "lon": -0.2016174,
+      "town": "Betxí"
+    },
+    {
+      "id": "way/1204462014",
+      "name": "Ludoteca de la Llosa",
+      "kind": "nursery",
+      "lat": 39.767731,
+      "lon": -0.2043252,
+      "town": null
+    },
+    {
+      "id": "way/1204472314",
+      "name": "Consultori Auxiliar de la Llosa",
+      "kind": "health centre",
+      "lat": 39.7687075,
+      "lon": -0.207285,
+      "town": null
+    },
+    {
+      "id": "way/1222366739",
+      "name": "Col·legi d'Educació Infantil i Primària Miralcamp",
+      "kind": "school",
+      "lat": 39.9685881,
+      "lon": -0.2567428,
+      "town": "Onda"
+    },
+    {
+      "id": "way/1234693728",
+      "name": "Col·legi d'Educació Infantil i Primària Sant Josep",
+      "kind": "school",
+      "lat": 39.6839884,
+      "lon": -0.4285794,
+      "town": null
+    },
+    {
+      "id": "way/1238509273",
+      "name": "Col·legi d'Educació Infantil i Primària Cronista Chabret",
+      "kind": "school",
+      "lat": 39.6819627,
+      "lon": -0.2777771,
+      "town": null
+    },
+    {
+      "id": "way/1238510263",
+      "name": "Col·legi d'Educació Infantil i Primària Ausiàs March",
+      "kind": "school",
+      "lat": 39.6852645,
+      "lon": -0.2758081,
+      "town": null
+    },
+    {
+      "id": "way/1238510265",
+      "name": "Col·legi d'Educació Infantil i Primària Montíber",
+      "kind": "school",
+      "lat": 39.6839308,
+      "lon": -0.2751205,
+      "town": null
+    },
+    {
+      "id": "way/1258745651",
+      "name": "SAVIA Quartell",
+      "kind": "care home",
+      "lat": 39.7371824,
+      "lon": -0.260255,
+      "town": null
+    },
+    {
+      "id": "way/1258745654",
+      "name": "Residencia Mirador",
+      "kind": "care home",
+      "lat": 39.734106,
+      "lon": -0.2626048,
+      "town": null
+    },
+    {
+      "id": "way/1274162622",
+      "name": "Institut d'Educació Secundària de Borriol",
+      "kind": "school",
+      "lat": 40.0431444,
+      "lon": -0.0673151,
+      "town": null
+    },
+    {
+      "id": "way/1279445424",
+      "name": "Col·legi d'Educació Infantil i Primària l'Ermita",
+      "kind": "school",
+      "lat": 39.7267251,
+      "lon": -0.2714983,
+      "town": null
+    },
+    {
+      "id": "way/1290994414",
+      "name": "Secció Infantil Col·legi Vilamar",
+      "kind": "nursery",
+      "lat": 39.6666748,
+      "lon": -0.213603,
+      "town": null
+    },
+    {
+      "id": "way/1291144712",
+      "name": "Institut d'Educació Secundària Número 1",
+      "kind": "school",
+      "lat": 39.6772726,
+      "lon": -0.2174375,
+      "town": null
+    },
+    {
+      "id": "way/1291144713",
+      "name": "Col·legi d'Educació Infantil i Primària La Muralla",
+      "kind": "school",
+      "lat": 39.6791226,
+      "lon": -0.2210041,
+      "town": null
+    },
+    {
+      "id": "way/1291874489",
+      "name": "Escola Infantil Mar de Somnis",
+      "kind": "nursery",
+      "lat": 39.9765564,
+      "lon": 0.0159672,
+      "town": null
+    },
+    {
+      "id": "way/1323823407",
+      "name": "Residencial Castellón",
+      "kind": "care home",
+      "lat": 39.9780715,
+      "lon": -0.0413037,
+      "town": null
+    },
+    {
+      "id": "way/1343840225",
+      "name": "Escola d'Algar de Palància - Centre Rural Agrupat Baronia Alta",
+      "kind": "school",
+      "lat": 39.7796549,
+      "lon": -0.368203,
+      "town": null
+    },
+    {
+      "id": "way/1346614585",
+      "name": "Residencial Azahar del Mediterráneo",
+      "kind": "care home",
+      "lat": 39.9810607,
+      "lon": -0.0212901,
+      "town": "Castellón"
+    },
+    {
+      "id": "way/1464030072",
+      "name": "Col·legi d'Educació Infantil i Primària Santa Quitèria",
+      "kind": "school",
+      "lat": 39.9546028,
+      "lon": -0.0659126,
+      "town": null
+    },
+    {
+      "id": "relation/14354911",
+      "name": "Col·legi d'Educació Infantil i Primària Mestre Antonio Armelles Doménech",
+      "kind": "school",
+      "lat": 39.9762923,
+      "lon": -0.0532844,
+      "town": null
+    },
+    {
+      "id": "relation/14354912",
+      "name": "Col·legi d'Educació Infantil i Primària Gregal",
+      "kind": "school",
+      "lat": 39.9807698,
+      "lon": -0.0502202,
+      "town": null
+    },
+    {
+      "id": "relation/15487253",
+      "name": "Col·legi Rural Agrupat Alt Carraixet",
+      "kind": "school",
+      "lat": 39.73473,
+      "lon": -0.5244646,
+      "town": null
+    },
+    {
+      "id": "relation/19949342",
+      "name": "Residència de Majors",
+      "kind": "care home",
+      "lat": 39.8944979,
+      "lon": -0.0894949,
+      "town": "Borriana"
+    }
+  ]
+}

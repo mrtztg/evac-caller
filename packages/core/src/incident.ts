@@ -1,0 +1,110 @@
+// The incident at one replay time: the fire front, the wind, the danger zones and the places at risk, ranked.
+import { activeFront, exposure, HORIZONS_H, spreadKmh, windAt, zonePolygon } from "./danger.js";
+import type { Fixture, Hotspot, Place, PlaceKind, WindObs } from "./fixture.js";
+import { compass } from "./geo.js";
+
+/** Harder to evacuate first: people who cannot walk or live there, then children, then outpatients. */
+const KIND_ORDER: Record<PlaceKind, number> = {
+  "care home": 0,
+  hospital: 1,
+  nursery: 2,
+  school: 3,
+  "health centre": 4,
+};
+
+export interface PlaceAtRisk extends Place {
+  distance_km: number;
+  /** Where the fire is, seen from the place ("the fire is to the north-west of the place"). */
+  fire_direction: string;
+  arrival_h: number;
+  arrival_estimate: string;
+  reason: "downwind" | "near";
+  instructions: string;
+}
+
+export interface IncidentState {
+  time: string;
+  /** Time of the latest satellite pass used: the age of the fire data. */
+  data_time: string | null;
+  wind: WindObs | null;
+  /** Wind in words, for the phone agent and the bot. */
+  wind_text: string;
+  spread_kmh: number | null;
+  front: Hotspot[];
+  zones: { hours: number; polygon: [number, number][] }[];
+  places: PlaceAtRisk[];
+}
+
+export function arrivalText(h: number): string {
+  if (h < 1) return "less than 1 hour";
+  const n = Math.round(h);
+  return n === 1 ? "about 1 hour" : `about ${n} hours`;
+}
+
+// Same fixed text for every place in a band: the coordinator reads it before approving the calls.
+export function instructionFor(arrivalH: number): string {
+  if (arrivalH <= 1)
+    return "Start moving everyone away from the fire now, and follow the orders of the emergency services on site.";
+  if (arrivalH <= 3)
+    return "Prepare to evacuate now: get people and transport ready, and follow the orders of the emergency services.";
+  return "Be ready to evacuate: check who needs help to move, and keep this phone line free.";
+}
+
+export function rank(places: PlaceAtRisk[]): PlaceAtRisk[] {
+  // Same hour band: the place that is harder to evacuate goes first.
+  return [...places].sort(
+    (a, b) =>
+      Math.ceil(a.arrival_h) - Math.ceil(b.arrival_h) ||
+      KIND_ORDER[a.kind] - KIND_ORDER[b.kind] ||
+      a.arrival_h - b.arrival_h,
+  );
+}
+
+export function incidentAt(fx: Fixture, time: Date): IncidentState {
+  const front = activeFront(fx.hotspots, time);
+  const wind = windAt(fx.wind, time);
+  const base = {
+    time: time.toISOString(),
+    data_time: front.at(-1)?.time ?? null,
+    wind,
+    wind_text: wind
+      ? `from the ${compass(wind.from_deg)} at ${wind.speed_kmh} km/h, measured at ${fx.meta.wind_station.name}`
+      : "no wind data",
+    spread_kmh: wind ? spreadKmh(wind) : null,
+    front,
+  };
+  if (!wind || !front.length) return { ...base, zones: [], places: [] };
+
+  const maxH = Math.max(...HORIZONS_H);
+  const places: PlaceAtRisk[] = [];
+  for (const p of fx.places) {
+    const e = exposure(p, front, wind);
+    if (!e || e.arrival_h === null || e.reason === null || e.arrival_h > maxH) continue;
+    places.push({
+      ...p,
+      distance_km: Math.round(e.distance_km * 10) / 10,
+      fire_direction: compass(e.fire_bearing_deg),
+      arrival_h: Math.round(e.arrival_h * 10) / 10,
+      arrival_estimate: arrivalText(e.arrival_h),
+      reason: e.reason,
+      instructions: instructionFor(e.arrival_h),
+    });
+  }
+  return {
+    ...base,
+    zones: HORIZONS_H.map((hours) => ({ hours, polygon: zonePolygon(front, wind, hours) })),
+    places: rank(places),
+  };
+}
+
+/** Whole hours from the first satellite detection to the last one: the replay timeline. */
+export function replayHours(fx: Fixture): Date[] {
+  const first = fx.hotspots[0];
+  const last = fx.hotspots.at(-1);
+  if (!first || !last) return [];
+  const hour = 3_600_000;
+  const start = Math.floor(new Date(first.time).getTime() / hour) * hour;
+  const out: Date[] = [];
+  for (let t = start; t <= new Date(last.time).getTime() + hour; t += hour) out.push(new Date(t));
+  return out;
+}

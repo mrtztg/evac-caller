@@ -1,0 +1,20 @@
+{
+  "name": "@evac/core",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "vitest run",
+    "data:fetch": "tsx --env-file-if-exists=../../.env scripts/fetch-fixtures.ts",
+    "replay": "tsx scripts/replay.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
+  }
+}

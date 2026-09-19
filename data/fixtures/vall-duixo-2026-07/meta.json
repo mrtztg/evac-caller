@@ -1,0 +1,12 @@
+{
+ "id": "vall-duixo-2026-07",
+ "name": "La Vall d'Uixó wildfire, Castellón (July 2026)",
+ "start": "2026-07-25T00:00:00Z",
+ "end": "2026-07-29T23:59:59Z",
+ "wind_station": {
+  "id": "LEVC",
+  "name": "Valencia airport (METAR)",
+  "lat": 39.4867,
+  "lon": -0.4733
+ }
+}

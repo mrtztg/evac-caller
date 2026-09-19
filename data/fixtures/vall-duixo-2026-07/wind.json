@@ -1,0 +1,688 @@
+{
+  "source": {
+    "name": "Measured wind, METAR LEVC, Iowa Environmental Mesonet archive",
+    "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=LEVC&data=drct&data=sknt&data=gust&tz=Etc/UTC&format=onlycomma&missing=M",
+    "fetched_at": "2026-09-19T20:24:21.686Z",
+    "note": "Open-Meteo was blocked on the venue network and Meteostat had no 2026 summer data (docs/DECISIONS.md)."
+  },
+  "wind": [
+    {
+      "time": "2026-07-25T00:00:00Z",
+      "from_deg": 260,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T01:00:00Z",
+      "from_deg": 260,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T02:00:00Z",
+      "from_deg": 280,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T03:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T04:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T05:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T06:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T07:00:00Z",
+      "from_deg": 260,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T08:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T09:00:00Z",
+      "from_deg": 260,
+      "speed_kmh": 28,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T10:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 30,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T11:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 31,
+      "gust_kmh": 50
+    },
+    {
+      "time": "2026-07-25T12:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 37,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T13:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 28,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T14:00:00Z",
+      "from_deg": 260,
+      "speed_kmh": 41,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T15:00:00Z",
+      "from_deg": 250,
+      "speed_kmh": 37,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T16:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 39,
+      "gust_kmh": 57
+    },
+    {
+      "time": "2026-07-25T17:00:00Z",
+      "from_deg": 260,
+      "speed_kmh": 37,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T18:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 31,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T19:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 30,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T20:00:00Z",
+      "from_deg": 280,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T21:00:00Z",
+      "from_deg": 280,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T22:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-25T23:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T00:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T01:00:00Z",
+      "from_deg": 300,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T02:00:00Z",
+      "from_deg": 320,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T03:00:00Z",
+      "from_deg": 300,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T04:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T05:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T06:00:00Z",
+      "from_deg": 300,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T07:00:00Z",
+      "from_deg": 340,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T08:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T10:00:00Z",
+      "from_deg": 90,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T11:00:00Z",
+      "from_deg": 30,
+      "speed_kmh": 4,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T12:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T13:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T14:00:00Z",
+      "from_deg": 140,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T15:00:00Z",
+      "from_deg": 110,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T16:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T17:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T18:00:00Z",
+      "from_deg": 140,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T19:00:00Z",
+      "from_deg": 140,
+      "speed_kmh": 15,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T20:00:00Z",
+      "from_deg": 150,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T21:00:00Z",
+      "from_deg": 160,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T22:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 4,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-26T23:00:00Z",
+      "from_deg": 330,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T00:00:00Z",
+      "from_deg": 320,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T01:00:00Z",
+      "from_deg": 300,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T02:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T03:00:00Z",
+      "from_deg": 250,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T04:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T05:00:00Z",
+      "from_deg": 300,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T06:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T07:00:00Z",
+      "from_deg": 280,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T08:00:00Z",
+      "from_deg": 240,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T11:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T12:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T13:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 24,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T14:00:00Z",
+      "from_deg": 110,
+      "speed_kmh": 26,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T15:00:00Z",
+      "from_deg": 110,
+      "speed_kmh": 24,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T16:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T17:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T18:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T19:00:00Z",
+      "from_deg": 60,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T20:00:00Z",
+      "from_deg": 50,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T21:00:00Z",
+      "from_deg": 20,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T22:00:00Z",
+      "from_deg": 10,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-27T23:00:00Z",
+      "from_deg": 20,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T00:00:00Z",
+      "from_deg": 340,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T01:00:00Z",
+      "from_deg": 330,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T02:00:00Z",
+      "from_deg": 340,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T03:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T04:00:00Z",
+      "from_deg": 320,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T05:00:00Z",
+      "from_deg": 300,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T07:00:00Z",
+      "from_deg": 290,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T08:00:00Z",
+      "from_deg": 270,
+      "speed_kmh": 4,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T09:00:00Z",
+      "from_deg": 170,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T10:00:00Z",
+      "from_deg": 110,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T11:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T12:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 15,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T13:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T14:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 24,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T15:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T16:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T17:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T18:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T19:00:00Z",
+      "from_deg": 120,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T20:00:00Z",
+      "from_deg": 70,
+      "speed_kmh": 13,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T21:00:00Z",
+      "from_deg": 60,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T22:00:00Z",
+      "from_deg": 20,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-28T23:00:00Z",
+      "from_deg": 30,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T00:00:00Z",
+      "from_deg": 20,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T01:00:00Z",
+      "from_deg": 320,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T02:00:00Z",
+      "from_deg": 340,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T03:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T04:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T05:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T06:00:00Z",
+      "from_deg": 330,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T07:00:00Z",
+      "from_deg": 310,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T09:00:00Z",
+      "from_deg": 80,
+      "speed_kmh": 6,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T10:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T12:00:00Z",
+      "from_deg": 110,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T13:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 20,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T14:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T15:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T16:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 22,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T17:00:00Z",
+      "from_deg": 130,
+      "speed_kmh": 19,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T18:00:00Z",
+      "from_deg": 140,
+      "speed_kmh": 17,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T19:00:00Z",
+      "from_deg": 90,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T20:00:00Z",
+      "from_deg": 70,
+      "speed_kmh": 11,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T22:00:00Z",
+      "from_deg": 20,
+      "speed_kmh": 9,
+      "gust_kmh": null
+    },
+    {
+      "time": "2026-07-29T23:00:00Z",
+      "from_deg": 350,
+      "speed_kmh": 7,
+      "gust_kmh": null
+    }
+  ]
+}
