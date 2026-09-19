@@ -8,10 +8,13 @@ When a wildfire moves, Evac Caller finds the hospitals, schools and care homes i
 2. Places inside the zone light up. They are ranked by how soon the fire can reach them.
 3. The coordinator's phone gets a Telegram message: "3 places at risk. Call them?" with **Approve / Deny** buttons.
 4. The coordinator presses **Approve**. A real phone on stage rings. The AI speaks: it names the place, the fire direction and distance, and what to do. The person on the phone can ask questions ("Which road should we use?").
-5. The dashboard shows the call status, the transcript and the numbers (latency, model, cost).
-6. A judge can text the Telegram bot cold ("Is Hospital X in danger?") and gets a correct answer from the data.
+5. The call ends with a result for each place: **confirmed**, **needs help** (for example "we have 12 residents who can't walk") or **no answer**. The dashboard shows it with the transcript and the numbers (latency, model, cost).
+6. A place that did not confirm goes back to the coordinator on Telegram: "Residència X: no answer. Call again / escalate to 112?"
+7. A judge can text the Telegram bot cold ("Is Hospital X in danger?") and gets a correct answer from the data.
 
-## Our difference (vs. other wildfire projects)
+## Our difference (vs. other wildfire projects and existing alert systems)
+See `docs/research-existing-solutions.md`. ES-Alert (cell broadcast) tells everyone in an area, one way, with no reply. Everbridge and Genasys use recorded calls with "press 1". **Evac Caller makes sure the specific places with vulnerable people heard, understood and confirmed, and sends every unconfirmed place back to a human.** It works next to ES-Alert and 112, not instead of them.
+
 Other teams (for example `eldtechnologies/hackbarna-wildfire`) focus on the map and the fire simulation. **Our focus is action: human approval, then real phone calls.** The map is simple on purpose.
 
 ## Milestones (in risk order: the most risky part first)
@@ -32,9 +35,11 @@ The riskiest part. It needs 3 things: SLNG, a Vonage phone number (SIP trunk), a
 - Mastra agent on Telegram (Mastra Channels). Model through Nebius.
 - A workflow: "places at risk" → message with **Approve / Deny** → the workflow **pauses** until the coordinator answers → on Approve, dispatch the calls (M0 code).
 - Memory: remembers the coordinator and the active incident.
+- **Call outcome:** after each call, Nebius reads the transcript and classifies it: `CONFIRMED`, `NEEDS_HELP` (with what help, for example number of people who can't walk) or `NO_ANSWER`/`UNCLEAR`. The model must quote the caller's words as evidence. Unknown means `UNCLEAR`, never `CONFIRMED`.
+- **Escalation:** every place that is not `CONFIRMED` is sent back to the coordinator on Telegram with buttons: **Call again** / **Mark as escalated to 112**.
 - A cold question from a judge ("Is X in danger?") gets a correct answer (at this point from a fixture list; real data comes in M2).
 
-**Acceptance:** from Telegram, Approve makes the phone ring. Deny makes no call. No call is possible without an approval (test).
+**Acceptance:** from Telegram, Approve makes the phone ring. Deny makes no call. No call is possible without an approval (test). After the call, Telegram shows the outcome with a quote from the call. A missed call comes back as `NO_ANSWER` with the escalation buttons.
 
 ### M2: Real fire data and places at risk (22:00 - 01:00)
 - First 10 minutes: read `eldtechnologies/hackbarna-wildfire`, so we don't copy its work, and note what's different.
