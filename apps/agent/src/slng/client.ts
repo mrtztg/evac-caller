@@ -66,6 +66,23 @@ export const createAgent = (config: AgentConfig) => request<Agent>("POST", "/age
 export const updateAgent = (id: string, config: Partial<AgentConfig>) =>
   request<Agent>("PATCH", `/agents/${id}`, config);
 
+/** Call record as returned by SLNG. Only the fields we use are typed; the rest stays available. */
+export interface CallRecord {
+  id: string;
+  phone_number: string;
+  status: string;
+  arguments: Record<string, string>;
+  call_started_at: string | null;
+  call_ended_at: string | null;
+  call_duration_ms: number | null;
+  call_end_reason: string | null;
+  error_message: string | null;
+  [key: string]: unknown;
+}
+
+export const getCall = (agentId: string, callId: string) =>
+  request<CallRecord>("GET", `/agents/${agentId}/calls/${callId}`);
+
 export interface CallResult {
   call_id: string;
   message: string;

@@ -6,7 +6,8 @@
     "typecheck": "tsc -p .",
     "test": "vitest run",
     "agent:sync": "tsx --env-file-if-exists=../../.env scripts/sync-agent.ts",
-    "call:test": "tsx --env-file-if-exists=../../.env scripts/call-test.ts"
+    "call:test": "tsx --env-file-if-exists=../../.env scripts/call-test.ts",
+    "call:status": "tsx --env-file-if-exists=../../.env scripts/call-status.ts"
   },
   "devDependencies": {
     "@types/node": "^22",
