@@ -21,6 +21,7 @@ describe("summarizeCall", () => {
       livekit_session_report: {
         events: [
           { item: { type: "agent_handoff" } },
+          { item: { type: "message", role: "system", content: ["internal"], metrics: {} } },
           {
             item: {
               type: "message",

@@ -51,19 +51,21 @@ export const evacAgentConfig: AgentConfig = {
   region: "eu-central",
   models: {
     stt: "deepgram/nova:3",
-    llm: "bedrock-mantle/nvidia.nemotron-super-3-120b:latest",
+    llm: process.env.SLNG_AGENT_LLM || "bedrock-mantle/nvidia.nemotron-super-3-120b:latest",
     tts: "deepgram/aura:2",
     tts_voice: "aura-2-thalia-en",
   },
+  // SLNG needs defaults, but dispatchCall rejects empty facts, so these are never spoken in practice.
+  // They must never sound like a real instruction.
   template_defaults: {
-    place_name: "the facility",
+    place_name: "this facility",
     place_type: "facility",
-    incident_name: "unknown incident",
-    fire_distance_km: "unknown",
-    fire_direction: "unknown direction",
-    arrival_estimate: "unknown",
-    wind: "unknown",
-    instructions: "Prepare to evacuate and wait for instructions from the authorities.",
-    data_time: "unknown time",
+    incident_name: "not provided",
+    fire_distance_km: "not provided",
+    fire_direction: "not provided",
+    arrival_estimate: "not provided",
+    wind: "not provided",
+    instructions: "No instruction was provided. Please call 112 for instructions.",
+    data_time: "not provided",
   },
 };

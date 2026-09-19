@@ -28,9 +28,13 @@ const avg = (xs: number[]) =>
 /** Turns SLNG's large call record into the transcript and latency numbers we show. */
 export function summarizeCall(call: CallRecord): CallSummary {
   const report = call.livekit_session_report as { events?: { item?: MessageItem }[] } | null;
+  // Only spoken turns: system/tool messages are not caller words and must not be quoted as evidence.
   const messages = (report?.events ?? [])
     .map((e) => e.item)
-    .filter((it): it is MessageItem => it?.type === "message");
+    .filter(
+      (it): it is MessageItem =>
+        it?.type === "message" && (it.role === "assistant" || it.role === "user"),
+    );
 
   const turns: Turn[] = messages.map((m) => ({
     role: m.role === "assistant" ? "assistant" : "user",

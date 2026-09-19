@@ -1,7 +1,8 @@
 // M0 test: rings TEST_PHONE_NUMBER with the evac agent.
 // The arguments are a labelled TEST call, not a real incident. Real values come from packages/core in M2.
-import { dispatchCall } from "../src/slng/client.js";
-import { type CallArguments, PROMPT_VERSION } from "../src/slng/evac-agent.js";
+import os from "node:os";
+import { type Approval, dispatchCall } from "../src/slng/client.js";
+import { type CallArguments, evacAgentConfig, PROMPT_VERSION } from "../src/slng/evac-agent.js";
 
 const agentId = process.env.SLNG_AGENT_ID;
 const phone = process.env.TEST_PHONE_NUMBER;
@@ -11,7 +12,7 @@ if (!agentId || !phone) {
 }
 
 const args: CallArguments = {
-  place_name: "Test Care Home",
+  place_name: "TEST CALL, Test Care Home",
   place_type: "care home (THIS IS A TEST CALL)",
   incident_name: "System test, no real fire",
   fire_distance_km: "4",
@@ -22,7 +23,24 @@ const args: CallArguments = {
   data_time: new Date().toISOString(),
 };
 
-const result = await dispatchCall(agentId, phone, { ...args });
+// Running this script by hand is the operator's approval; it is recorded in the output.
+const approval: Approval = {
+  approvedBy: `cli:${os.userInfo().username}`,
+  approvedAt: new Date().toISOString(),
+  channel: "cli",
+};
+const result = await dispatchCall(agentId, phone, args, approval);
 console.log(
-  JSON.stringify({ mode: "LIVE", prompt_version: PROMPT_VERSION, to: phone, ...result }, null, 2),
+  JSON.stringify(
+    {
+      mode: "LIVE",
+      prompt_version: PROMPT_VERSION,
+      models: evacAgentConfig.models,
+      to: phone,
+      approval,
+      ...result,
+    },
+    null,
+    2,
+  ),
 );

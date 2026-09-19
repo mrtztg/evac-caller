@@ -15,7 +15,10 @@ if (!agentId) {
 const outbound = (await sipTrunkOptions(agentId)).outbound.filter(
   (t) => t.selectable && t.status === "active",
 );
-const trunk = outbound.find((t) => t.name === evacAgentConfig.name) ?? outbound[0];
+const named = outbound.find((t) => t.name === evacAgentConfig.name);
+const trunk = named ?? outbound[0];
+if (trunk && !named)
+  console.warn(`No trunk named "${evacAgentConfig.name}"; using "${trunk.name}".`);
 
 // SLNG only accepts a directional greeting when a trunk is attached.
 await updateAgent(agentId, {
