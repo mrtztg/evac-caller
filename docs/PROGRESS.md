@@ -1,7 +1,7 @@
 # Progress
 
 **Current milestone:** M1 (Telegram coordinator bot with approval + call outcome + escalation)
-**Status:** M0 done (gate 19:55). M1 not started. About 30 min behind plan.
+**Status:** M1 built (21:25): bot, approval-gated calls, outcome classifier, escalation buttons. Live Telegram test next. About 1.5 h behind plan; hard stop for M1 gate 23:00.
 
 ## Done
 - Repo, rules (CLAUDE.md), plan, reviewer/verifier agents, /milestone /handoff /gate commands, check script + Stop hook.
@@ -15,7 +15,15 @@
 
 - Call 2 `987fd3a8-7a7f-4451-a01b-ca133cfb4b4b` (19:35, prompt v3, quiet room): key message in greeting; "Which road?" answered "I do not have information about roads... call 112" (no invention); asked for confirmation and help needed; recorded "I'm fine". 116 s. Latency avg: e2e 1.97 s, LLM 0.81 s, TTS 0.21 s. Issues fixed in v4: robotic "You asked: ..." when it didn't understand; said "End of call" without hanging up.
 
-## Next
+## M1 so far
+- `pnpm bot`: Mastra agent `coordinator` on Telegram (@evaccallerbot, polling, no public URL), Nebius `openai/gpt-oss-120b` (override `NEBIUS_MODEL`), memory + channel state in local `evac.db` (LibSQL, git-ignored).
+- Approval = Mastra tool approval: `call_places` has `requireApproval: true`, Telegram shows Approve / Deny. The Approve click records `Approval` (Telegram user id, name, time) in the request context; the tool refuses without it (test). Chosen over a hand-built workflow: same pause/resume, less code.
+- Calls run one after another on one line (demo phone = `TEST_PHONE_NUMBER`, never the real place). After each call: wait for end, classify, post outcome with quote, call id, duration, classifier model/latency/tokens.
+- Outcome: no caller speech = `NO_ANSWER` without a model. Else Nebius structured output; code checks the quote is really in the caller's words, else `UNCLEAR`. Tested on real calls: call 2 = CONFIRMED ("yes understood", 1054 ms, 534+229 tokens), call 1 = UNCLEAR.
+- Not CONFIRMED → card with **Call again** (new recorded approval) / **Escalated to 112** (logged with who and when).
+- Places: `data/fixtures/m1-places-at-risk.json`, clearly labelled test fixture (real data in M2).
+
+## Next (before M1)
 - M1 (see docs/PLAN.md): check Mastra docs (context7) for Telegram channel, human approval (suspend/resume workflow), memory, and Nebius as a model provider. Then build in `apps/agent`.
 - Needs from user: `TELEGRAM_BOT_TOKEN` (from @BotFather) and `NEBIUS_API_KEY` + `NEBIUS_MODEL` in `.env`.
 - Prompt v4 gets its first real test in the first M1 approval call.
