@@ -8,9 +8,9 @@ import type { ActionEvent } from "chat";
 import type { Approval } from "../slng/client.js";
 import { queueCalls } from "./calls.js";
 import { loadIncident } from "./incident.js";
+import { NEBIUS_MODEL } from "./model.js";
 import { APPROVAL_KEY, createCallPlacesTool, placesAtRiskTool, THREAD_KEY } from "./tools.js";
 
-export const NEBIUS_MODEL = process.env.NEBIUS_MODEL || "openai/gpt-oss-120b";
 export const BOT_PROMPT_VERSION = "coordinator-v1";
 
 const INSTRUCTIONS = `You are Evac Caller, the assistant of a wildfire emergency coordinator, on Telegram.
