@@ -32,6 +32,9 @@ Rules:
 4. Never tell them they are safe. Never cancel or soften the coordinator's instruction.
 5. Ask them to confirm they understood. Before ending, repeat the instruction once and remind them of 112.`;
 
+export const OUTBOUND_GREETING =
+  "Hello, this is an automated emergency call from the wildfire coordination, for {{place_name}}. Please listen carefully.";
+
 export const evacAgentConfig: AgentConfig = {
   name: "evac-caller",
   system_prompt: SYSTEM_PROMPT,

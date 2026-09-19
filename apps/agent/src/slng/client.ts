@@ -37,6 +37,7 @@ export interface AgentConfig {
   region: "us-east" | "eu-central" | "ap-south";
   models: { stt: string; llm: string; tts: string; tts_voice: string };
   template_defaults: Record<string, string>;
+  sip_outbound_trunk_id?: string | null;
 }
 
 export interface Agent {
@@ -45,6 +46,20 @@ export interface Agent {
 }
 
 export const listAgents = () => request<Agent[]>("GET", "/agents");
+
+export interface TrunkOption {
+  id: string;
+  name: string;
+  numbers: string[];
+  status: string;
+  selectable: boolean;
+}
+
+export const sipTrunkOptions = (agentId: string) =>
+  request<{ inbound: TrunkOption[]; outbound: TrunkOption[] }>(
+    "GET",
+    `/agents/${agentId}/sip-trunk-options`,
+  );
 
 export const createAgent = (config: AgentConfig) => request<Agent>("POST", "/agents", config);
 
