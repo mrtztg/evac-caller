@@ -1,11 +1,12 @@
-// The active incident: places at risk, ranked. M1 reads a labelled test fixture; M2 replaces it with packages/core.
-import { readFileSync } from "node:fs";
+// The active incident: a replay of the real fire at one moment, computed by packages/core from the fixtures.
+import { DEMO_FIRE, incidentAt, loadFixture } from "@evac/core";
 import type { CallArguments } from "../slng/evac-agent.js";
 
 export interface PlaceAtRisk {
   id: string;
   name: string;
   type: string;
+  town: string | null;
   distance_km: number;
   /** Where the fire is, seen from the place (the fire is to the north-west of the place). */
   fire_direction: string;
@@ -16,15 +17,45 @@ export interface PlaceAtRisk {
 export interface Incident {
   source: string;
   incident_name: string;
+  /** The replayed moment. */
+  replay_time: string;
+  /** Latest satellite pass used: how old the fire data is. */
   data_time: string;
   wind: string;
   places: PlaceAtRisk[];
 }
 
-const FIXTURE = new URL("../../../../data/fixtures/m1-places-at-risk.json", import.meta.url);
+// The replayed moment. Default: the first satellite pass after ignition, with the strong westerly wind.
+// Override with REPLAY_TIME (ISO UTC) to replay another hour; the dashboard slider will set it in M3.
+const DEFAULT_REPLAY_TIME = "2026-07-25T14:00:00Z";
+
+/** Spoken and shown to people in Spain: "25 July, 15:02 Spanish time". */
+export const localTime = (iso: string) =>
+  `${new Date(iso).toLocaleString("en-GB", { timeZone: "Europe/Madrid", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })} Spanish time`;
 
 export function loadIncident(): Incident {
-  return JSON.parse(readFileSync(FIXTURE, "utf8")) as Incident;
+  const fx = loadFixture(DEMO_FIRE);
+  const time = new Date(process.env.REPLAY_TIME || DEFAULT_REPLAY_TIME);
+  if (Number.isNaN(time.getTime()))
+    throw new Error(`REPLAY_TIME is not a date: ${process.env.REPLAY_TIME}`);
+  const inc = incidentAt(fx, time);
+  return {
+    source: `REPLAY of real data, not a live fire. ${fx.sources.map((s) => s.name).join("; ")}. Arrival times are estimates from a wind cone (spread = 10% of wind speed), not a fire simulation.`,
+    incident_name: fx.meta.name,
+    replay_time: localTime(inc.time),
+    data_time: inc.data_time ? localTime(inc.data_time) : "no satellite detection yet",
+    wind: inc.wind_text,
+    places: inc.places.map((p) => ({
+      id: p.id,
+      name: p.name,
+      type: p.kind,
+      town: p.town,
+      distance_km: p.distance_km,
+      fire_direction: p.fire_direction,
+      arrival_estimate: p.arrival_estimate,
+      instructions: p.instructions,
+    })),
+  };
 }
 
 export function callArguments(incident: Incident, place: PlaceAtRisk): CallArguments {

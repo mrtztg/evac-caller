@@ -1,6 +1,6 @@
 {
   "files": {
-    "includes": ["**", "!**/node_modules", "!**/.next", "!**/dist", "!**/.mastra", "!docs/mockups"]
+    "includes": ["**", "!**/node_modules", "!**/.next", "!**/dist", "!**/.mastra", "!docs/mockups", "!data/fixtures"]
   },
   "formatter": { "indentStyle": "space", "lineWidth": 100 },
   "linter": { "enabled": true, "rules": { "preset": "none" } }

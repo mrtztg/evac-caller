@@ -3,12 +3,18 @@ import { z } from "zod";
 import { isApproval, queueCalls, type Thread } from "./calls.js";
 import { loadIncident } from "./incident.js";
 
+/** Enough for a phone screen; the full ranked list is in the dashboard. */
+const LISTED = 8;
+
 export const placesAtRiskTool = createTool({
   id: "places_at_risk",
   description:
-    "The active wildfire incident: data source, data time, wind, and the places at risk ranked by how soon the fire can reach them.",
+    "The active wildfire incident: data source, data time, wind, how many places are at risk, and the highest-risk places ranked by how soon the fire can reach them.",
   inputSchema: z.object({}),
-  execute: async () => loadIncident(),
+  execute: async () => {
+    const { places, ...incident } = loadIncident();
+    return { ...incident, total_at_risk: places.length, top_places: places.slice(0, LISTED) };
+  },
 });
 
 /** Set by the Telegram Approve button handler. The tool refuses to run without them. */

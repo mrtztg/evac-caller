@@ -181,6 +181,9 @@ importers:
       '@chat-adapter/telegram':
         specifier: ^4.41.0
         version: 4.41.0(zod@4.6.5)
+      '@evac/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@mastra/core':
         specifier: ^1.67.0
         version: 1.67.0(zod@4.6.5)

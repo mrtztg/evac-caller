@@ -5,7 +5,7 @@ import { APPROVAL_KEY, createCallPlacesTool, THREAD_KEY } from "./tools.js";
 afterEach(() => vi.restoreAllMocks());
 
 const run = (requestContext: RequestContext) =>
-  createCallPlacesTool("m").execute!({ place_ids: ["test-care-home"] }, {
+  createCallPlacesTool("m").execute!({ place_ids: ["way/1"] }, {
     requestContext,
   } as never);
 
