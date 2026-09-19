@@ -70,13 +70,14 @@ describe("danger zone", () => {
     expect(compass(e?.fire_bearing_deg ?? -1)).toBe("west"); // the fire is west of the place
   });
 
-  it("takes distance and direction from the hotspot that sets the arrival time", () => {
-    const south = hot(destination(FIRE, 180, 3)); // nearest, but not upwind of the place
-    const west = hot(destination(FIRE, 270, 5)); // farther, upwind
+  it("reports the nearest fire, but the arrival time of the fire that can reach the place", () => {
+    const south = hot(destination(FIRE, 180, 3)); // nearest, but the wind does not push it here
+    const west = hot(destination(FIRE, 270, 5)); // farther, upwind: this one can arrive
     const e = exposure(FIRE, [south, west], WEST_40);
     expect(e?.reason).toBe("downwind");
-    expect(e?.distance_km).toBeCloseTo(5, 3);
-    expect(compass(e?.fire_bearing_deg ?? -1)).toBe("west");
+    expect(e?.distance_km).toBeCloseTo(3, 3);
+    expect(compass(e?.fire_bearing_deg ?? -1)).toBe("south");
+    expect(e?.arrival_h).toBeCloseTo(5 / 4, 2); // 5 km at 4 km/h, from the hotspot in the cone
   });
 
   it("does not put an upwind or side place at risk unless it is near", () => {
@@ -158,7 +159,10 @@ describe("incident", () => {
 
   it("describes arrival and instruction bands", () => {
     expect(arrivalText(0.4)).toBe("less than 1 hour");
-    expect(arrivalText(2.6)).toBe("about 3 hours");
+    expect(arrivalText(2.6)).toBe("up to about 3 hours");
+    expect(arrivalText(1.4)).toBe("up to about 2 hours");
+    // Same words, same instruction band.
+    expect(instructionFor(1.4)).toBe(instructionFor(2.6));
     expect(instructionFor(0.5)).toMatch(/now/);
     expect(instructionFor(5)).toMatch(/Be ready/);
   });
@@ -191,7 +195,7 @@ describe("incident", () => {
     expect(inc.places[0]).toMatchObject({
       distance_km: 8,
       fire_direction: "west",
-      arrival_estimate: "about 2 hours",
+      arrival_estimate: "up to about 2 hours",
     });
     expect(inc.counts).toEqual({ within_1h: 0, within_3h: 1, within_6h: 1 });
     expect(inc.zones.map((z) => z.hours)).toEqual([1, 3, 6]);

@@ -84,7 +84,7 @@ async function callOne(
   const res = await dispatchCall(agentId, phone, callArguments(incident, place), approval);
   console.log(JSON.stringify({ event: "call_dispatched", place: place.id, approval, ...res }));
   await thread.post(
-    `📞 LIVE call to ${place.name} (rings the demo phone). call ${res.call_id}, API ${res.latency_ms} ms`,
+    `📞 LIVE call (replayed fire data) to ${place.name} (rings the demo phone). call ${res.call_id}, API ${res.latency_ms} ms`,
   );
 
   const call = await waitForEnd(agentId, res.call_id);

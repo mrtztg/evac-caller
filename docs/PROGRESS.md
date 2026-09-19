@@ -1,16 +1,17 @@
 # Progress
 
 **Current milestone:** M2 (real fire data and places at risk)
-**Status (23:20):** M2 built. Real FIRMS hotspots (2097 in the fire, 7 isolated detections dropped), wind, OSM places (329). `pnpm replay` works hour by hour. Bot + calls read the replay (default 25 Jul 16:00 Spanish time, `REPLAY_TIME` to change). Demo script `docs/demo-scripts/M2.md`. Next: reviewer, verifier, gate.
+**Status (00:15, Sun):** M2 built, two reviews done (PASS, all blockers/majors fixed). Waiting for the human demo steps 6-8 (Telegram + one call) before the gate.
 
 ## M2 so far
 - Other team (`eldtechnologies/hackbarna-wildfire`, "Ojo de Fuego"): Deepfire API + 3D globe + 5/10/20 km buffer rings, Los Gallardos fire. Ours: FIRMS + measured wind cone + OSM places, then approval and real phone calls. Different fire.
 - Wind: METAR from Valencia airport (LEVC, 41 km away) via Iowa Environmental Mesonet. Open-Meteo blocked on venue IP; Meteostat bulk ends March 2026. Same kind of source as decided (measured station wind).
 - Danger zone: head-fire spread = 10% of wind speed (Cruz & Alexander 2019), 30° cone, 2 km any-direction buffer, 1/3/6 h. Labelled estimate everywhere.
-- Places: 329 named OSM places (211 schools, 25 nurseries, 61 health centres, 24 care homes, 8 hospitals). Overpass main server refuses the venue IP; mirrors used. Pensioners' clubs are not counted as care homes.
+- Places: 305 named OSM places (212 schools, 25 nurseries, 34 public health centres, 25 care homes, 9 hospitals). Private clinics ("Centro Médico", cosmetic, dental) are not counted. Overpass main server refuses the venue IP; mirrors used. Pensioners' clubs are not counted as care homes.
 - FIRMS: only `_NRT` has July 2026 (`_SP` empty, `VIIRS_NOAA21_SP` invalid). Isolated detections (tile kilns near Vila-real) dropped by a 3 km cluster rule.
 - 25 Jul 2026 was a Saturday: schools/nurseries marked `likely empty` (weekend; schools also Jul-Aug) and ranked after occupied places.
-- At 16:00 local: 31 places ≤1 h (health centres in the town), 74 ≤3 h, 171 ≤6 h, incl. 14 care homes + 3 hospitals in Borriana/Vila-real/Castelló. Bot tool can filter by name/type ("call the care homes").
+- At 16:00 local (default replay hour): 26 places ≤1 h, 67 ≤3 h, 158 ≤6 h, including 13 care homes and 4 hospitals in Borriana, Vila-real and Castelló. Bot tool can filter by name/type ("call the care homes").
+- Known limit: if an hour has no wind reading younger than 3 h, the hour reports no places at risk (does not happen in this fixture).
 - Review fixes: phone prompt v5 says "exercise, not a real emergency, real data from a past fire" (`call_context`, needs `pnpm agent:sync`); private clinics (cosmetic, dental) dropped; low-confidence FIRMS points dropped; ranking = hour band, then occupied, then type; wind older than 3 h not used; distance/direction from the same hotspot as the arrival time.
 - Bot prompt v3: top 8 places + total count; calls the top 3 unless the coordinator names places. `REPLAY_TIME` env picks the replayed hour.
 

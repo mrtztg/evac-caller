@@ -39,17 +39,20 @@ export interface IncidentState {
   counts: { within_1h: number; within_3h: number; within_6h: number };
 }
 
-export function arrivalText(h: number): string {
-  if (h < 1) return "less than 1 hour";
-  const n = Math.round(h);
-  return n === 1 ? "about 1 hour" : `about ${n} hours`;
+/** The hour band a place is in: 1 = the fire could arrive within the hour. Used for text and ranking. */
+export const band = (arrivalH: number) => Math.max(1, Math.ceil(arrivalH));
+
+export function arrivalText(arrivalH: number): string {
+  if (arrivalH < 1) return "less than 1 hour";
+  const n = band(arrivalH);
+  return n === 1 ? "about 1 hour" : `up to about ${n} hours`;
 }
 
 // Same fixed text for every place in a band: the coordinator reads it before approving the calls.
 export function instructionFor(arrivalH: number): string {
-  if (arrivalH <= 1)
+  if (band(arrivalH) <= 1)
     return "Start moving everyone away from the fire now, and follow the orders of the emergency services on site.";
-  if (arrivalH <= 3)
+  if (band(arrivalH) <= 3)
     return "Prepare to evacuate now: get people and transport ready, and follow the orders of the emergency services.";
   return "Be ready to evacuate: check who needs help to move, and keep this phone line free.";
 }
@@ -76,7 +79,7 @@ export function rank(places: PlaceAtRisk[]): PlaceAtRisk[] {
   // Same hour band: places with people inside first, then the place that is harder to evacuate.
   return [...places].sort(
     (a, b) =>
-      Math.ceil(a.arrival_h) - Math.ceil(b.arrival_h) ||
+      band(a.arrival_h) - band(b.arrival_h) ||
       Number(a.likely_empty !== null) - Number(b.likely_empty !== null) ||
       KIND_ORDER[a.kind] - KIND_ORDER[b.kind] ||
       a.arrival_h - b.arrival_h,

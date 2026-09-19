@@ -144,14 +144,18 @@ function kindOf(t: Record<string, string>): PlaceKind | null {
     return "care home";
   if (t.amenity === "school") return "school";
   if (t.amenity === "kindergarten") return "nursery";
-  // Public primary care only. Private clinics (cosmetic, dental, physio) are not places we evacuate first.
+  // Public primary and specialist care only. Private clinics ("Centro Médico X", cosmetic, dental)
+  // are not the places a coordinator evacuates first.
+  const publicOperator =
+    /conselleria|generalitat|gva|servicio|servei|ayuntamiento|ajuntament|diputaci/i;
+  const publicName =
+    /centr[eo] de salu[dt]|centre de salut|consultori|consultorio|ambulatori|centr[eo] sanitari|centr[eo] d.especialit|centro de especialidades|comarcal de la salu[dt]/i;
   if (
-    (t.healthcare === "centre" ||
-      (t.amenity === "clinic" &&
-        /centr[eo] de salu[dt]|consultori|ambulatori|centro m[eé]dico|centre m[eè]dic/i.test(
-          t.name ?? "",
-        ))) &&
-    !/est[eé]tic|dental|dentist/i.test(t.name ?? "")
+    (t.healthcare === "centre" || t.amenity === "clinic") &&
+    (publicName.test(t.name ?? "") ||
+      t["operator:type"] === "public" ||
+      publicOperator.test(t.operator ?? "")) &&
+    !/est[eé]tic|dental|dentist|veterinari/i.test(t.name ?? "")
   )
     return "health centre";
   return null;

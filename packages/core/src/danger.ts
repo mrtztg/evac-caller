@@ -78,7 +78,7 @@ export const spreadKmh = (w: WindObs) =>
 const downwind = (w: WindObs) => (w.from_deg + 180) % 360;
 
 export interface Exposure {
-  /** Distance to the nearest active hotspot. */
+  /** Distance to the nearest active hotspot: what the people at the place need to hear. */
   distance_km: number;
   /** Direction from the place to the nearest hotspot: where the fire is, seen from the place. */
   fire_bearing_deg: number;
@@ -102,13 +102,13 @@ export function exposure(place: Point, front: Hotspot[], wind: WindObs): Exposur
   }
   // Near places use the head-fire rate too: faster than a flank fire, so the estimate errs on the safe side.
   const reason = nearestKm <= NEAR_KM ? "near" : upwind ? "downwind" : null;
-  // Distance and direction come from the same hotspot as the arrival time.
-  const source = reason === "downwind" ? (upwind as Hotspot) : nearest;
-  const km = reason === "downwind" ? upwindKm : nearestKm;
+  // Distance and direction always describe the nearest fire (never understate how close it is).
+  // The arrival time comes from the nearest hotspot that can reach the place with the wind.
+  const arrivalKm = reason === "downwind" ? upwindKm : nearestKm;
   return {
-    distance_km: km,
-    fire_bearing_deg: bearingDeg(place, source),
-    arrival_h: reason ? km / rate : null,
+    distance_km: nearestKm,
+    fire_bearing_deg: bearingDeg(place, nearest),
+    arrival_h: reason ? arrivalKm / rate : null,
     reason,
   };
 }

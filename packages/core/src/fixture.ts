@@ -75,7 +75,8 @@ export function loadFixture(fire: string): Fixture {
   const p = read<{ source: Source; places: Place[] }>(fire, "places.json");
   // Low-confidence VIIRS detections ("l") are dropped: they can grow the front without a real fire.
   const confident = h.hotspots
-    .filter((x) => x.confidence !== "l")
+    // VIIRS uses l/n/h, MODIS a percentage.
+    .filter((x) => x.confidence !== "l" && !(Number(x.confidence) < 30))
     .sort((a, b) => a.time.localeCompare(b.time));
   const fireHotspots = mainCluster(confident);
   return {

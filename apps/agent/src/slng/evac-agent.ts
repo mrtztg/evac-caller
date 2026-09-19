@@ -48,7 +48,7 @@ export const evacAgentConfig: AgentConfig = {
   system_prompt: SYSTEM_PROMPT,
   // A plain greeting (not outbound_greeting): SLNG only allows directional greetings once a SIP trunk is attached.
   greeting:
-    "Hello, this is an automated emergency call from the wildfire coordination, for {{place_name}}. Please listen carefully.",
+    "Hello, this is an automated emergency call from the wildfire coordination, for {{place_name}}. {{call_context}} Please listen carefully.",
   inbound_greeting: null,
   outbound_greeting: null,
   language: "en",

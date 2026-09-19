@@ -16,7 +16,7 @@ const fold = (s: string) =>
 export const placesAtRiskTool = createTool({
   id: "places_at_risk",
   description:
-    "The active wildfire incident: data source, data time, wind, how many places are at risk per arrival band, and the highest-risk places ranked (occupied places first, then by how soon the fire can reach them). Use name or type to look up specific places at risk.",
+    "The active wildfire incident: data source, data time, wind, how many places are at risk per arrival band, and the highest-risk places ranked: soonest arrival band first, inside a band the places with people inside first, then the hardest to evacuate. Use name or type to look up specific places at risk.",
   inputSchema: z.object({
     name: z.string().optional().describe("part of a place or town name, for example 'Borriana'"),
     type: z
