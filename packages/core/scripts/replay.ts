@@ -7,7 +7,7 @@ console.log(`REPLAY of ${fx.meta.name}`);
 for (const s of fx.sources)
   console.log(`  source: ${s.name} (fetched ${s.fetched_at.slice(0, 16)}Z)`);
 console.log(
-  `  ${fx.hotspots.length} fire hotspots; ${fx.excluded_hotspots} isolated detections outside the fire ignored`,
+  `  ${fx.hotspots.length} fire hotspots; ignored: ${fx.low_confidence_hotspots} low-confidence, ${fx.excluded_hotspots} isolated detections outside the fire`,
 );
 console.log("  Arrival times are ESTIMATES from a wind cone (10% rule), not a fire simulation.\n");
 

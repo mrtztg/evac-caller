@@ -31,7 +31,7 @@ export interface Incident {
   places: PlaceAtRisk[];
 }
 
-// The replayed moment. Default: first hour with a large front (248 hotspots) and strong westerly wind.
+// The replayed moment. Default: first hour with a large front (197 hotspots) and strong westerly wind.
 // Override with REPLAY_TIME (ISO UTC) to replay another hour; the dashboard slider will set it in M3.
 const DEFAULT_REPLAY_TIME = "2026-07-25T14:00:00Z";
 

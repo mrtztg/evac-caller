@@ -2,9 +2,17 @@
  "source": {
   "name": "OpenStreetMap via Overpass API (© OpenStreetMap contributors, ODbL)",
   "url": "https://overpass.private.coffee/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A90%5D%3B(%20nwr%5B%22amenity%22~%22%5E(hospital%7Cclinic%7Cschool%7Ckindergarten%7Cnursing_home)%24%22%5D(39.65%2C-0.7%2C40.1%2C0.05)%3B%20nwr%5B%22amenity%22%3D%22social_facility%22%5D(39.65%2C-0.7%2C40.1%2C0.05)%3B%20nwr%5B%22healthcare%22%3D%22centre%22%5D(39.65%2C-0.7%2C40.1%2C0.05)%3B%20)%3Bout%20tags%20center%3B",
-  "fetched_at": "2026-09-19T20:48:10.573Z"
+  "fetched_at": "2026-09-19T20:58:09.100Z"
  },
  "places": [
+  {
+   "id": "node/268987031",
+   "name": "Hospital de La Magdalena",
+   "kind": "hospital",
+   "lat": 40.0043875,
+   "lon": -0.0728965,
+   "town": null
+  },
   {
    "id": "node/392063785",
    "name": "Centre de Salut San Agustín",
@@ -110,43 +118,11 @@
    "town": null
   },
   {
-   "id": "node/3391118279",
-   "name": "Clínica Náquera",
-   "kind": "health centre",
-   "lat": 39.6561966,
-   "lon": -0.4239371,
-   "town": "Náquera"
-  },
-  {
    "id": "node/4016142766",
    "name": "Carenes",
    "kind": "nursery",
    "lat": 39.9808904,
    "lon": -0.0477283,
-   "town": null
-  },
-  {
-   "id": "node/4016142781",
-   "name": "Dr. Giner",
-   "kind": "health centre",
-   "lat": 39.9793787,
-   "lon": -0.0438805,
-   "town": null
-  },
-  {
-   "id": "node/4016148799",
-   "name": "Kine Avant",
-   "kind": "health centre",
-   "lat": 39.9802269,
-   "lon": -0.0443323,
-   "town": null
-  },
-  {
-   "id": "node/4016148845",
-   "name": "Vitalbed",
-   "kind": "health centre",
-   "lat": 39.9791306,
-   "lon": -0.0452736,
    "town": null
   },
   {
@@ -166,14 +142,6 @@
    "town": "Vall de Uxó"
   },
   {
-   "id": "node/5107702421",
-   "name": "Centre Sanitari Integrat d'Onda II",
-   "kind": "health centre",
-   "lat": 39.9671329,
-   "lon": -0.25655,
-   "town": null
-  },
-  {
    "id": "node/5239447612",
    "name": "William Einstein",
    "kind": "school",
@@ -190,28 +158,12 @@
    "town": "Playa de Canet d'en Berenguer"
   },
   {
-   "id": "node/6060228655",
-   "name": "CLINICA PODOLÓGICA DEALBERT",
-   "kind": "health centre",
-   "lat": 39.986972,
-   "lon": -0.0340499,
-   "town": null
-  },
-  {
    "id": "node/6060247400",
    "name": "Hospital de Día de Salud Mental Cardenal Costa",
    "kind": "hospital",
    "lat": 39.9899471,
    "lon": -0.0462162,
    "town": null
-  },
-  {
-   "id": "node/6855696163",
-   "name": "Centre Sanitari Integrat Grau",
-   "kind": "health centre",
-   "lat": 39.9768164,
-   "lon": 0.0152673,
-   "town": "Castelló de la Plana"
   },
   {
    "id": "node/6865098923",
@@ -222,36 +174,12 @@
    "town": null
   },
   {
-   "id": "node/6865098924",
-   "name": "Umivale - Port de Sagunt",
-   "kind": "health centre",
-   "lat": 39.6556105,
-   "lon": -0.227284,
-   "town": "Sagunt"
-  },
-  {
-   "id": "node/7595174066",
-   "name": "Clínica Medicina Estética Barberá",
-   "kind": "health centre",
-   "lat": 39.8197472,
-   "lon": -0.2268001,
-   "town": "La Vall d'Uixó"
-  },
-  {
    "id": "node/7973248946",
    "name": "Centre de Salut Illes Columbretes",
    "kind": "health centre",
    "lat": 39.9924803,
    "lon": -0.03807,
    "town": "Castelló de la Plana"
-  },
-  {
-   "id": "node/8345780750",
-   "name": "Clínica Ennova",
-   "kind": "health centre",
-   "lat": 39.9813738,
-   "lon": -0.0281283,
-   "town": null
   },
   {
    "id": "node/9248545212",
@@ -262,28 +190,12 @@
    "town": null
   },
   {
-   "id": "node/9464415134",
-   "name": "Centre d'Especialitats Jaume I",
-   "kind": "health centre",
-   "lat": 39.9864525,
-   "lon": -0.0409634,
-   "town": "Castelló de la Plana"
-  },
-  {
    "id": "node/9464415135",
    "name": "Centre de Salut 9 d'Octubre",
    "kind": "health centre",
    "lat": 39.9864196,
    "lon": -0.0409647,
    "town": "Castelló de la Plana"
-  },
-  {
-   "id": "node/9468603239",
-   "name": "Clínica Miquel",
-   "kind": "health centre",
-   "lat": 39.819521,
-   "lon": -0.2282425,
-   "town": "La Vall d'Uixó"
   },
   {
    "id": "node/9867819756",
@@ -318,27 +230,11 @@
    "town": null
   },
   {
-   "id": "node/10855645888",
-   "name": "CENTRO RECONOCIMIENTO MÉDICO CONDUCTORES",
-   "kind": "health centre",
-   "lat": 39.9634872,
-   "lon": -0.2619948,
-   "town": null
-  },
-  {
    "id": "node/11052486964",
    "name": "Institut d'Educació Secundària Crémor",
    "kind": "school",
    "lat": 39.9944955,
    "lon": -0.0573999,
-   "town": null
-  },
-  {
-   "id": "node/11330828899",
-   "name": "Agencia Valenciana de Salut",
-   "kind": "health centre",
-   "lat": 39.9918637,
-   "lon": -0.0614148,
    "town": null
   },
   {
@@ -358,35 +254,11 @@
    "town": null
   },
   {
-   "id": "node/12081380322",
-   "name": "Clínica Medefis",
-   "kind": "health centre",
-   "lat": 39.9415284,
-   "lon": -0.0938406,
-   "town": null
-  },
-  {
-   "id": "node/12081380323",
-   "name": "Clínica Robles",
-   "kind": "health centre",
-   "lat": 39.931244,
-   "lon": -0.1075776,
-   "town": null
-  },
-  {
    "id": "node/12081380324",
    "name": "Centro Médico Manebas Burriana",
    "kind": "health centre",
    "lat": 39.8856657,
    "lon": -0.0875912,
-   "town": null
-  },
-  {
-   "id": "node/12081380325",
-   "name": "Policlínica Medinul",
-   "kind": "health centre",
-   "lat": 39.8528418,
-   "lon": -0.1575825,
    "town": null
   },
   {
@@ -398,36 +270,12 @@
    "town": null
   },
   {
-   "id": "node/12081470583",
-   "name": "Policlínica Prades",
-   "kind": "health centre",
-   "lat": 39.9666876,
-   "lon": -0.260331,
-   "town": null
-  },
-  {
    "id": "node/12081621437",
    "name": "Centro Médico Plana Baixa",
    "kind": "health centre",
    "lat": 39.8215706,
    "lon": -0.2268352,
    "town": null
-  },
-  {
-   "id": "node/12081621438",
-   "name": "Clínica Sanchis",
-   "kind": "health centre",
-   "lat": 39.8219227,
-   "lon": -0.2273039,
-   "town": null
-  },
-  {
-   "id": "node/12467989807",
-   "name": "Clínica Laura Baduy",
-   "kind": "health centre",
-   "lat": 39.9816772,
-   "lon": -0.0325576,
-   "town": "Castelló de la Plana"
   },
   {
    "id": "node/12596008630",
@@ -446,28 +294,12 @@
    "town": null
   },
   {
-   "id": "node/13300157385",
-   "name": "Cliniplus",
-   "kind": "health centre",
-   "lat": 39.9874979,
-   "lon": -0.0414439,
-   "town": null
-  },
-  {
    "id": "node/13391848319",
    "name": "Centre d'Educació Especial Glorieta",
    "kind": "school",
    "lat": 39.8506377,
    "lon": -0.4910626,
    "town": "Segorbe"
-  },
-  {
-   "id": "node/13579960444",
-   "name": "Clínica Port Salud",
-   "kind": "health centre",
-   "lat": 39.6595701,
-   "lon": -0.219847,
-   "town": null
   },
   {
    "id": "node/13633302403",
@@ -483,14 +315,6 @@
    "kind": "school",
    "lat": 40.0304901,
    "lon": 0.0383674,
-   "town": null
-  },
-  {
-   "id": "way/24751176",
-   "name": "Hospital de La Magdalena",
-   "kind": "hospital",
-   "lat": 40.0043187,
-   "lon": -0.0728363,
    "town": null
   },
   {
@@ -1091,14 +915,6 @@
    "kind": "school",
    "lat": 39.9390789,
    "lon": -0.1148781,
-   "town": null
-  },
-  {
-   "id": "way/41085315",
-   "name": "Centro Comarcal de la Salud",
-   "kind": "health centre",
-   "lat": 39.9431371,
-   "lon": -0.1074142,
    "town": null
   },
   {
@@ -1782,14 +1598,6 @@
    "town": null
   },
   {
-   "id": "way/396206598",
-   "name": "Centre Sanitari Integrat de Gran Via",
-   "kind": "health centre",
-   "lat": 39.9791559,
-   "lon": -0.0522435,
-   "town": null
-  },
-  {
    "id": "way/409291789",
    "name": "Aulari d'Olocau",
    "kind": "school",
@@ -1828,14 +1636,6 @@
    "lat": 39.6640056,
    "lon": -0.2231018,
    "town": "Port de Sagunt"
-  },
-  {
-   "id": "way/438436828",
-   "name": "Centro de Especialidades",
-   "kind": "health centre",
-   "lat": 39.6652555,
-   "lon": -0.2284093,
-   "town": null
   },
   {
    "id": "way/438524765",
@@ -2262,14 +2062,6 @@
    "town": "les Alqueries / Alquerías del Niño Perdido"
   },
   {
-   "id": "way/891003722",
-   "name": "Centro Desplazados Marjaleria-Grao",
-   "kind": "health centre",
-   "lat": 39.9977746,
-   "lon": 0.0158423,
-   "town": null
-  },
-  {
    "id": "way/893714291",
    "name": "Residencia Centro de Día Maset de Frater",
    "kind": "care home",
@@ -2340,14 +2132,6 @@
    "lat": 39.9138574,
    "lon": -0.19899,
    "town": null
-  },
-  {
-   "id": "way/1070001951",
-   "name": "el Raval",
-   "kind": "health centre",
-   "lat": 39.678016,
-   "lon": -0.2718135,
-   "town": "Sagunt"
   },
   {
    "id": "way/1124887720",
@@ -2481,7 +2265,7 @@
    "id": "way/1234693728",
    "name": "Col·legi d'Educació Infantil i Primària Sant Josep",
    "kind": "school",
-   "lat": 39.6839884,
+   "lat": 39.6839911,
    "lon": -0.4285794,
    "town": null
   },
