@@ -6,8 +6,11 @@
 ## Done
 - Repo, rules (CLAUDE.md), plan, agents, commands, check script.
 
+## Evidence
+- Call 1 `a09b5ad8-5144-4a8e-b206-e9af48f3ee1c` (18:51, prompt v1): rang, greeting named the place, 51.5 s, completed. Background talk interrupted the agent for 30 s before the key message. Latency avg: e2e 2.23 s, LLM first token 0.68 s, TTS first audio 0.24 s. Fix: v2 speaks the key message in the greeting.
+
 ## Next
-- M0: user runs `pnpm call:test` and reports the result (steps 4-5 in `docs/demo-scripts/M0.md`).
+- M0: second test call with prompt v2 in a quiet place; ask "Which road should we take?" and check the 112 answer.
 
 ## Blockers
 - None known. If the call doesn't ring: check Vonage trial test numbers and outbound country permissions.

@@ -1,12 +1,25 @@
-// Shows status, duration and the other fields SLNG returns for a call. Usage: pnpm call:status <call_id>
+// Shows a call's status, transcript and latency. Usage: pnpm call:status <call_id> [--raw]
+import { summarizeCall } from "../src/slng/call-summary.js";
 import { getCall } from "../src/slng/client.js";
 
 const agentId = process.env.SLNG_AGENT_ID;
 const callId = process.argv[2];
 if (!agentId || !callId) {
-  console.error("Usage: pnpm call:status <call_id>  (needs SLNG_AGENT_ID in .env)");
+  console.error("Usage: pnpm call:status <call_id> [--raw]  (needs SLNG_AGENT_ID in .env)");
   process.exit(1);
 }
 
-const { rendered_prompt: _prompt, arguments: _args, ...call } = await getCall(agentId, callId);
-console.log(JSON.stringify(call, null, 2));
+const call = await getCall(agentId, callId);
+if (process.argv.includes("--raw")) {
+  console.log(JSON.stringify(call, null, 2));
+} else {
+  const s = summarizeCall(call);
+  console.log(
+    `${s.id}  ${s.status}  ${s.duration_s ?? "-"} s  (${s.end_reason ?? "no end reason"})`,
+  );
+  for (const t of s.turns) {
+    const lat = t.e2e_latency_s === null ? "" : `  [${t.e2e_latency_s.toFixed(2)} s]`;
+    console.log(`${t.role === "assistant" ? "AGENT" : "CALLER"}: ${t.text}${lat}`);
+  }
+  console.log(`latency avg (s): ${JSON.stringify(s.latency_s)}`);
+}

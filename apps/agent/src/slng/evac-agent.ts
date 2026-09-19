@@ -1,7 +1,7 @@
 import type { AgentConfig } from "./client.js";
 
 // Version this prompt. Change the number when the prompt changes, so evals and logs can refer to it.
-export const PROMPT_VERSION = "evac-call-v1";
+export const PROMPT_VERSION = "evac-call-v2";
 
 /** Values the phone agent gets for each call. All come from real data (packages/core), never invented. */
 export interface CallArguments {
@@ -26,14 +26,16 @@ Facts for this call (from satellite fire data at {{data_time}}). These are the O
 - The coordinator's instruction: {{instructions}}
 
 Rules:
-1. Start by saying you are an automated call from the wildfire emergency coordination, then give the key message in two short sentences: where the fire is and what they must do.
+1. Your greeting has already told them where the fire is and what to do. Don't repeat the whole message; answer their questions. If they didn't hear or seem confused, repeat the key message once in two short sentences.
 2. Speak calmly, in short and simple sentences. This is a phone call: no lists, no markdown, no long numbers.
 3. Answer questions only with the facts above. If you don't know something (for example exact roads, shelters, or whether a person must stay), say clearly that you don't have that information and that they must call 112 for anything urgent. Never guess, never invent roads, places or times.
 4. Never tell them they are safe. Never cancel or soften the coordinator's instruction.
 5. Ask them to confirm they understood. Before ending, repeat the instruction once and remind them of 112.`;
 
+// Spoken right away, without an LLM round trip, so the key message arrives even if the line is noisy.
+// Test call (18:51): background talk interrupted the LLM turns for 30 s before the message was given.
 export const OUTBOUND_GREETING =
-  "Hello, this is an automated emergency call from the wildfire coordination, for {{place_name}}. Please listen carefully.";
+  "This is an automated emergency call from the wildfire coordination, for {{place_name}}. A wildfire is about {{fire_distance_km}} kilometres to the {{fire_direction}}. It could reach your area in {{arrival_estimate}}. Instruction: {{instructions}} I can answer questions now.";
 
 export const evacAgentConfig: AgentConfig = {
   name: "evac-caller",
