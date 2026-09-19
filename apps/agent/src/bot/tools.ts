@@ -9,11 +9,11 @@ const LISTED = 8;
 export const placesAtRiskTool = createTool({
   id: "places_at_risk",
   description:
-    "The active wildfire incident: data source, data time, wind, how many places are at risk, and the highest-risk places ranked by how soon the fire can reach them.",
+    "The active wildfire incident: data source, data time, wind, how many places are at risk per arrival band, and the highest-risk places ranked (occupied places first, then by how soon the fire can reach them).",
   inputSchema: z.object({}),
   execute: async () => {
     const { places, ...incident } = loadIncident();
-    return { ...incident, total_at_risk: places.length, top_places: places.slice(0, LISTED) };
+    return { ...incident, top_places: places.slice(0, LISTED) };
   },
 });
 

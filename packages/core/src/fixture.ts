@@ -1,5 +1,6 @@
 // Fixture files for one real fire: satellite hotspots, measured wind, places. Written by scripts/fetch-fixtures.ts.
 import { readFileSync } from "node:fs";
+import { mainCluster } from "./danger.js";
 
 export interface Source {
   name: string;
@@ -53,7 +54,10 @@ export interface FireMeta {
 export interface Fixture {
   meta: FireMeta;
   sources: Source[];
+  /** Hotspots of the fire itself (main cluster). */
   hotspots: Hotspot[];
+  /** Detections in the box that are not part of the fire. */
+  excluded_hotspots: number;
   wind: WindObs[];
   places: Place[];
 }
@@ -67,10 +71,12 @@ export function loadFixture(fire: string): Fixture {
   const h = read<{ source: Source; hotspots: Hotspot[] }>(fire, "hotspots.json");
   const w = read<{ source: Source; wind: WindObs[] }>(fire, "wind.json");
   const p = read<{ source: Source; places: Place[] }>(fire, "places.json");
+  const fireHotspots = mainCluster(h.hotspots);
   return {
     meta: read<FireMeta>(fire, "meta.json"),
     sources: [h.source, w.source, p.source],
-    hotspots: h.hotspots,
+    hotspots: fireHotspots,
+    excluded_hotspots: h.hotspots.length - fireHotspots.length,
     wind: w.wind,
     places: p.places,
   };

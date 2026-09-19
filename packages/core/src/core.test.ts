@@ -1,8 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { activeFront, exposure, NEAR_KM, windAt, zonePolygon } from "./danger.js";
+import { activeFront, exposure, mainCluster, NEAR_KM, windAt, zonePolygon } from "./danger.js";
 import type { Fixture, Hotspot, Place, WindObs } from "./fixture.js";
 import { bearingDeg, compass, destination, distanceKm } from "./geo.js";
-import { arrivalText, incidentAt, instructionFor, rank, replayHours } from "./incident.js";
+import {
+  arrivalText,
+  incidentAt,
+  instructionFor,
+  likelyEmpty,
+  rank,
+  replayHours,
+} from "./incident.js";
 
 const FIRE = { lat: 39.82, lon: -0.3 };
 const hot = (p: { lat: number; lon: number }, time = "2026-07-25T13:00:00Z"): Hotspot => ({
@@ -68,6 +75,12 @@ describe("danger zone", () => {
     expect(near?.reason).toBe("near");
   });
 
+  it("keeps the main fire and drops isolated detections", () => {
+    const fire = [0, 1, 2, 3].map((i) => hot(destination(FIRE, 0, i * 2.5)));
+    const kiln = hot(destination(FIRE, 90, 10));
+    expect(mainCluster([kiln, ...fire])).toEqual(fire);
+  });
+
   it("zone polygon is closed and reaches downwind", () => {
     const ring = zonePolygon([hot(FIRE)], WEST_40, 3);
     expect(ring[0]).toEqual(ring.at(-1));
@@ -85,6 +98,7 @@ describe("incident", () => {
       arrival_h: h,
       arrival_estimate: arrivalText(h),
       reason: "downwind" as const,
+      likely_empty: null,
       instructions: instructionFor(h),
     });
     const ranked = rank([
@@ -99,6 +113,35 @@ describe("incident", () => {
       "school-1.5",
       "nursery-4",
     ]);
+  });
+
+  it("puts places that are likely empty last", () => {
+    const p = (id: string, kind: Place["kind"], h: number, empty: string | null) => ({
+      ...place(id, kind, FIRE),
+      distance_km: 1,
+      fire_direction: "west",
+      arrival_h: h,
+      arrival_estimate: arrivalText(h),
+      reason: "downwind" as const,
+      likely_empty: empty,
+      instructions: instructionFor(h),
+    });
+    const ranked = rank([
+      p("school", "school", 0.5, "weekend"),
+      p("clinic", "health centre", 5, null),
+    ]);
+    expect(ranked.map((x) => x.id)).toEqual(["clinic", "school"]);
+  });
+
+  it("knows schools are closed at weekends and in summer, care homes never", () => {
+    const saturday = new Date("2026-07-25T14:00:00Z");
+    const julyTuesday = new Date("2026-07-21T10:00:00Z");
+    const octoberTuesday = new Date("2026-10-20T10:00:00Z");
+    expect(likelyEmpty("school", saturday)).toBe("weekend");
+    expect(likelyEmpty("nursery", julyTuesday)).toBeNull();
+    expect(likelyEmpty("school", julyTuesday)).toBe("school summer holidays");
+    expect(likelyEmpty("school", octoberTuesday)).toBeNull();
+    expect(likelyEmpty("care home", saturday)).toBeNull();
   });
 
   it("describes arrival and instruction bands", () => {
@@ -118,6 +161,7 @@ describe("incident", () => {
         wind_station: { id: "X", name: "Test station", lat: 0, lon: 0 },
       },
       sources: [],
+      excluded_hotspots: 0,
       hotspots: [hot(FIRE), hot(destination(FIRE, 90, 3), "2026-07-26T02:00:00Z")],
       wind: [WEST_40],
       places: [
@@ -136,6 +180,7 @@ describe("incident", () => {
       fire_direction: "west",
       arrival_estimate: "about 2 hours",
     });
+    expect(inc.counts).toEqual({ within_1h: 0, within_3h: 1, within_6h: 1 });
     expect(inc.zones.map((z) => z.hours)).toEqual([1, 3, 6]);
     expect(replayHours(fx)[0]?.toISOString()).toBe("2026-07-25T13:00:00.000Z");
   });

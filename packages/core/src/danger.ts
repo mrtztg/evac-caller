@@ -18,6 +18,37 @@ export const HORIZONS_H = [1, 3, 6] as const;
 export const FRONT_WINDOW_H = 12;
 
 const HOUR_MS = 3_600_000;
+/** Hotspots closer than this belong to the same fire. Our assumption (VIIRS pixels are ~375 m). */
+export const CLUSTER_KM = 3;
+
+/**
+ * The fire: the biggest group of hotspots linked by CLUSTER_KM steps, over all passes. Drops isolated
+ * detections elsewhere in the box (for example hot kilns in the Castellón tile industry).
+ */
+export function mainCluster(hotspots: Hotspot[]): Hotspot[] {
+  const group = new Array<number>(hotspots.length).fill(-1);
+  const sizes: number[] = [];
+  for (let i = 0; i < hotspots.length; i++) {
+    if (group[i] !== -1) continue;
+    const id = sizes.length;
+    const queue = [i];
+    group[i] = id;
+    let size = 0;
+    while (queue.length) {
+      const a = hotspots[queue.pop() as number] as Hotspot;
+      size++;
+      hotspots.forEach((b, j) => {
+        if (group[j] === -1 && distanceKm(a, b) <= CLUSTER_KM) {
+          group[j] = id;
+          queue.push(j);
+        }
+      });
+    }
+    sizes.push(size);
+  }
+  const biggest = sizes.indexOf(Math.max(...sizes));
+  return hotspots.filter((_, i) => group[i] === biggest);
+}
 
 /** Latest wind observation at or before `time` (the replay must not see the future). */
 export function windAt(wind: WindObs[], time: Date): WindObs | null {

@@ -11,6 +11,8 @@ export interface PlaceAtRisk {
   /** Where the fire is, seen from the place (the fire is to the north-west of the place). */
   fire_direction: string;
   arrival_estimate: string;
+  /** Why nobody is likely inside now (weekend, school holidays), or null. */
+  likely_empty: string | null;
   instructions: string;
 }
 
@@ -22,6 +24,8 @@ export interface Incident {
   /** Latest satellite pass used: how old the fire data is. */
   data_time: string;
   wind: string;
+  /** Places at risk per estimated arrival band. */
+  counts: { within_1h: number; within_3h: number; within_6h: number };
   places: PlaceAtRisk[];
 }
 
@@ -45,6 +49,7 @@ export function loadIncident(): Incident {
     replay_time: localTime(inc.time),
     data_time: inc.data_time ? localTime(inc.data_time) : "no satellite detection yet",
     wind: inc.wind_text,
+    counts: inc.counts,
     places: inc.places.map((p) => ({
       id: p.id,
       name: p.name,
@@ -53,6 +58,7 @@ export function loadIncident(): Incident {
       distance_km: p.distance_km,
       fire_direction: p.fire_direction,
       arrival_estimate: p.arrival_estimate,
+      likely_empty: p.likely_empty,
       instructions: p.instructions,
     })),
   };

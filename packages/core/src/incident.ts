@@ -19,6 +19,8 @@ export interface PlaceAtRisk extends Place {
   arrival_h: number;
   arrival_estimate: string;
   reason: "downwind" | "near";
+  /** Why nobody is likely inside at this time (weekend, school holidays), or null. */
+  likely_empty: string | null;
   instructions: string;
 }
 
@@ -33,6 +35,8 @@ export interface IncidentState {
   front: Hotspot[];
   zones: { hours: number; polygon: [number, number][] }[];
   places: PlaceAtRisk[];
+  /** Places at risk per arrival band. */
+  counts: { within_1h: number; within_3h: number; within_6h: number };
 }
 
 export function arrivalText(h: number): string {
@@ -50,10 +54,23 @@ export function instructionFor(arrivalH: number): string {
   return "Be ready to evacuate: check who needs help to move, and keep this phone line free.";
 }
 
+/**
+ * Schools and nurseries are closed at weekends, schools also in July and August (Valencian school
+ * calendar). Rough on purpose: the place stays in the list, it only moves down.
+ */
+export function likelyEmpty(kind: PlaceKind, time: Date): string | null {
+  if (kind !== "school" && kind !== "nursery") return null;
+  const local = new Date(time.toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
+  if (local.getDay() === 0 || local.getDay() === 6) return "weekend";
+  if (kind === "school" && [6, 7].includes(local.getMonth())) return "school summer holidays";
+  return null;
+}
+
 export function rank(places: PlaceAtRisk[]): PlaceAtRisk[] {
-  // Same hour band: the place that is harder to evacuate goes first.
+  // Places with people inside first. Same hour band: the place that is harder to evacuate goes first.
   return [...places].sort(
     (a, b) =>
+      Number(a.likely_empty !== null) - Number(b.likely_empty !== null) ||
       Math.ceil(a.arrival_h) - Math.ceil(b.arrival_h) ||
       KIND_ORDER[a.kind] - KIND_ORDER[b.kind] ||
       a.arrival_h - b.arrival_h,
@@ -73,7 +90,8 @@ export function incidentAt(fx: Fixture, time: Date): IncidentState {
     spread_kmh: wind ? spreadKmh(wind) : null,
     front,
   };
-  if (!wind || !front.length) return { ...base, zones: [], places: [] };
+  if (!wind || !front.length)
+    return { ...base, zones: [], places: [], counts: { within_1h: 0, within_3h: 0, within_6h: 0 } };
 
   const maxH = Math.max(...HORIZONS_H);
   const places: PlaceAtRisk[] = [];
@@ -87,6 +105,7 @@ export function incidentAt(fx: Fixture, time: Date): IncidentState {
       arrival_h: Math.round(e.arrival_h * 10) / 10,
       arrival_estimate: arrivalText(e.arrival_h),
       reason: e.reason,
+      likely_empty: likelyEmpty(p.kind, time),
       instructions: instructionFor(e.arrival_h),
     });
   }
@@ -94,6 +113,11 @@ export function incidentAt(fx: Fixture, time: Date): IncidentState {
     ...base,
     zones: HORIZONS_H.map((hours) => ({ hours, polygon: zonePolygon(front, wind, hours) })),
     places: rank(places),
+    counts: {
+      within_1h: places.filter((p) => p.arrival_h <= 1).length,
+      within_3h: places.filter((p) => p.arrival_h <= 3).length,
+      within_6h: places.length,
+    },
   };
 }
 

@@ -26,6 +26,10 @@ const FIRMS_SOURCES = ["VIIRS_SNPP", "VIIRS_NOAA20", "VIIRS_NOAA21", "MODIS"];
 const now = new Date().toISOString();
 const dir = new URL(`../../../data/fixtures/${DEMO_FIRE}/`, import.meta.url);
 
+// Never print the FIRMS key (it is part of the URL path).
+const redact = (url: string) =>
+  process.env.FIRMS_MAP_KEY ? url.replaceAll(process.env.FIRMS_MAP_KEY, "<MAP_KEY>") : url;
+
 async function get(url: string, init?: RequestInit): Promise<string> {
   const res = await fetch(url, {
     ...init,
@@ -33,7 +37,8 @@ async function get(url: string, init?: RequestInit): Promise<string> {
     signal: AbortSignal.timeout(90_000),
   });
   const text = await res.text();
-  if (!res.ok) throw new Error(`${res.status} from ${url.split("?")[0]}: ${text.slice(0, 200)}`);
+  if (!res.ok)
+    throw new Error(`${res.status} from ${redact(url.split("?")[0] ?? "")}: ${text.slice(0, 200)}`);
   return text;
 }
 
@@ -61,8 +66,8 @@ async function fetchHotspots(): Promise<{ hotspots: Hotspot[]; source: Source }>
     for (const kind of ["SP", "NRT"]) {
       const source = `${sat}_${kind}`;
       const url = `https://firms.modaps.eosdis.nasa.gov/api/area/csv/${key}/${source}/${FIRE_BOX.join(",")}/${days}/${date}`;
-      const text = await get(url);
-      if (text.startsWith("Invalid") || text.includes("Error")) {
+      const text = await get(url).catch((err: Error) => `Error: ${err.message}`);
+      if (text.startsWith("Invalid") || text.startsWith("Error")) {
         console.log(`${source}: ${text.slice(0, 100).trim()}`);
         continue;
       }
