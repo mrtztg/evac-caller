@@ -13,7 +13,8 @@
     "test": "pnpm -r --if-present test",
     "agent:sync": "pnpm --filter @evac/agent agent:sync",
     "call:test": "pnpm --filter @evac/agent call:test",
-    "call:status": "pnpm --filter @evac/agent call:status"
+    "call:status": "pnpm --filter @evac/agent call:status",
+    "bot": "pnpm --filter @evac/agent bot"
   },
   "devDependencies": {
     "@biomejs/biome": "^2",

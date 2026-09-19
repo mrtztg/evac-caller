@@ -7,3 +7,7 @@ dist
 .mastra
 *.log
 .DS_Store
+
+# Local Mastra storage (memory, channel state)
+*.db
+*.db-*
