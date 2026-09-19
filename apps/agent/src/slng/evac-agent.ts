@@ -35,16 +35,16 @@ Rules:
 export const evacAgentConfig: AgentConfig = {
   name: "evac-caller",
   system_prompt: SYSTEM_PROMPT,
-  greeting: "Hello, this is an automated call from the wildfire emergency coordination.",
-  outbound_greeting:
+  // A plain greeting (not outbound_greeting): SLNG only allows directional greetings once a SIP trunk is attached.
+  greeting:
     "Hello, this is an automated emergency call from the wildfire coordination, for {{place_name}}. Please listen carefully.",
+  inbound_greeting: null,
+  outbound_greeting: null,
   language: "en",
   region: "eu-central",
   models: {
-    // Models must be allowed for the region (see https://api.slng.ai/v1/catalog/models).
     stt: "deepgram/nova:3",
-    // Allowed agent LLMs depend on the SLNG account; override with SLNG_AGENT_LLM.
-    llm: process.env.SLNG_AGENT_LLM ?? "bedrock-mantle/nvidia.nemotron-super-3-120b:latest",
+    llm: "bedrock-mantle/nvidia.nemotron-super-3-120b:latest",
     tts: "deepgram/aura:2",
     tts_voice: "aura-2-thalia-en",
   },

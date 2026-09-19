@@ -31,7 +31,8 @@ export interface AgentConfig {
   name: string;
   system_prompt: string;
   greeting: string;
-  outbound_greeting: string;
+  inbound_greeting: string | null;
+  outbound_greeting: string | null;
   language: string;
   region: "us-east" | "eu-central" | "ap-south";
   models: { stt: string; llm: string; tts: string; tts_voice: string };
@@ -42,6 +43,8 @@ export interface Agent {
   id: string;
   name: string;
 }
+
+export const listAgents = () => request<Agent[]>("GET", "/agents");
 
 export const createAgent = (config: AgentConfig) => request<Agent>("POST", "/agents", config);
 
