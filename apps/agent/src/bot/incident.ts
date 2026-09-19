@@ -7,7 +7,8 @@ export interface PlaceAtRisk {
   name: string;
   type: string;
   distance_km: number;
-  direction: string;
+  /** Where the fire is, seen from the place (the fire is to the north-west of the place). */
+  fire_direction: string;
   arrival_estimate: string;
   instructions: string;
 }
@@ -32,7 +33,7 @@ export function callArguments(incident: Incident, place: PlaceAtRisk): CallArgum
     place_type: place.type,
     incident_name: incident.incident_name,
     fire_distance_km: String(place.distance_km),
-    fire_direction: place.direction,
+    fire_direction: place.fire_direction,
     arrival_estimate: place.arrival_estimate,
     wind: incident.wind,
     instructions: place.instructions,

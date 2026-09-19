@@ -9,7 +9,7 @@
       "name": "Test Care Home",
       "type": "care home",
       "distance_km": 4,
-      "direction": "north-west",
+      "fire_direction": "north-west",
       "arrival_estimate": "about 2 hours",
       "instructions": "This is a test. In a real call, this line would say to start evacuation now."
     },
@@ -18,7 +18,7 @@
       "name": "Test Primary School",
       "type": "school",
       "distance_km": 7,
-      "direction": "north-west",
+      "fire_direction": "north-west",
       "arrival_estimate": "about 4 hours",
       "instructions": "This is a test. In a real call, this line would say to prepare to evacuate."
     },
@@ -27,7 +27,7 @@
       "name": "Test Health Centre",
       "type": "health centre",
       "distance_km": 11,
-      "direction": "west",
+      "fire_direction": "west",
       "arrival_estimate": "about 6 hours",
       "instructions": "This is a test. In a real call, this line would say to prepare to evacuate."
     }
