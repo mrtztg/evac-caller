@@ -16,6 +16,8 @@ export const NEAR_KM = 2;
 export const HORIZONS_H = [1, 3, 6] as const;
 /** Hotspots from satellite passes up to this long before the latest pass count as the active front. */
 export const FRONT_WINDOW_H = 12;
+/** Older wind observations are not used. */
+export const WIND_MAX_AGE_H = 3;
 
 const HOUR_MS = 3_600_000;
 /** Hotspots closer than this belong to the same fire. Our assumption (VIIRS pixels are ~375 m). */
@@ -54,15 +56,18 @@ export function mainCluster(hotspots: Hotspot[]): Hotspot[] {
 export function windAt(wind: WindObs[], time: Date): WindObs | null {
   let best: WindObs | null = null;
   for (const w of wind) if (new Date(w.time) <= time) best = w;
+  // Calm or variable hours have no direction; an old direction must not be used silently.
+  if (best && time.getTime() - new Date(best.time).getTime() > WIND_MAX_AGE_H * HOUR_MS)
+    return null;
   return best;
 }
 
 /** Hotspots of the latest satellite passes seen at `time`: the fire as the coordinator knows it then. */
 export function activeFront(hotspots: Hotspot[], time: Date): Hotspot[] {
   const seen = hotspots.filter((h) => new Date(h.time) <= time);
-  const last = seen.at(-1);
-  if (!last) return [];
-  const from = new Date(last.time).getTime() - FRONT_WINDOW_H * HOUR_MS;
+  if (!seen.length) return [];
+  const last = Math.max(...seen.map((h) => new Date(h.time).getTime()));
+  const from = last - FRONT_WINDOW_H * HOUR_MS;
   return seen.filter((h) => new Date(h.time).getTime() >= from);
 }
 
@@ -87,21 +92,24 @@ export function exposure(place: Point, front: Hotspot[], wind: WindObs): Exposur
   const rate = spreadKmh(wind);
   let nearest = front[0] as Hotspot;
   let nearestKm = Number.POSITIVE_INFINITY;
-  let downwindH = Number.POSITIVE_INFINITY;
+  let upwind: Hotspot | null = null;
+  let upwindKm = Number.POSITIVE_INFINITY;
   for (const h of front) {
     const d = distanceKm(h, place);
     if (d < nearestKm) [nearest, nearestKm] = [h, d];
-    if (angleDiff(bearingDeg(h, place), downwind(wind)) <= CONE_HALF_ANGLE_DEG)
-      downwindH = Math.min(downwindH, d / rate);
+    if (d < upwindKm && angleDiff(bearingDeg(h, place), downwind(wind)) <= CONE_HALF_ANGLE_DEG)
+      [upwind, upwindKm] = [h, d];
   }
   // Near places use the head-fire rate too: faster than a flank fire, so the estimate errs on the safe side.
-  const nearH = nearestKm <= NEAR_KM ? nearestKm / rate : Number.POSITIVE_INFINITY;
-  const arrival = Math.min(downwindH, nearH);
+  const reason = nearestKm <= NEAR_KM ? "near" : upwind ? "downwind" : null;
+  // Distance and direction come from the same hotspot as the arrival time.
+  const source = reason === "downwind" ? (upwind as Hotspot) : nearest;
+  const km = reason === "downwind" ? upwindKm : nearestKm;
   return {
-    distance_km: nearestKm,
-    fire_bearing_deg: bearingDeg(place, nearest),
-    arrival_h: Number.isFinite(arrival) ? arrival : null,
-    reason: !Number.isFinite(arrival) ? null : nearH <= downwindH ? "near" : "downwind",
+    distance_km: km,
+    fire_bearing_deg: bearingDeg(place, source),
+    arrival_h: reason ? km / rate : null,
+    reason,
   };
 }
 

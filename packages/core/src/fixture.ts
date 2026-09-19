@@ -56,6 +56,8 @@ export interface Fixture {
   sources: Source[];
   /** Hotspots of the fire itself (main cluster). */
   hotspots: Hotspot[];
+  /** Low-confidence detections, not used. */
+  low_confidence_hotspots: number;
   /** Detections in the box that are not part of the fire. */
   excluded_hotspots: number;
   wind: WindObs[];
@@ -71,12 +73,17 @@ export function loadFixture(fire: string): Fixture {
   const h = read<{ source: Source; hotspots: Hotspot[] }>(fire, "hotspots.json");
   const w = read<{ source: Source; wind: WindObs[] }>(fire, "wind.json");
   const p = read<{ source: Source; places: Place[] }>(fire, "places.json");
-  const fireHotspots = mainCluster(h.hotspots);
+  // Low-confidence VIIRS detections ("l") are dropped: they can grow the front without a real fire.
+  const confident = h.hotspots
+    .filter((x) => x.confidence !== "l")
+    .sort((a, b) => a.time.localeCompare(b.time));
+  const fireHotspots = mainCluster(confident);
   return {
     meta: read<FireMeta>(fire, "meta.json"),
     sources: [h.source, w.source, p.source],
     hotspots: fireHotspots,
-    excluded_hotspots: h.hotspots.length - fireHotspots.length,
+    low_confidence_hotspots: h.hotspots.length - confident.length,
+    excluded_hotspots: confident.length - fireHotspots.length,
     wind: w.wind,
     places: p.places,
   };

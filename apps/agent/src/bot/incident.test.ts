@@ -9,5 +9,7 @@ describe("incident from the real fire replay", () => {
     const args = callArguments(incident, incident.places[0]!);
     for (const [key, value] of Object.entries(args)) expect(value, key).not.toBe("");
     expect(args.data_time).toMatch(/Spanish time$/);
+    // A replay must never sound like a live fire on the phone.
+    expect(args.call_context).toMatch(/exercise, not a real emergency/);
   });
 });

@@ -60,18 +60,24 @@ export function instructionFor(arrivalH: number): string {
  */
 export function likelyEmpty(kind: PlaceKind, time: Date): string | null {
   if (kind !== "school" && kind !== "nursery") return null;
-  const local = new Date(time.toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
-  if (local.getDay() === 0 || local.getDay() === 6) return "weekend";
-  if (kind === "school" && [6, 7].includes(local.getMonth())) return "school summer holidays";
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/Madrid",
+    weekday: "short",
+    month: "numeric",
+  }).formatToParts(time);
+  const part = (type: string) => parts.find((p) => p.type === type)?.value;
+  if (part("weekday") === "Sat" || part("weekday") === "Sun") return "weekend";
+  if (kind === "school" && ["7", "8"].includes(part("month") ?? ""))
+    return "school summer holidays";
   return null;
 }
 
 export function rank(places: PlaceAtRisk[]): PlaceAtRisk[] {
-  // Places with people inside first. Same hour band: the place that is harder to evacuate goes first.
+  // Same hour band: places with people inside first, then the place that is harder to evacuate.
   return [...places].sort(
     (a, b) =>
-      Number(a.likely_empty !== null) - Number(b.likely_empty !== null) ||
       Math.ceil(a.arrival_h) - Math.ceil(b.arrival_h) ||
+      Number(a.likely_empty !== null) - Number(b.likely_empty !== null) ||
       KIND_ORDER[a.kind] - KIND_ORDER[b.kind] ||
       a.arrival_h - b.arrival_h,
   );
@@ -97,16 +103,19 @@ export function incidentAt(fx: Fixture, time: Date): IncidentState {
   const places: PlaceAtRisk[] = [];
   for (const p of fx.places) {
     const e = exposure(p, front, wind);
-    if (!e || e.arrival_h === null || e.reason === null || e.arrival_h > maxH) continue;
+    if (!e || e.arrival_h === null || e.reason === null) continue;
+    // Round once, so counts, ranking, text and instruction always agree.
+    const arrival = Math.round(e.arrival_h * 10) / 10;
+    if (arrival > maxH) continue;
     places.push({
       ...p,
       distance_km: Math.round(e.distance_km * 10) / 10,
       fire_direction: compass(e.fire_bearing_deg),
-      arrival_h: Math.round(e.arrival_h * 10) / 10,
-      arrival_estimate: arrivalText(e.arrival_h),
+      arrival_h: arrival,
+      arrival_estimate: arrivalText(arrival),
       reason: e.reason,
       likely_empty: likelyEmpty(p.kind, time),
-      instructions: instructionFor(e.arrival_h),
+      instructions: instructionFor(arrival),
     });
   }
   return {

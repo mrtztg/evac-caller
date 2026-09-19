@@ -50,6 +50,8 @@ describe("danger zone", () => {
     const later = { ...WEST_40, time: "2026-07-25T14:00:00Z", from_deg: 90 };
     expect(windAt([WEST_40, later], new Date("2026-07-25T13:30:00Z"))).toBe(WEST_40);
     expect(windAt([WEST_40], new Date("2026-07-25T11:00:00Z"))).toBeNull();
+    // Too old: calm hours have no direction, the last direction is not reused.
+    expect(windAt([WEST_40], new Date("2026-07-25T16:00:00Z"))).toBeNull();
   });
 
   it("uses only the latest passes up to the replay time as the front", () => {
@@ -66,6 +68,15 @@ describe("danger zone", () => {
     expect(e?.reason).toBe("downwind");
     expect(e?.arrival_h).toBeCloseTo(2, 2); // 8 km at 4 km/h
     expect(compass(e?.fire_bearing_deg ?? -1)).toBe("west"); // the fire is west of the place
+  });
+
+  it("takes distance and direction from the hotspot that sets the arrival time", () => {
+    const south = hot(destination(FIRE, 180, 3)); // nearest, but not upwind of the place
+    const west = hot(destination(FIRE, 270, 5)); // farther, upwind
+    const e = exposure(FIRE, [south, west], WEST_40);
+    expect(e?.reason).toBe("downwind");
+    expect(e?.distance_km).toBeCloseTo(5, 3);
+    expect(compass(e?.fire_bearing_deg ?? -1)).toBe("west");
   });
 
   it("does not put an upwind or side place at risk unless it is near", () => {
@@ -115,7 +126,7 @@ describe("incident", () => {
     ]);
   });
 
-  it("puts places that are likely empty last", () => {
+  it("puts likely empty places last within the same hour band", () => {
     const p = (id: string, kind: Place["kind"], h: number, empty: string | null) => ({
       ...place(id, kind, FIRE),
       distance_km: 1,
@@ -128,9 +139,10 @@ describe("incident", () => {
     });
     const ranked = rank([
       p("school", "school", 0.5, "weekend"),
-      p("clinic", "health centre", 5, null),
+      p("clinic", "health centre", 0.9, null),
+      p("far clinic", "health centre", 5, null),
     ]);
-    expect(ranked.map((x) => x.id)).toEqual(["clinic", "school"]);
+    expect(ranked.map((x) => x.id)).toEqual(["clinic", "school", "far clinic"]);
   });
 
   it("knows schools are closed at weekends and in summer, care homes never", () => {
@@ -161,6 +173,7 @@ describe("incident", () => {
         wind_station: { id: "X", name: "Test station", lat: 0, lon: 0 },
       },
       sources: [],
+      low_confidence_hotspots: 0,
       excluded_hotspots: 0,
       hotspots: [hot(FIRE), hot(destination(FIRE, 90, 3), "2026-07-26T02:00:00Z")],
       wind: [WEST_40],

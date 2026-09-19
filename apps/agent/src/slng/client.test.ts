@@ -3,6 +3,7 @@ import { type Approval, dispatchCall } from "./client.js";
 import type { CallArguments } from "./evac-agent.js";
 
 const args: CallArguments = {
+  call_context: "This is a test call, not a real emergency.",
   place_name: "X",
   place_type: "care home",
   incident_name: "I",

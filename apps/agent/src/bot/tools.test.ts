@@ -2,7 +2,10 @@ import { RequestContext } from "@mastra/core/request-context";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { APPROVAL_KEY, createCallPlacesTool, placesAtRiskTool, THREAD_KEY } from "./tools.js";
 
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => {
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+});
 
 const run = (requestContext: RequestContext) =>
   createCallPlacesTool("m").execute!({ place_ids: ["way/1"] }, {
@@ -35,6 +38,8 @@ describe("places_at_risk tool", () => {
     }>;
 
   it("finds places by type and by name without accents", async () => {
+    // Expected places are for the default replay hour.
+    vi.stubEnv("REPLAY_TIME", "");
     const careHomes = await run({ type: "care home" });
     expect(careHomes.top_places.length).toBeGreaterThan(0);
     expect(careHomes.top_places.every((p) => p.type === "care home")).toBe(true);

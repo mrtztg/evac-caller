@@ -1,10 +1,12 @@
 import type { AgentConfig } from "./client.js";
 
 // Version this prompt. Change the number when the prompt changes, so evals and logs can refer to it.
-export const PROMPT_VERSION = "evac-call-v4";
+export const PROMPT_VERSION = "evac-call-v5";
 
 /** Values the phone agent gets for each call. All come from real data (packages/core), never invented. */
 export interface CallArguments {
+  /** Says whether this is live or an exercise with replayed data. Spoken first, never left out. */
+  call_context: string;
   place_name: string;
   place_type: string;
   incident_name: string;
@@ -17,6 +19,8 @@ export interface CallArguments {
 }
 
 const SYSTEM_PROMPT = `You are Evac Caller, an automated emergency notification line working for the wildfire emergency coordinator. You are calling {{place_name}}, a {{place_type}}.
+
+About this call: {{call_context}} If they ask whether this is real, say this again clearly.
 
 Facts for this call (from satellite fire data at {{data_time}}). These are the ONLY facts you know:
 - Incident: {{incident_name}}
@@ -37,7 +41,7 @@ Rules:
 // Spoken right away, without an LLM round trip, so the key message arrives even if the line is noisy.
 // Test call (18:51): background talk interrupted the LLM turns for 30 s before the message was given.
 export const OUTBOUND_GREETING =
-  "This is an automated emergency call from the wildfire coordination, for {{place_name}}. A wildfire is about {{fire_distance_km}} kilometres to the {{fire_direction}}. It could reach your area in {{arrival_estimate}}. Instruction: {{instructions}} I can answer questions now.";
+  "This is an automated emergency call from the wildfire coordination, for {{place_name}}. {{call_context}} A wildfire is about {{fire_distance_km}} kilometres to the {{fire_direction}}. It could reach your area in {{arrival_estimate}}. Instruction: {{instructions}} I can answer questions now.";
 
 export const evacAgentConfig: AgentConfig = {
   name: "evac-caller",
@@ -58,6 +62,7 @@ export const evacAgentConfig: AgentConfig = {
   // SLNG needs defaults, but dispatchCall rejects empty facts, so these are never spoken in practice.
   // They must never sound like a real instruction.
   template_defaults: {
+    call_context: "This is a test call.",
     place_name: "this facility",
     place_type: "facility",
     incident_name: "not provided",

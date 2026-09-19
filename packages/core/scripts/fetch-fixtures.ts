@@ -34,7 +34,7 @@ async function get(url: string, init?: RequestInit): Promise<string> {
   const res = await fetch(url, {
     ...init,
     headers: { "User-Agent": "evac-caller-hackathon/0.1", ...init?.headers },
-    signal: AbortSignal.timeout(90_000),
+    signal: AbortSignal.timeout(180_000),
   });
   const text = await res.text();
   if (!res.ok)
@@ -103,12 +103,13 @@ async function fetchHotspots(): Promise<{ hotspots: Hotspot[]; source: Source }>
 
 async function fetchWind(): Promise<{ wind: WindObs[]; source: Source }> {
   const s = new Date(FIRE.start);
-  const e = new Date(FIRE.end);
+  // The archive's end day is exclusive: ask for the day after the window.
+  const e = new Date(new Date(FIRE.end).getTime() + 86_400_000);
   const url =
     `https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=${FIRE.wind_station.id}` +
     "&data=drct&data=sknt&data=gust&tz=Etc/UTC&format=onlycomma&missing=M" +
     `&year1=${s.getUTCFullYear()}&month1=${s.getUTCMonth() + 1}&day1=${s.getUTCDate()}` +
-    `&year2=${e.getUTCFullYear()}&month2=${e.getUTCMonth() + 1}&day2=${e.getUTCDate() + 1}`;
+    `&year2=${e.getUTCFullYear()}&month2=${e.getUTCMonth() + 1}&day2=${e.getUTCDate()}`;
   const KNOT_KMH = 1.852;
   const wind = csvRows(await get(url))
     // Hourly: the METAR on the hour. Skip calm/variable reports without a direction.
@@ -143,7 +144,16 @@ function kindOf(t: Record<string, string>): PlaceKind | null {
     return "care home";
   if (t.amenity === "school") return "school";
   if (t.amenity === "kindergarten") return "nursery";
-  if (t.amenity === "clinic" || t.healthcare === "centre") return "health centre";
+  // Public primary care only. Private clinics (cosmetic, dental, physio) are not places we evacuate first.
+  if (
+    (t.healthcare === "centre" ||
+      (t.amenity === "clinic" &&
+        /centr[eo] de salu[dt]|consultori|ambulatori|centro m[eé]dico|centre m[eè]dic/i.test(
+          t.name ?? "",
+        ))) &&
+    !/est[eé]tic|dental|dentist/i.test(t.name ?? "")
+  )
+    return "health centre";
   return null;
 }
 

@@ -1,5 +1,5 @@
 // The active incident: a replay of the real fire at one moment, computed by packages/core from the fixtures.
-import { DEMO_FIRE, incidentAt, loadFixture } from "@evac/core";
+import { DEMO_FIRE, type Fixture, incidentAt, loadFixture } from "@evac/core";
 import type { CallArguments } from "../slng/evac-agent.js";
 
 export interface PlaceAtRisk {
@@ -18,6 +18,8 @@ export interface PlaceAtRisk {
 
 export interface Incident {
   source: string;
+  /** Spoken at the start of every call: this is an exercise with a replayed past fire, not a live fire. */
+  call_context: string;
   incident_name: string;
   /** The replayed moment. */
   replay_time: string;
@@ -29,7 +31,7 @@ export interface Incident {
   places: PlaceAtRisk[];
 }
 
-// The replayed moment. Default: the first satellite pass after ignition, with the strong westerly wind.
+// The replayed moment. Default: first hour with a large front (248 hotspots) and strong westerly wind.
 // Override with REPLAY_TIME (ISO UTC) to replay another hour; the dashboard slider will set it in M3.
 const DEFAULT_REPLAY_TIME = "2026-07-25T14:00:00Z";
 
@@ -37,14 +39,19 @@ const DEFAULT_REPLAY_TIME = "2026-07-25T14:00:00Z";
 export const localTime = (iso: string) =>
   `${new Date(iso).toLocaleString("en-GB", { timeZone: "Europe/Madrid", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })} Spanish time`;
 
+// Loaded once: the fixture does not change while the bot runs.
+let fixture: Fixture | undefined;
+
 export function loadIncident(): Incident {
-  const fx = loadFixture(DEMO_FIRE);
+  fixture ??= loadFixture(DEMO_FIRE);
+  const fx = fixture;
   const time = new Date(process.env.REPLAY_TIME || DEFAULT_REPLAY_TIME);
   if (Number.isNaN(time.getTime()))
     throw new Error(`REPLAY_TIME is not a date: ${process.env.REPLAY_TIME}`);
   const inc = incidentAt(fx, time);
   return {
     source: `REPLAY of real data, not a live fire. ${fx.sources.map((s) => s.name).join("; ")}. Arrival times are estimates from a wind cone (spread = 10% of wind speed), not a fire simulation.`,
+    call_context: `This is an exercise, not a real emergency. It uses real data from a past fire, replayed at ${localTime(inc.time)}.`,
     incident_name: fx.meta.name,
     replay_time: localTime(inc.time),
     data_time: inc.data_time ? localTime(inc.data_time) : "no satellite detection yet",
@@ -66,6 +73,7 @@ export function loadIncident(): Incident {
 
 export function callArguments(incident: Incident, place: PlaceAtRisk): CallArguments {
   return {
+    call_context: incident.call_context,
     place_name: place.name,
     place_type: place.type,
     incident_name: incident.incident_name,

@@ -12,6 +12,7 @@ if (!agentId || !phone) {
 }
 
 const args: CallArguments = {
+  call_context: "This is a test call, not a real emergency.",
   place_name: "TEST CALL, Test Care Home",
   place_type: "care home (THIS IS A TEST CALL)",
   incident_name: "System test, no real fire",

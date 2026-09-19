@@ -58,6 +58,21 @@ const coordinator = new Agent({
         const thread = event.thread;
         const incident = loadIncident();
         const place = incident.places.find((p) => p.id === event.value);
+        if ((event.actionId === "call_again" || event.actionId === "escalate_112") && !place) {
+          // The replay hour changed since the card was sent: say so, never drop the press silently.
+          console.error(
+            JSON.stringify({
+              event: "unknown_place",
+              action: event.actionId,
+              place: event.value,
+              by: approval.approvedBy,
+            }),
+          );
+          await thread?.post(
+            `⚠️ ${event.value} is not in the current list of places at risk. Nothing was done. Please act by hand (call 112).`,
+          );
+          return;
+        }
         if (event.actionId === "call_again" && thread && place) {
           console.log(JSON.stringify({ event: "call_again", place: place.id, approval }));
           await thread.post(`🔁 Call again approved by ${approval.approvedBy}: ${place.name}`);
