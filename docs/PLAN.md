@@ -19,9 +19,9 @@ Other teams (for example `eldtechnologies/hackbarna-wildfire`) focus on the map 
 Each milestone ends at a **gate**: demo script passes, reviewer agent has checked the code, and the user approves.
 
 ### M0: Real phone call (17:45 - 19:30)
-The riskiest part. It needs 3 accounts (SLNG, Twilio, a verified phone).
+The riskiest part. It needs 3 things: SLNG, a Vonage phone number (SIP trunk), and a phone that can receive the call.
 - Create an SLNG voice agent with a prompt that uses call arguments (place name, distance, direction, instructions).
-- Connect Twilio to SLNG as an outbound SIP connection (SLNG dashboard, "Twilio guided" mode). Twilio trial accounts can only call **verified** numbers, so verify the stage phone.
+- Connect Vonage to SLNG as an outbound SIP connection (SLNG dashboard, manual mode). `pnpm agent:sync` attaches it to the agent. A Vonage trial account can only call its allowed test numbers, so add the stage phone.
 - A script `pnpm call:test` calls `POST /v1/agents/{id}/calls` with real arguments, and the phone rings.
 - Save the call ID, latency and (if the API gives it) the transcript.
 

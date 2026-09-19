@@ -29,7 +29,7 @@ Do **not** ask about small things (variable names, helper structure, test layout
 
 ## Anti-slop rules (non-negotiable)
 - **Real data only on the demo path.** Fire points, wind, places and the danger zone come from the fixture files or real APIs through `packages/core`. Never hardcode a demo result in the UI or in the agent prompt.
-- **No fake sponsor use.** If SLNG, Nebius, Twilio or Galtea is not really called, the UI and logs must say `MOCK` or `REPLAY` clearly. Never present a recording as live.
+- **No fake sponsor use.** If SLNG, Nebius, Vonage or Galtea is not really called, the UI and logs must say `MOCK` or `REPLAY` clearly. Never present a recording as live.
 - **Log real numbers.** Every LLM call (Nebius): model ID, latency, tokens. Every call (SLNG): call ID, latency, duration. Show them in the UI or logs. Sponsors ask for numbers.
 - **The human approves before any phone call.** No code path may dispatch a call without a recorded approval. This is a safety rule and a test case.
 - **The agent never invents facts.** It only says what the data shows (distance, direction, time). If it doesn't know, it says so and gives the official emergency number (112).
