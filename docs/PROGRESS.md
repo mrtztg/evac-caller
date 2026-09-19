@@ -16,7 +16,7 @@
 - Call 2 `987fd3a8-7a7f-4451-a01b-ca133cfb4b4b` (19:35, prompt v3, quiet room): key message in greeting; "Which road?" answered "I do not have information about roads... call 112" (no invention); asked for confirmation and help needed; recorded "I'm fine". 116 s. Latency avg: e2e 1.97 s, LLM 0.81 s, TTS 0.21 s. Issues fixed in v4: robotic "You asked: ..." when it didn't understand; said "End of call" without hanging up.
 
 ## M1 so far
-- `pnpm bot`: Mastra agent `coordinator` on Telegram (@evaccallerbot, polling, no public URL), Nebius `openai/gpt-oss-120b` (override `NEBIUS_MODEL`), memory + channel state in local `evac.db` (LibSQL, git-ignored).
+- `pnpm bot`: Mastra agent `coordinator` on Telegram (@evaccallerbot, polling, no public URL), Nebius `deepseek-ai/DeepSeek-V4-Flash-0731` (override `NEBIUS_MODEL`; `gpt-oss-120b` breaks streamed tool calls on Nebius, reproduced 21:40), memory + channel state in local `evac.db` (LibSQL, git-ignored).
 - Approval = Mastra tool approval: `call_places` has `requireApproval: true`, Telegram shows Approve / Deny. The Approve click records `Approval` (Telegram user id, name, time) in the request context; the tool refuses without it (test). Chosen over a hand-built workflow: same pause/resume, less code.
 - Calls run one after another on one line (demo phone = `TEST_PHONE_NUMBER`, never the real place). After each call: wait for end, classify, post outcome with quote, call id, duration, classifier model/latency/tokens.
 - Outcome: no caller speech = `NO_ANSWER` without a model. Else Nebius structured output; code checks the quote is really in the caller's words, else `UNCLEAR`. Tested on real calls: call 2 = CONFIRMED ("yes understood", 1054 ms, 534+229 tokens), call 1 = UNCLEAR.
