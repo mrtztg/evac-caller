@@ -1,0 +1,21 @@
+{
+  "name": "evac-caller",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.4.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "pnpm -r --if-present test",
+    "agent:sync": "pnpm --filter @evac/agent agent:sync",
+    "call:test": "pnpm --filter @evac/agent call:test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2",
+    "typescript": "^5"
+  }
+}

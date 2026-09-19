@@ -1,0 +1,17 @@
+{
+  "name": "@evac/agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "vitest run",
+    "agent:sync": "tsx --env-file-if-exists=../../.env scripts/sync-agent.ts",
+    "call:test": "tsx --env-file-if-exists=../../.env scripts/call-test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
+  }
+}
