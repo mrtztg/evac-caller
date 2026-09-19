@@ -1,7 +1,14 @@
 # Progress
 
-**Current milestone:** M1 (Telegram coordinator bot with approval + call outcome + escalation)
-**Status:** M1 built (21:25): bot, approval-gated calls, outcome classifier, escalation buttons. Live Telegram test next. About 1.5 h behind plan; hard stop for M1 gate 23:00.
+**Current milestone:** M2 (real fire data and places at risk)
+**Status (22:45):** M1 done (gate 22:05). M2: fire = La Vall d'Uixó (25 Jul 2026). `packages/core` built and tested (wind cone, places at risk, ranking). Wind + OSM places fixtures saved. Bot and phone calls now read the replay. **Blocked: `FIRMS_MAP_KEY` not yet in `.env`** (satellite hotspots). Then: `pnpm data:fetch hotspots`, pick default replay time, `pnpm replay`, demo script, review.
+
+## M2 so far
+- Other team (`eldtechnologies/hackbarna-wildfire`, "Ojo de Fuego"): Deepfire API + 3D globe + 5/10/20 km buffer rings, Los Gallardos fire. Ours: FIRMS + measured wind cone + OSM places, then approval and real phone calls. Different fire.
+- Wind: METAR from Valencia airport (LEVC, 41 km away) via Iowa Environmental Mesonet. Open-Meteo blocked on venue IP; Meteostat bulk ends March 2026. Same kind of source as decided (measured station wind).
+- Danger zone: head-fire spread = 10% of wind speed (Cruz & Alexander 2019), 30° cone, 2 km any-direction buffer, 1/3/6 h. Labelled estimate everywhere.
+- Places: 335 named OSM places in the box (schools, nurseries, health centres, care homes, hospitals). Overpass main server refuses the venue IP; mirrors used. TODO: refetch places once Overpass works (stricter care-home tags drop pensioners' clubs).
+- Bot prompt v3: top 8 places + total count; calls the top 3 unless the coordinator names places. `REPLAY_TIME` env picks the replayed hour.
 
 ## Done
 - Repo, rules (CLAUDE.md), plan, reviewer/verifier agents, /milestone /handoff /gate commands, check script + Stop hook.
