@@ -6,14 +6,36 @@ import { loadIncident } from "./incident.js";
 /** Enough for a phone screen; the full ranked list is in the dashboard. */
 const LISTED = 8;
 
+// Accents and case don't matter: "residencia" finds "Residència".
+const fold = (s: string) =>
+  s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
 export const placesAtRiskTool = createTool({
   id: "places_at_risk",
   description:
-    "The active wildfire incident: data source, data time, wind, how many places are at risk per arrival band, and the highest-risk places ranked (occupied places first, then by how soon the fire can reach them).",
-  inputSchema: z.object({}),
-  execute: async () => {
+    "The active wildfire incident: data source, data time, wind, how many places are at risk per arrival band, and the highest-risk places ranked (occupied places first, then by how soon the fire can reach them). Use name or type to look up specific places at risk.",
+  inputSchema: z.object({
+    name: z.string().optional().describe("part of a place or town name, for example 'Borriana'"),
+    type: z
+      .enum(["care home", "hospital", "school", "nursery", "health centre"])
+      .optional()
+      .describe("only places of this type"),
+  }),
+  execute: async ({ name, type }) => {
     const { places, ...incident } = loadIncident();
-    return { ...incident, top_places: places.slice(0, LISTED) };
+    const matches = places.filter(
+      (p) =>
+        (!type || p.type === type) &&
+        (!name || fold(`${p.name} ${p.town ?? ""}`).includes(fold(name))),
+    );
+    return {
+      ...incident,
+      filter: name || type ? { name, type, matches: matches.length } : null,
+      top_places: matches.slice(0, LISTED),
+    };
   },
 });
 

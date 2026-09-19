@@ -1,6 +1,6 @@
 import { RequestContext } from "@mastra/core/request-context";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { APPROVAL_KEY, createCallPlacesTool, THREAD_KEY } from "./tools.js";
+import { APPROVAL_KEY, createCallPlacesTool, placesAtRiskTool, THREAD_KEY } from "./tools.js";
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -25,5 +25,20 @@ describe("call_places tool", () => {
     badApproval.set(APPROVAL_KEY, { approvedBy: "x" });
     await expect(run(badApproval)).rejects.toThrow(/approval/);
     expect(fetchSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe("places_at_risk tool", () => {
+  const run = (input: { name?: string; type?: "care home" }) =>
+    placesAtRiskTool.execute!(input, {} as never) as Promise<{
+      top_places: { name: string; type: string; town: string | null }[];
+    }>;
+
+  it("finds places by type and by name without accents", async () => {
+    const careHomes = await run({ type: "care home" });
+    expect(careHomes.top_places.length).toBeGreaterThan(0);
+    expect(careHomes.top_places.every((p) => p.type === "care home")).toBe(true);
+    const byName = await run({ name: "residencia de majors" });
+    expect(byName.top_places.map((p) => p.name)).toContain("Residència de Majors");
   });
 });
