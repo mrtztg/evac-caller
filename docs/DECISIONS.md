@@ -13,3 +13,4 @@ Every gate answer from the user goes here. Newest at the bottom.
 | 2026-09-19 17:42 | Accounts ready | SLNG, Nebius, Twilio, Galtea | All four | |
 | 2026-09-19 17:42 | Deadline | Sunday 11:00 / midnight / unsure | Sunday 11:00 (we aim for 10:45) | |
 | 2026-09-19 17:50 | Phone line setup | (found in SLNG docs) | Twilio SIP trunk connected in the SLNG dashboard, calls started with `POST /v1/agents/{id}/calls` | SLNG supports this directly, so we don't need our own audio streaming server. |
+| 2026-09-19 18:05 | Phone agent models (found by testing the SLNG API) | Documented IDs failed with `AGENT_MODEL_UNAVAILABLE` | LLM `bedrock-mantle/nvidia.nemotron-super-3-120b:latest`, STT `deepgram/nova:3`, TTS `deepgram/aura:2` (voice `aura-2-thalia-en`), region `eu-central` | These are the ones the API accepts for our account and region. LLM can be overridden with `SLNG_AGENT_LLM`. |

@@ -41,9 +41,11 @@ export const evacAgentConfig: AgentConfig = {
   language: "en",
   region: "eu-central",
   models: {
-    stt: "slng/deepgram/nova:3-en",
-    llm: "groq/openai/gpt-oss-120b",
-    tts: "slng/deepgram/aura:2-en",
+    // Models must be allowed for the region (see https://api.slng.ai/v1/catalog/models).
+    stt: "deepgram/nova:3",
+    // Allowed agent LLMs depend on the SLNG account; override with SLNG_AGENT_LLM.
+    llm: process.env.SLNG_AGENT_LLM ?? "bedrock-mantle/nvidia.nemotron-super-3-120b:latest",
+    tts: "deepgram/aura:2",
     tts_voice: "aura-2-thalia-en",
   },
   template_defaults: {
