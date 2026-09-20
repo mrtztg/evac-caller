@@ -43,7 +43,18 @@ describe("places_at_risk tool", () => {
     const careHomes = await run({ type: "care home" });
     expect(careHomes.top_places.length).toBeGreaterThan(0);
     expect(careHomes.top_places.every((p) => p.type === "care home")).toBe(true);
-    const byName = await run({ name: "residencia de majors" });
-    expect(byName.top_places.map((p) => p.name)).toContain("Residència de Majors");
+    // The model often passes a whole phrase, not just the name.
+    for (const q of [
+      "residencia de majors",
+      "Residència de Majors in Borriana",
+      "majors borriana",
+    ]) {
+      const byName = await run({ name: q });
+      expect(
+        byName.top_places.map((p) => p.name),
+        q,
+      ).toContain("Residència de Majors");
+    }
+    expect((await run({ name: "Hospital in Paris" })).top_places).toEqual([]);
   });
 });

@@ -13,6 +13,15 @@ const fold = (s: string) =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
+/** Every word of the query must appear, so "Residència de Majors in Borriana" still finds the place. */
+function matchesName(place: { name: string; town: string | null }, query: string): boolean {
+  const text = fold(`${place.name} ${place.town ?? ""}`);
+  const words = fold(query)
+    .split(/[^a-z0-9]+/)
+    .filter((w) => w.length > 2);
+  return words.length ? words.every((w) => text.includes(w)) : text.includes(fold(query));
+}
+
 export const placesAtRiskTool = createTool({
   id: "places_at_risk",
   description:
@@ -27,9 +36,7 @@ export const placesAtRiskTool = createTool({
   execute: async ({ name, type }) => {
     const { places, ...incident } = loadIncident();
     const matches = places.filter(
-      (p) =>
-        (!type || p.type === type) &&
-        (!name || fold(`${p.name} ${p.town ?? ""}`).includes(fold(name))),
+      (p) => (!type || p.type === type) && (!name || matchesName(p, name)),
     );
     return {
       ...incident,
