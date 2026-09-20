@@ -108,5 +108,5 @@ Note: Vonage supplies the phone line, but Vonage's own prize challenge is for it
 - "Likely empty" for schools and nurseries is a calendar rule (weekends, July and August), not real occupancy.
 - Places and phone numbers come from OpenStreetMap, which is incomplete. Every call in this demo rings the demo phone.
 - The dashboard has no login. Anything that can reach port 3000 can move the replay hour, which also moves the hour the bot answers about. Fine for a hackathon laptop, not for real use.
-- Moving the slider between the bot listing places and the coordinator pressing Approve can make a place id unknown. The bot says so in Telegram instead of calling the wrong place.
+- The calls use the hour the coordinator was shown, so moving the slider after the list appears cannot change what the phone agent says. Only the next list follows the slider.
 - English only.
