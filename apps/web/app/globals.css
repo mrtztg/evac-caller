@@ -47,6 +47,10 @@ body {
 .leaflet-container {
   background: var(--bg);
 }
+/* OpenStreetMap only serves light tiles; this makes them dark so the fire colours stand out. */
+.leaflet-tile {
+  filter: invert(1) hue-rotate(180deg) brightness(0.86) contrast(0.92) saturate(0.6);
+}
 .leaflet-control-container {
   z-index: 2;
 }
@@ -361,6 +365,7 @@ button.place {
 }
 .time-row {
   display: flex;
+  padding: 0 2px;
   justify-content: space-between;
   font-size: 12px;
   color: var(--ink-faint);

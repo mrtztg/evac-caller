@@ -11,6 +11,9 @@ const Map = dynamicImport(() => import("./Map"), { ssr: false });
 const CALLS_POLL_MS = 2000;
 
 const hhmm = (iso: string) => iso.slice(11, 16);
+/** "25 Jul 09:00 UTC": the replay runs over five days, so the ends of the slider need the date. */
+const dayHour = (iso: string) =>
+  `${new Date(iso).toLocaleDateString("en-GB", { timeZone: "UTC", day: "numeric", month: "short" })} ${hhmm(iso)} UTC`;
 const localHour = (iso: string) =>
   new Date(iso).toLocaleTimeString("en-GB", {
     timeZone: "Europe/Madrid",
@@ -199,13 +202,11 @@ export default function Page() {
           aria-label="Replay hour"
         />
         <div className="time-row">
-          <span>{hours[0] ? `${hhmm(hours[0])} UTC` : ""}</span>
+          <span>{hours[0] ? dayHour(hours[0]) : ""}</span>
           <span className="time-now">
-            {incident
-              ? `${hhmm(incident.time)} UTC · ${localHour(incident.time)} Spanish time`
-              : ""}
+            {incident ? `${dayHour(incident.time)} · ${localHour(incident.time)} Spanish time` : ""}
           </span>
-          <span>{hours.at(-1) ? `${hhmm(hours.at(-1) as string)} UTC` : ""}</span>
+          <span>{hours.at(-1) ? dayHour(hours.at(-1) as string) : ""}</span>
         </div>
       </section>
     </div>
