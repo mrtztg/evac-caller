@@ -2,7 +2,7 @@
 
 **Current milestone:** M4 (evals, code scan, submission)
 **Status (Sun 14:02, clock time):** M3 **done**. M4 in progress: Galtea dropped at the gate, README and `docs/SUBMISSION.md` ready. Left: Norma scan (user runs it), demo video, submit.
-**Nothing is tested with a real phone or a real browser click yet. The list of human tests is `docs/TEST-BEFORE-DEMO.md`. Run it before the demo.**
+**Two real phone calls were made with `pnpm call:test` (call IDs in Evidence below). What is still untested end to end is the Telegram Approve -> call path since M2, and every dashboard click. The list of human tests is `docs/TEST-BEFORE-DEMO.md`. Run it before the demo.**
 **Real deadline: Sunday 14:30 CEST.** The times written in PLAN.md and in the M0-M2 notes below are plan times, not clock times; they are about 11 hours ahead of the real clock. Use `date`.
 
 ## M3 so far
@@ -11,7 +11,7 @@
 - `packages/core`: `paths.ts` (finds the repo root from the working directory, so Next.js can read the fixtures too) and `events.ts` (`appendEvent`, `readEvents`, `readReplayTime`, `writeReplayTime`, `DEFAULT_REPLAY_TIME`). 4 new tests.
 - `apps/agent`: writes `call_started`, `call_outcome`, `call_failed` and `escalated` events; `loadIncident()` now reads the slider hour first, then `REPLAY_TIME`, then the default.
 - `apps/web` (new): Next.js 15 app router. `/api/incident` (any hour), `/api/calls`, `/api/replay-time`. Leaflet + CARTO dark tiles. Map shows the real hotspots, the 1/3/6 h danger zones and a dot per place at risk; the list is the same ranking as `pnpm replay`; the call panel polls every 2 s and shows quote, transcript, call duration, voice latency and classifier model/latency/tokens.
-- Verified: `/api/incident` at the default hour returns 197 hotspots, counts 26/67/158 and the same first three places as `pnpm replay`. `scripts/check.sh` is OK (36 tests).
+- Verified: `/api/incident` at the default hour returns 197 hotspots, counts 26/67/158 and the same first three places as `pnpm replay`. `scripts/check.sh` is OK (38 tests: 19 in `packages/core`, 19 in `apps/agent`).
 - Next.js needed `resolve.extensionAlias` (`.js` -> `.ts`) because `packages/core` imports with `.js` endings.
 - Run it: `pnpm web` (port 3000) next to `pnpm bot`.
 - Verifier: every automated step passes; `/api/incident` matches `pnpm replay` character for character. Everything else needs a human.
