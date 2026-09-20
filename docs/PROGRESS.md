@@ -1,7 +1,18 @@
 # Progress
 
-**Current milestone:** M2 (real fire data and places at risk)
-**Status (Sun 00:55):** M2 **done** (gate passed). Next milestone: M3 (map dashboard), which starts with the UI gate (mockups).
+**Current milestone:** M3 (map dashboard)
+**Status (Sun 13:00, clock time):** M3 built, demo script written, reviewer and verifier running. Gate not passed yet.
+**Real deadline: Sunday 14:30 CEST.** The times written in PLAN.md and in the M0-M2 notes below are plan times, not clock times; they are about 11 hours ahead of the real clock. Use `date`.
+
+## M3 so far
+- UI gate: three mockups in `docs/mockups/`; the user chose **B (`b-map-first.html`)**: full-screen map, floating cards, made for a projector.
+- Architecture gate: the bot and the dashboard share two git-ignored files in `data/runtime/`: `call-events.jsonl` (append-only, one JSON line per call event) and `replay-time.txt` (the hour the slider is on). No new server or port.
+- `packages/core`: `paths.ts` (finds the repo root from the working directory, so Next.js can read the fixtures too) and `events.ts` (`appendEvent`, `readEvents`, `readReplayTime`, `writeReplayTime`, `DEFAULT_REPLAY_TIME`). 4 new tests.
+- `apps/agent`: writes `call_started`, `call_outcome`, `call_failed` and `escalated` events; `loadIncident()` now reads the slider hour first, then `REPLAY_TIME`, then the default.
+- `apps/web` (new): Next.js 15 app router. `/api/incident` (any hour), `/api/calls`, `/api/replay-time`. Leaflet + CARTO dark tiles. Map shows the real hotspots, the 1/3/6 h danger zones and a dot per place at risk; the list is the same ranking as `pnpm replay`; the call panel polls every 2 s and shows quote, transcript, call duration, voice latency and classifier model/latency/tokens.
+- Verified: `/api/incident` at the default hour returns 197 hotspots, counts 26/67/158 and the same first three places as `pnpm replay`. `scripts/check.sh` is OK (36 tests).
+- Next.js needed `resolve.extensionAlias` (`.js` -> `.ts`) because `packages/core` imports with `.js` endings.
+- Run it: `pnpm web` (port 3000) next to `pnpm bot`.
 
 ## M2 so far
 - Other team (`eldtechnologies/hackbarna-wildfire`, "Ojo de Fuego"): Deepfire API + 3D globe + 5/10/20 km buffer rings, Los Gallardos fire. Ours: FIRMS + measured wind cone + OSM places, then approval and real phone calls. Different fire.
@@ -38,8 +49,8 @@
 - Places: now from the M2 replay (the M1 test fixture was removed).
 
 ## Next
-- M3 (06:30-09:30 in the plan): **UI gate first** - 2-3 mockups in `docs/mockups/`, user chooses. Then the Next.js map page (hotspots, danger zone, ranked places, replay slider, call status + transcript + numbers).
-- The dashboard slider should set the replay time (`REPLAY_TIME` today).
+- M3 gate: reviewer + verifier results, then the user marks M3 done.
+- M4 (must be finished by 14:30): README (setup, architecture, data sources, limits), Galtea evals if time allows, Norma scan if time allows, push, submit.
 
 ## Blockers
 - None.
