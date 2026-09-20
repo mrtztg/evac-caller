@@ -8,7 +8,8 @@
     "agent:sync": "tsx --env-file-if-exists=../../.env scripts/sync-agent.ts",
     "call:test": "tsx --env-file-if-exists=../../.env scripts/call-test.ts",
     "call:status": "tsx --env-file-if-exists=../../.env scripts/call-status.ts",
-    "bot": "tsx --env-file-if-exists=../../.env src/bot/index.ts"
+    "bot": "tsx --env-file-if-exists=../../.env src/bot/index.ts",
+    "ask": "tsx --env-file-if-exists=../../.env scripts/ask.ts"
   },
   "devDependencies": {
     "@types/node": "^22",
