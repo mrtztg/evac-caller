@@ -1,4 +1,5 @@
 // After approval: phone each place in order, wait for the call to end, classify it, report to Telegram.
+import { appendEvent } from "@evac/core";
 import { type ActionEvent, Actions, Button, Card, CardText } from "chat";
 import { summarizeCall } from "../slng/call-summary.js";
 import { type Approval, type CallRecord, dispatchCall, getCall } from "../slng/client.js";
@@ -83,6 +84,16 @@ async function callOne(
 
   const res = await dispatchCall(agentId, phone, callArguments(incident, place), approval);
   console.log(JSON.stringify({ event: "call_dispatched", place: place.id, approval, ...res }));
+  appendEvent({
+    type: "call_started",
+    time: new Date().toISOString(),
+    place_id: place.id,
+    place_name: place.name,
+    call_id: res.call_id,
+    api_latency_ms: res.latency_ms,
+    approved_by: approval.approvedBy,
+    approved_at: approval.approvedAt,
+  });
   await thread.post(
     `📞 LIVE call (replayed fire data) to ${place.name} (rings the demo phone). call ${res.call_id}, API ${res.latency_ms} ms`,
   );
@@ -93,6 +104,23 @@ async function callOne(
   console.log(
     JSON.stringify({ event: "call_outcome", place: place.id, call_id: call.id, outcome }),
   );
+  appendEvent({
+    type: "call_outcome",
+    time: new Date().toISOString(),
+    place_id: place.id,
+    place_name: place.name,
+    call_id: call.id,
+    status: outcome.status,
+    evidence_quote: outcome.evidence_quote,
+    help_needed: outcome.help_needed,
+    reason: outcome.reason,
+    duration_s: summary.duration_s,
+    latency_s: summary.latency_s,
+    transcript: summary.turns
+      .filter((t) => t.text.trim())
+      .map((t) => ({ speaker: t.role === "assistant" ? "agent" : "caller", text: t.text.trim() })),
+    llm: outcome.llm,
+  });
   const text = outcomeText(place, outcome, call.id, summary.duration_s);
   if (outcome.status === "CONFIRMED") {
     await thread.post(text);
@@ -128,6 +156,13 @@ export function queueCalls(
     line = line.then(() =>
       callOne(thread, incident, place, approval, model).catch(async (err) => {
         console.error(`call to ${place.id} failed:`, err);
+        appendEvent({
+          type: "call_failed",
+          time: new Date().toISOString(),
+          place_id: place.id,
+          place_name: place.name,
+          error: (err as Error).message,
+        });
         const text = `⚠️ UNCLEAR: call to ${place.name} failed: ${(err as Error).message}`;
         await thread.post(escalationCard(text, place)).catch(() => {});
       }),

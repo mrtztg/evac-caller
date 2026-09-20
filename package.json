@@ -16,7 +16,9 @@
     "call:status": "pnpm --filter @evac/agent call:status",
     "bot": "pnpm --filter @evac/agent bot",
     "data:fetch": "pnpm --filter @evac/core data:fetch",
-    "replay": "pnpm --filter @evac/core replay"
+    "replay": "pnpm --filter @evac/core replay",
+    "web": "pnpm --filter @evac/web dev",
+    "web:build": "pnpm --filter @evac/web build"
   },
   "devDependencies": {
     "@biomejs/biome": "^2",

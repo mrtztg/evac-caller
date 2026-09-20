@@ -1,6 +1,8 @@
 // Fixture files for one real fire: satellite hotspots, measured wind, places. Written by scripts/fetch-fixtures.ts.
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { mainCluster } from "./danger.js";
+import { fixturesDir } from "./paths.js";
 
 export interface Source {
   name: string;
@@ -64,10 +66,8 @@ export interface Fixture {
   places: Place[];
 }
 
-const FIXTURES = new URL("../../../data/fixtures/", import.meta.url);
-
 const read = <T>(fire: string, file: string): T =>
-  JSON.parse(readFileSync(new URL(`${fire}/${file}`, FIXTURES), "utf8")) as T;
+  JSON.parse(readFileSync(join(fixturesDir(), fire, file), "utf8")) as T;
 
 export function loadFixture(fire: string): Fixture {
   const h = read<{ source: Source; hotspots: Hotspot[] }>(fire, "hotspots.json");

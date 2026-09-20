@@ -1,5 +1,6 @@
 // Coordinator bot: Mastra agent on Telegram (polling, no public URL needed). Run: pnpm bot
 import { createTelegramAdapter } from "@chat-adapter/telegram";
+import { appendEvent } from "@evac/core";
 import { Agent } from "@mastra/core/agent";
 import { Mastra } from "@mastra/core/mastra";
 import { LibSQLStore } from "@mastra/libsql";
@@ -75,6 +76,14 @@ const coordinator = new Agent({
         }
         if (event.actionId === "call_again" && thread && place) {
           console.log(JSON.stringify({ event: "call_again", place: place.id, approval }));
+          appendEvent({
+            type: "escalated",
+            time: new Date().toISOString(),
+            place_id: place.id,
+            place_name: place.name,
+            action: "call_again",
+            by: approval.approvedBy,
+          });
           await thread.post(`🔁 Call again approved by ${approval.approvedBy}: ${place.name}`);
           queueCalls(thread, incident, [place], approval, NEBIUS_MODEL);
           return;
@@ -88,6 +97,14 @@ const coordinator = new Agent({
               at: approval.approvedAt,
             }),
           );
+          appendEvent({
+            type: "escalated",
+            time: new Date().toISOString(),
+            place_id: place.id,
+            place_name: place.name,
+            action: "escalated_112",
+            by: approval.approvedBy,
+          });
           await thread.post(
             `📟 ${place.name}: marked as escalated to 112 by ${approval.approvedBy} at ${approval.approvedAt}`,
           );

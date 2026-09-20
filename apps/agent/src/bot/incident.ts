@@ -1,5 +1,12 @@
 // The active incident: a replay of the real fire at one moment, computed by packages/core from the fixtures.
-import { DEMO_FIRE, type Fixture, incidentAt, loadFixture } from "@evac/core";
+import {
+  DEFAULT_REPLAY_TIME,
+  DEMO_FIRE,
+  type Fixture,
+  incidentAt,
+  loadFixture,
+  readReplayTime,
+} from "@evac/core";
 import type { CallArguments } from "../slng/evac-agent.js";
 
 export interface PlaceAtRisk {
@@ -31,9 +38,7 @@ export interface Incident {
   places: PlaceAtRisk[];
 }
 
-// The replayed moment. Default: first hour with a large front (197 hotspots) and strong westerly wind.
-// Override with REPLAY_TIME (ISO UTC) to replay another hour; the dashboard slider will set it in M3.
-const DEFAULT_REPLAY_TIME = "2026-07-25T14:00:00Z";
+// The dashboard slider wins (it writes data/runtime/replay-time.txt), then REPLAY_TIME, then the default.
 
 /** Spoken and shown to people in Spain: "25 July, 15:02 Spanish time". */
 export const localTime = (iso: string) =>
@@ -45,7 +50,7 @@ let fixture: Fixture | undefined;
 export function loadIncident(): Incident {
   fixture ??= loadFixture(DEMO_FIRE);
   const fx = fixture;
-  const time = new Date(process.env.REPLAY_TIME || DEFAULT_REPLAY_TIME);
+  const time = new Date(readReplayTime() || process.env.REPLAY_TIME || DEFAULT_REPLAY_TIME);
   if (Number.isNaN(time.getTime()))
     throw new Error(`REPLAY_TIME is not a date: ${process.env.REPLAY_TIME}`);
   const inc = incidentAt(fx, time);

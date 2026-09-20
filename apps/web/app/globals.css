@@ -1,0 +1,354 @@
+/* Look: docs/mockups/b-map-first.html (chosen at the M3 UI gate). Full-screen map, floating cards. */
+:root {
+  --bg: #0c1210;
+  --panel-bg: rgba(20, 28, 26, 0.86);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --ink: #eef3f0;
+  --ink-dim: #b7c3bd;
+  --ink-faint: #85938c;
+  --danger: #ff6a3d;
+  --danger-2: #ffb347;
+  --ok: #37c98f;
+  --live: #3aa0ff;
+  --wait: #f4c542;
+  --fail: #ff5c5c;
+  --font: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--bg);
+}
+
+/* Leaflet's own controls must sit under our floating cards. */
+.leaflet-container {
+  background: var(--bg);
+}
+.leaflet-control-container {
+  z-index: 2;
+}
+.leaflet-control-attribution {
+  background: rgba(12, 18, 16, 0.75) !important;
+  color: var(--ink-faint) !important;
+}
+.leaflet-control-attribution a {
+  color: var(--ink-dim) !important;
+}
+
+.panel {
+  position: absolute;
+  z-index: 5;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  padding: 16px 18px;
+}
+
+.badges {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--panel-border);
+  background: rgba(20, 28, 26, 0.86);
+  backdrop-filter: blur(6px);
+}
+.badge.replay {
+  color: var(--danger-2);
+  border-color: rgba(255, 179, 71, 0.4);
+}
+.badge.live {
+  color: var(--live);
+  border-color: rgba(58, 160, 255, 0.4);
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---------- incident card (top left) ---------- */
+.incident {
+  top: 74px;
+  left: 18px;
+  width: 330px;
+}
+.incident h1 {
+  margin: 0 0 2px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.sub {
+  color: var(--ink-faint);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.rows {
+  display: grid;
+  gap: 7px;
+  font-size: 14px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.row span:first-child {
+  color: var(--ink-dim);
+}
+.row span:last-child {
+  font-weight: 600;
+  text-align: right;
+}
+.pills {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+.pill {
+  flex: 1;
+  border-radius: 10px;
+  padding: 8px 6px;
+  text-align: center;
+  background: rgba(255, 106, 61, 0.12);
+  border: 1px solid rgba(255, 106, 61, 0.3);
+}
+.pill b {
+  display: block;
+  font-size: 22px;
+  color: var(--danger-2);
+}
+.pill small {
+  color: var(--ink-dim);
+  font-size: 12px;
+}
+.note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ink-faint);
+  line-height: 1.45;
+}
+
+/* ---------- places card (top right) ---------- */
+.places {
+  top: 74px;
+  right: 18px;
+  width: 400px;
+  max-height: calc(100vh - 340px);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 8px;
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.card-head h2 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.scroll {
+  overflow-y: auto;
+  margin-right: -8px;
+  padding-right: 8px;
+}
+.place {
+  display: flex;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+}
+.place:hover,
+.place.on {
+  background: rgba(255, 255, 255, 0.04);
+}
+.rank {
+  color: var(--ink-faint);
+  font-size: 13px;
+  min-width: 18px;
+}
+.place-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.place-meta {
+  font-size: 12.5px;
+  color: var(--ink-dim);
+  margin-top: 3px;
+}
+.kind {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+  margin-bottom: 2px;
+}
+.tag {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--ink-faint);
+}
+
+/* ---------- calls card (bottom right) ---------- */
+.calls {
+  bottom: 96px;
+  right: 18px;
+  width: 400px;
+  max-height: 46vh;
+  display: flex;
+  flex-direction: column;
+}
+.call {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 9px 0;
+}
+.call-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+.status {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.s-CONFIRMED {
+  color: var(--ok);
+}
+.s-NEEDS_HELP {
+  color: var(--danger-2);
+}
+.s-NO_ANSWER,
+.s-FAILED {
+  color: var(--fail);
+}
+.s-UNCLEAR {
+  color: var(--wait);
+}
+.s-IN_CALL {
+  color: var(--live);
+}
+.numbers {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+  word-break: break-all;
+}
+.quote {
+  font-size: 13px;
+  color: var(--ink);
+  margin-top: 4px;
+}
+.transcript {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-dim);
+  max-height: 96px;
+  overflow-y: auto;
+}
+.transcript b {
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.empty {
+  font-size: 13px;
+  color: var(--ink-faint);
+  line-height: 1.5;
+}
+
+/* ---------- timeline (bottom) ---------- */
+.timeline {
+  left: 18px;
+  right: 436px;
+  bottom: 18px;
+  padding: 12px 18px 14px;
+}
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 46px;
+}
+.bar {
+  flex: 1;
+  background: rgba(255, 106, 61, 0.35);
+  border-radius: 3px 3px 0 0;
+  min-height: 2px;
+  cursor: pointer;
+}
+.bar.on {
+  background: var(--danger);
+}
+.slider {
+  width: 100%;
+  margin: 10px 0 0;
+  accent-color: var(--danger);
+}
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+.time-now {
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 14px;
+}

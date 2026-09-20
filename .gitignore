@@ -11,3 +11,6 @@ dist
 # Local Mastra storage (memory, channel state)
 *.db
 *.db-*
+
+# Files written while the demo runs (call events, replay time)
+data/runtime

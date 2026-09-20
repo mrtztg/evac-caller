@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Evac Caller — Mockup B: Map first, floating panels</title>
+<style>
+  :root {
+    --bg: #0c1210;
+    --panel-bg: rgba(20, 28, 26, 0.82);
+    --panel-border: rgba(255, 255, 255, 0.10);
+    --ink: #eef3f0;
+    --ink-dim: #b7c3bd;
+    --ink-faint: #85938c;
+    --accent-danger: #ff6a3d;
+    --accent-danger-2: #ffb347;
+    --accent-ok: #37c98f;
+    --accent-live: #3aa0ff;
+    --accent-wait: #f4c542;
+    --accent-fail: #ff5c5c;
+    --font: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    font-family: var(--font);
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .stage {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 720px;
+  }
+
+  /* ---------- MAP BACKGROUND (SVG placeholder) ---------- */
+  .map-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .map-layer svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .map-caption {
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ---------- COMMON FLOATING PANEL ---------- */
+  .panel {
+    position: absolute;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+    z-index: 5;
+  }
+
+  /* ---------- TOP BADGES ---------- */
+  .badge-row {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 6;
+    pointer-events: none;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: rgba(15, 20, 19, 0.85);
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  }
+  .badge-replay { color: var(--accent-danger-2); }
+  .badge-replay .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-danger-2); animation: none; }
+  .badge-live { color: var(--accent-live); }
+  .badge-live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-live); }
+
+  /* ---------- INCIDENT CARD (top-left) ---------- */
+  .incident-card {
+    top: 68px;
+    left: 20px;
+    width: 360px;
+    padding: 20px 22px;
+  }
+  .incident-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+    line-height: 1.25;
+  }
+  .incident-sub {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin: 0 0 14px 0;
+  }
+  .incident-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+  }
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin-bottom: 3px;
+  }
+  .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .stat-value.danger { color: var(--accent-danger-2); }
+  .stat-value small {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-dim);
+  }
+  .incident-note {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--panel-border);
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    line-height: 1.5;
+  }
+  .risk-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .risk-pill {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--panel-border);
+  }
+  .risk-pill .n {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .risk-pill:nth-child(1) .n { color: var(--accent-fail); }
+  .risk-pill:nth-child(2) .n { color: var(--accent-danger-2); }
+  .risk-pill:nth-child(3) .n { color: var(--accent-wait); }
+  .risk-pill .l {
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+
+  /* ---------- PLACES AT RISK CARD (right) ---------- */
+  .places-card {
+    top: 68px;
+    right: 20px;
+    width: 400px;
+    max-height: 58vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .places-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 12px 20px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .places-header h2 {
+    font-size: 17px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .collapse-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    color: var(--ink-dim);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .places-list {
+    overflow-y: auto;
+    padding: 6px 10px 14px 10px;
+  }
+  .place-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 11px 10px;
+    border-radius: 10px;
+  }
+  .place-item + .place-item {
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .rank {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255,106,61,0.16);
+    color: var(--accent-danger-2);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .place-body { flex: 1; min-width: 0; }
+  .place-type {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+  .place-name {
+    font-size: 14.5px;
+    font-weight: 600;
+    margin: 1px 0 4px 0;
+    line-height: 1.3;
+  }
+  .place-meta {
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    align-items: center;
+  }
+  .place-meta .eta {
+    color: var(--accent-danger-2);
+    font-weight: 600;
+  }
+  .empty-tag {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.07);
+    color: var(--ink-faint);
+    border: 1px solid var(--panel-border);
+  }
+
+  /* ---------- CALL STATUS CARD (bottom-right) ---------- */
+  .calls-card {
+    right: 20px;
+    bottom: 132px;
+    width: 420px;
+    padding: 18px 20px 16px 20px;
+  }
+  .calls-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .calls-header h2 {
+    font-size: 17px;
+    margin: 0;
+    font-weight: 700;
+  }
+  .mini-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+  }
+  .mini-badge.live {
+    background: rgba(58,160,255,0.14);
+    color: var(--accent-live);
+    border: 1px solid rgba(58,160,255,0.35);
+  }
+  .call-entry {
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--panel-border);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .call-entry:last-child { margin-bottom: 0; }
+  .call-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .call-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .call-status {
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .status-confirmed { background: rgba(55,201,143,0.16); color: var(--accent-ok); border: 1px solid rgba(55,201,143,0.4); }
+  .status-incall { background: rgba(58,160,255,0.16); color: var(--accent-live); border: 1px solid rgba(58,160,255,0.4); }
+  .status-noanswer { background: rgba(255,92,92,0.16); color: var(--accent-fail); border: 1px solid rgba(255,92,92,0.4); }
+  .call-meta {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+    word-break: break-all;
+  }
+  .call-quote {
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+  .call-transcript {
+    margin-top: 9px;
+    padding-top: 9px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .call-transcript .who {
+    color: var(--ink-faint);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    margin-right: 6px;
+  }
+  .call-latency {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+  .call-latency b { color: var(--ink-dim); }
+  .call-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+  .call-actions button {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--panel-border);
+    background: rgba(255,255,255,0.06);
+    color: var(--ink);
+  }
+  .call-actions button.warn {
+    border-color: rgba(255,92,92,0.4);
+    color: var(--accent-fail);
+    background: rgba(255,92,92,0.10);
+  }
+
+  /* ---------- TIMELINE BAR (bottom, full width) ---------- */
+  .timeline-card {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    height: 96px;
+    padding: 14px 24px 12px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .timeline-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .timeline-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-dim);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .timeline-clock {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-danger-2);
+  }
+  .timeline-track {
+    position: relative;
+    height: 42px;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+  }
+  .tl-bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--accent-danger-2), var(--accent-danger));
+    border-radius: 3px 3px 0 0;
+    opacity: 0.55;
+    position: relative;
+  }
+  .tl-bar.now { opacity: 1; }
+  .tl-bar.future { opacity: 0.22; }
+  .tl-handle {
+    position: absolute;
+    top: -8px;
+    bottom: -18px;
+    width: 2px;
+    background: var(--accent-danger-2);
+  }
+  .tl-handle::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--accent-danger-2);
+    box-shadow: 0 0 0 4px rgba(255,179,71,0.25);
+  }
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- MAP BACKGROUND -->
+  <div class="map-layer">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="terrain" cx="50%" cy="45%" r="75%">
+          <stop offset="0%" stop-color="#2a3830"/>
+          <stop offset="55%" stop-color="#1c2a23"/>
+          <stop offset="100%" stop-color="#121c17"/>
+        </radialGradient>
+        <linearGradient id="windCone" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ff5a2e" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#ffb347" stop-opacity="0.05"/>
+        </linearGradient>
+        <radialGradient id="hotspotGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff8a3d" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#ff8a3d" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- base terrain -->
+      <rect x="0" y="0" width="1600" height="900" fill="url(#terrain)"/>
+      <rect x="24" y="24" width="1552" height="852" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+
+      <!-- faint contour lines to suggest terrain -->
+      <g stroke="rgba(255,255,255,0.045)" stroke-width="1.5" fill="none">
+        <path d="M 80 700 Q 400 620 700 680 T 1500 640"/>
+        <path d="M 60 780 Q 420 700 760 760 T 1540 720"/>
+        <path d="M 120 220 Q 460 160 800 210 T 1480 180"/>
+        <path d="M 200 340 Q 520 280 860 330 T 1500 300"/>
+      </g>
+
+      <!-- roads -->
+      <g stroke="rgba(255,255,255,0.09)" stroke-width="3" fill="none">
+        <path d="M 0 520 L 1600 460"/>
+        <path d="M 700 0 L 780 900"/>
+      </g>
+
+      <!-- wind cone: danger zone pointing east / north-east from fire cluster -->
+      <path d="M 760 470 L 1480 260 L 1560 760 Z" fill="url(#windCone)"/>
+      <path d="M 760 470 L 1480 260 L 1560 760 Z" fill="none" stroke="#ff6a3d" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.6"/>
+
+      <!-- fire hotspot cluster -->
+      <g>
+        <circle cx="760" cy="470" r="90" fill="url(#hotspotGlow)"/>
+        <circle cx="745" cy="452" r="5" fill="#ff8a3d"/>
+        <circle cx="762" cy="468" r="6" fill="#ff6a3d"/>
+        <circle cx="778" cy="455" r="4" fill="#ffb347"/>
+        <circle cx="730" cy="480" r="4" fill="#ff8a3d"/>
+        <circle cx="770" cy="490" r="5" fill="#ff6a3d"/>
+        <circle cx="800" cy="475" r="4" fill="#ffb347"/>
+        <circle cx="740" cy="500" r="3" fill="#ff8a3d"/>
+        <circle cx="790" cy="500" r="4" fill="#ff6a3d"/>
+        <circle cx="720" cy="460" r="3" fill="#ffb347"/>
+        <circle cx="810" cy="450" r="3" fill="#ff8a3d"/>
+        <circle cx="755" cy="435" r="3" fill="#ff6a3d"/>
+        <circle cx="695" cy="470" r="3" fill="#ffb347"/>
+      </g>
+
+      <!-- place pin markers -->
+      <g fill="#eef3f0">
+        <!-- pin helper: circle head + small triangle tail, simplified as teardrop via path -->
+        <g transform="translate(680,430)">
+          <path d="M0,-18 C10,-18 16,-10 16,-2 C16,8 0,22 0,22 C0,22 -16,8 -16,-2 C-16,-10 -10,-18 0,-18 Z" fill="#ff6a3d" stroke="#1c2a23" stroke-width="1.5"/>
+          <circle cx="0" cy="-2" r="5" fill="#1c2a23"/>
+        </g>
+        <g transform="translate(640,410)">
+          <path d="M0,-15 C8,-15 13,-8 13,-2 C13,7 0,18 0,18 C0,18 -13,7 -13,-2 C-13,-8 -8,-15 0,-15 Z" fill="#ff6a3d" stroke="#1c2a23" stroke-width="1.5"/>
+          <circle cx="0" cy="-2" r="4" fill="#1c2a23"/>
+        </g>
+        <g transform="translate(600,470)">
+          <path d="M0,-15 C8,-15 13,-8 13,-2 C13,7 0,18 0,18 C0,18 -13,7 -13,-2 C-13,-8 -8,-15 0,-15 Z" fill="#ffb347" stroke="#1c2a23" stroke-width="1.5"/>
+          <circle cx="0" cy="-2" r="4" fill="#1c2a23"/>
+        </g>
+        <g transform="translate(800,390)">
+          <path d="M0,-15 C8,-15 13,-8 13,-2 C13,7 0,18 0,18 C0,18 -13,7 -13,-2 C-13,-8 -8,-15 0,-15 Z" fill="#ffb347" stroke="#1c2a23" stroke-width="1.5"/>
+          <circle cx="0" cy="-2" r="4" fill="#1c2a23"/>
+        </g>
+        <g transform="translate(730,395)">
+          <path d="M0,-15 C8,-15 13,-8 13,-2 C13,7 0,18 0,18 C0,18 -13,7 -13,-2 C-13,-8 -8,-15 0,-15 Z" fill="#ffb347" stroke="#1c2a23" stroke-width="1.5"/>
+          <circle cx="0" cy="-2" r="4" fill="#1c2a23"/>
+        </g>
+        <g transform="translate(830,480)">
+          <path d="M0,-15 C8,-15 13,-8 13,-2 C13,7 0,18 0,18 C0,18 -13,7 -13,-2 C-13,-8 -8,-15 0,-15 Z" fill="#ffb347" stroke="#1c2a23" stroke-width="1.5"/>
+          <circle cx="0" cy="-2" r="4" fill="#1c2a23"/>
+        </g>
+      </g>
+
+      <!-- north-east direction hint on cone -->
+      <text x="1420" y="300" fill="#ffb347" font-size="15" font-family="Arial, sans-serif" opacity="0.65" text-anchor="middle">NE →</text>
+    </svg>
+  </div>
+  <div class="map-caption">map (Leaflet + OpenStreetMap tiles)</div>
+
+  <!-- TOP BADGES -->
+  <div class="badge-row">
+    <div class="badge badge-replay"><span class="dot"></span>REPLAY — real data from a past fire (25 Jul 2026)</div>
+    <div class="badge badge-live"><span class="dot"></span>LIVE CALLS via SLNG</div>
+  </div>
+
+  <!-- INCIDENT CARD -->
+  <div class="panel incident-card">
+    <p class="incident-title">La Vall d'Uixó wildfire</p>
+    <p class="incident-sub">Castellón, Spain — 25 Jul 2026 · REPLAY of real data</p>
+    <div class="incident-grid">
+      <div>
+        <div class="stat-label">Time now</div>
+        <div class="stat-value">16:00 <small>local</small></div>
+      </div>
+      <div>
+        <div class="stat-label">Fire hotspots</div>
+        <div class="stat-value danger">197</div>
+      </div>
+      <div>
+        <div class="stat-label">Wind</div>
+        <div class="stat-value">41 <small>km/h, west</small></div>
+      </div>
+      <div>
+        <div class="stat-label">Spread estimate</div>
+        <div class="stat-value danger">4.1 <small>km/h</small></div>
+      </div>
+    </div>
+    <div class="risk-row">
+      <div class="risk-pill"><div class="n">26</div><div class="l">in 1 h</div></div>
+      <div class="risk-pill"><div class="n">67</div><div class="l">in 3 h</div></div>
+      <div class="risk-pill"><div class="n">158</div><div class="l">in 6 h</div></div>
+    </div>
+    <div class="incident-note">
+      Wind from Valencia airport (LEVC, METAR). Hotspots from latest satellite pass, 13:33 UTC. Spread is 10% of wind speed — an estimate, not a fire simulation.
+    </div>
+  </div>
+
+  <!-- PLACES AT RISK CARD -->
+  <div class="panel places-card">
+    <div class="places-header">
+      <h2>Places at risk</h2>
+      <div class="collapse-btn">–</div>
+    </div>
+    <div class="places-list">
+
+      <div class="place-item">
+        <div class="rank">1</div>
+        <div class="place-body">
+          <div class="place-type">Health centre</div>
+          <div class="place-name">Centre de Salut la Vall d'Uixó 2</div>
+          <div class="place-meta">
+            <span>0.7 km</span>
+            <span>· fire to the north</span>
+            <span class="eta">less than 1 hour</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="place-item">
+        <div class="rank">2</div>
+        <div class="place-body">
+          <div class="place-type">Health centre</div>
+          <div class="place-name">Centre de Salut de la Vall d'Uixó I</div>
+          <div class="place-meta">
+            <span>1.1 km</span>
+            <span>· fire to the north-west</span>
+            <span class="eta">less than 1 hour</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="place-item">
+        <div class="rank">3</div>
+        <div class="place-body">
+          <div class="place-type">Health centre</div>
+          <div class="place-name">Centre de Salut Nules</div>
+          <div class="place-meta">
+            <span>2.4 km</span>
+            <span>· fire to the west</span>
+            <span class="eta">less than 1 hour</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="place-item">
+        <div class="rank">4</div>
+        <div class="place-body">
+          <div class="place-type">Nursery</div>
+          <div class="place-name">Centre d'Educació Infantil Carbonaire</div>
+          <div class="place-meta">
+            <span>0.4 km</span>
+            <span>· fire to the north-east</span>
+            <span class="eta">less than 1 hour</span>
+          </div>
+          <span class="empty-tag">likely empty: weekend</span>
+        </div>
+      </div>
+
+      <div class="place-item">
+        <div class="rank">5</div>
+        <div class="place-body">
+          <div class="place-type">Nursery</div>
+          <div class="place-name">Col·legi d'Educació Infantil Sagrado Corazón</div>
+          <div class="place-meta">
+            <span>0.9 km</span>
+            <span>· fire to the north</span>
+            <span class="eta">less than 1 hour</span>
+          </div>
+          <span class="empty-tag">likely empty: weekend</span>
+        </div>
+      </div>
+
+      <div class="place-item">
+        <div class="rank">6</div>
+        <div class="place-body">
+          <div class="place-type">School</div>
+          <div class="place-name">Col·legi d'Educació Infantil i Primària Rosari</div>
+          <div class="place-meta">
+            <span>0.5 km</span>
+            <span>· fire to the north-east</span>
+            <span class="eta">less than 1 hour</span>
+          </div>
+          <span class="empty-tag">likely empty: weekend</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALL STATUS CARD -->
+  <div class="panel calls-card">
+    <div class="calls-header">
+      <h2>Calls</h2>
+      <span class="mini-badge live">LIVE CALLS via SLNG</span>
+    </div>
+
+    <div class="call-entry">
+      <div class="call-top">
+        <div class="call-name">Centre de Salut la Vall d'Uixó 2</div>
+        <div class="call-status status-confirmed">CONFIRMED</div>
+      </div>
+      <div class="call-meta">call 987fd3a8-7a7f-4451-a01b-ca133cfb4b4b · 116 s</div>
+      <div class="call-quote">"yes understood"</div>
+    </div>
+
+    <div class="call-entry">
+      <div class="call-top">
+        <div class="call-name">Centre de Salut de la Vall d'Uixó I</div>
+        <div class="call-status status-incall">IN CALL</div>
+      </div>
+      <div class="call-meta">call a09b5ad8-5144-4a8e-b206-e9af48f3ee1c · 51 s so far</div>
+      <div class="call-latency">
+        <span>end-to-end <b>1.97 s</b></span>
+        <span>LLM first token <b>0.81 s</b></span>
+        <span>TTS first audio <b>0.21 s</b></span>
+      </div>
+      <div class="call-transcript">
+        <div><span class="who">Agent</span>"This is an exercise, not a real emergency. A wildfire is 1.1 km to the north-west of Centre de Salut de la Vall d'Uixó I."</div>
+        <div style="margin-top:4px;"><span class="who">Caller</span>"Which road should we use?"</div>
+      </div>
+    </div>
+
+    <div class="call-entry">
+      <div class="call-top">
+        <div class="call-name">Centre de Salut Nules</div>
+        <div class="call-status status-noanswer">NO ANSWER</div>
+      </div>
+      <div class="call-actions">
+        <button>Call again</button>
+        <button class="warn">Escalated to 112</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPLAY TIMELINE BAR -->
+  <div class="panel timeline-card">
+    <div class="timeline-top">
+      <div class="timeline-title">Replay timeline · hotspot count</div>
+      <div class="timeline-clock">14:00 UTC · 16:00 local</div>
+    </div>
+    <div class="timeline-track">
+      <!-- 11 hourly bars, 09:00 -> 19:00, values: 0,1,1,27,58,197,197,216,216,216,216 -->
+      <div class="tl-bar" style="height:2%;"></div>
+      <div class="tl-bar" style="height:2%;"></div>
+      <div class="tl-bar" style="height:2%;"></div>
+      <div class="tl-bar" style="height:29%;"></div>
+      <div class="tl-bar" style="height:60%;"></div>
+      <div class="tl-bar now" style="height:91%;">
+        <div class="tl-handle"></div>
+      </div>
+      <div class="tl-bar future" style="height:91%;"></div>
+      <div class="tl-bar future" style="height:100%;"></div>
+      <div class="tl-bar future" style="height:100%;"></div>
+      <div class="tl-bar future" style="height:100%;"></div>
+      <div class="tl-bar future" style="height:100%;"></div>
+    </div>
+    <div class="timeline-labels">
+      <span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span>
+      <span>14:00</span><span>15:00</span><span>16:00</span><span>17:00</span><span>18:00</span><span>19:00</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
