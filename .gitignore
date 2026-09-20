@@ -17,3 +17,7 @@ data/runtime
 
 # TypeScript incremental build info
 *.tsbuildinfo
+
+# Vercel CLI (project link and the token it pulls)
+.vercel
+.env.local
