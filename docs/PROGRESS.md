@@ -1,7 +1,7 @@
 # Progress
 
 **Current milestone:** M2 (real fire data and places at risk)
-**Status (00:15, Sun):** M2 built, two reviews done (PASS, all blockers/majors fixed). Waiting for the human demo steps 6-8 (Telegram + one call) before the gate.
+**Status (Sun 00:55):** M2 **done** (gate passed). Next milestone: M3 (map dashboard), which starts with the UI gate (mockups).
 
 ## M2 so far
 - Other team (`eldtechnologies/hackbarna-wildfire`, "Ojo de Fuego"): Deepfire API + 3D globe + 5/10/20 km buffer rings, Los Gallardos fire. Ours: FIRMS + measured wind cone + OSM places, then approval and real phone calls. Different fire.
@@ -23,6 +23,8 @@
 - Research on existing systems: `docs/research-existing-solutions.md`.
 
 ## Evidence
+- M2 gate (Sun 00:50): human test passed. Telegram answers use the real replay data; "Call the care homes" + Approve rang the demo phone and the agent spoke the exercise wording. Call ID not saved.
+- Two bugs found by the human test, both fixed: the bot process was still running M1 code (restart needed after the fixture change), and place lookup matched the whole phrase, so "Residència de Majors in Borriana" found nothing (now word by word).
 - Call 1 `a09b5ad8-5144-4a8e-b206-e9af48f3ee1c` (18:51, prompt v1): rang, greeting named the place, 51.5 s, completed. Background talk interrupted the agent for 30 s before the key message. Latency avg: e2e 2.23 s, LLM first token 0.68 s, TTS first audio 0.24 s. Fix: v2 speaks the key message in the greeting.
 
 - Call 2 `987fd3a8-7a7f-4451-a01b-ca133cfb4b4b` (19:35, prompt v3, quiet room): key message in greeting; "Which road?" answered "I do not have information about roads... call 112" (no invention); asked for confirmation and help needed; recorded "I'm fine". 116 s. Latency avg: e2e 1.97 s, LLM 0.81 s, TTS 0.21 s. Issues fixed in v4: robotic "You asked: ..." when it didn't understand; said "End of call" without hanging up.
@@ -36,8 +38,8 @@
 - Places: now from the M2 replay (the M1 test fixture was removed).
 
 ## Next
-- M2 gate: human runs demo steps 6-8 (Telegram + one call), then `pnpm agent:sync` is needed first (prompt v5 adds `call_context`: "This is an exercise...").
-- M3: UI gate (mockups) first.
+- M3 (06:30-09:30 in the plan): **UI gate first** - 2-3 mockups in `docs/mockups/`, user chooses. Then the Next.js map page (hotspots, danger zone, ranked places, replay slider, call status + transcript + numbers).
+- The dashboard slider should set the replay time (`REPLAY_TIME` today).
 
 ## Blockers
 - None.
