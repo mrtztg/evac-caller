@@ -1,7 +1,7 @@
 # Progress
 
 **Current milestone:** M4 (evals, code scan, submission)
-**Status (Sun 13:47, clock time):** M3 **done**. M4 all built: Galtea dropped at the gate, README, `docs/SUBMISSION.md`, `docs/demo-scripts/M4.md` and `docs/DEMO-STAGE-SCRIPT.md` ready, reviewer and verifier both run and their findings fixed. Left, all human: Norma scan, demo video, fill the three TODOs in SUBMISSION.md, submit, save the receipt. **M4 is marked done when the receipt is in SUBMISSION.md.**
+**Status (Sun 13:47, clock time):** M3 **done**. M4 all built: Galtea dropped at the gate, README, `docs/SUBMISSION.md`, `docs/demo-scripts/M4.md` and `docs/DEMO-STAGE-SCRIPT.md` ready, reviewer and verifier both run and their findings fixed. Left, all human and in this order: **record the video (`docs/RECORD-THE-VIDEO.md`) — the form will not accept a submission without the link** — then fill the three TODOs in SUBMISSION.md, submit, save the receipt. Norma scan only if time is left. The demo itself is live on stage: `docs/DEMO-STAGE-SCRIPT.md`. **M4 is marked done when the receipt is in SUBMISSION.md.**
 **Two real phone calls were made with `pnpm call:test` (call IDs in Evidence below). What is still untested end to end is the Telegram Approve -> call path since M2, and every dashboard click. The list of human tests is `docs/TEST-BEFORE-DEMO.md`. Run it before the demo.**
 **Real deadline: Sunday 14:30 CEST.** The times written in PLAN.md and in the M0-M2 notes below are plan times, not clock times; they are about 11 hours ahead of the real clock. Use `date`.
 
