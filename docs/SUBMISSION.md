@@ -36,7 +36,7 @@ In the Valencia floods of October 2024, the alert reached phones late and many p
 
 ## How we built it
 
-- **pnpm + TypeScript monorepo**, Node 22. `packages/core` holds the pure logic (fire replay, wind, danger zone, places at risk, ranking) with 38 tests (19 in `packages/core`, 19 in `apps/agent`) and no network calls in tests.
+- **pnpm + TypeScript monorepo**, Node 22. `packages/core` holds the pure logic (fire replay, wind, danger zone, places at risk, ranking). 38 tests in total, 19 in `packages/core` and 19 in `apps/agent`, with no network calls in tests.
 - **Mastra** agent on Telegram. The approval is a Mastra tool approval: `call_places` has `requireApproval: true`, and the Approve button press is recorded (Telegram user id, name, time) before the tool will run.
 - **SLNG** voice agent over a Vonage SIP trunk, started with `POST /v1/agents/{id}/calls` and real call arguments.
 - **Nebius Token Factory** for the coordinator LLM and the call-outcome classifier.
