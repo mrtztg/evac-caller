@@ -96,7 +96,6 @@ The dashboard and the Telegram messages show these numbers for every call.
 - **SLNG**: the outbound voice agent and the phone calls (`POST /v1/agents/{id}/calls` over a Vonage SIP trunk).
 - **Mastra**: the Telegram coordinator agent, its memory, and the tool approval that holds the call until a human presses Approve.
 - **Nebius Token Factory**: the coordinator LLM and the call-outcome classifier.
-- **Galtea**: evaluation of the phone agent and the bot (M4).
 
 Note: Vonage supplies the phone line, but Vonage's own prize challenge is for its Video API, so this project does not enter it.
 

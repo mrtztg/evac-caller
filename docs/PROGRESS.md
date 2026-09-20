@@ -1,7 +1,7 @@
 # Progress
 
 **Current milestone:** M4 (evals, code scan, submission)
-**Status (Sun 13:06, clock time):** M3 **done** (gate passed). README written. Next: Galtea, Norma, demo video, submit.
+**Status (Sun 14:02, clock time):** M3 **done**. M4 in progress: Galtea dropped at the gate, README and `docs/SUBMISSION.md` ready. Left: Norma scan (user runs it), demo video, submit.
 **Nothing is tested with a real phone or a real browser click yet. The list of human tests is `docs/TEST-BEFORE-DEMO.md`. Run it before the demo.**
 **Real deadline: Sunday 14:30 CEST.** The times written in PLAN.md and in the M0-M2 notes below are plan times, not clock times; they are about 11 hours ahead of the real clock. Use `date`.
 
@@ -54,7 +54,8 @@
 - Places: now from the M2 replay (the M1 test fixture was removed).
 
 ## Next
-- M4 (must be finished by 14:30): README is done. Left: Galtea eval, Norma scan, demo video, submit.
+- M4 (must be finished by 14:30): README and `docs/SUBMISSION.md` are done, `docs/demo-scripts/M4.md` says what to check before submitting. Left: Norma scan (user), demo video (user, recorded while running the test list), fill the three TODO lines in SUBMISSION.md, submit, save the receipt.
+- Galtea is **out** (gate, 13:52). The harness built for it (`pnpm ask`, `evals/galtea/`) was reverted, so no dead code. No document may claim a Galtea evaluation.
 - Before the demo: run `docs/TEST-BEFORE-DEMO.md` (Telegram, phone, browser clicks). Save the call ID this time.
 
 ## Blockers
