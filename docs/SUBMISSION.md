@@ -30,6 +30,16 @@ Evac Caller does the opposite. It works on the small number of places where evac
 
 The dashboard shows the map, the ranked list and every call with its transcript, duration, latency, model and tokens.
 
+## Tell us more about it — short version (use if the field has a limit)
+
+Wildfire alerts today are one-way. ES-Alert messages every phone in an area and nobody knows who read it. In the Valencia floods of 2024 the alert arrived and people still did not act — the gap was not the alert, it was that nobody knew who had heard it. That gap hurts most at hospitals, care homes, schools and nurseries, where evacuation is slow.
+
+Evac Caller finds the places in a fire's path, asks a human to approve, and then an AI voice agent phones each one and confirms they heard.
+
+We replay a real fire (Vall d'Uixó, Castellón, July 2026) from NASA FIRMS satellite hotspots and measured wind, estimate a danger cone for 1, 3 and 6 hours, and rank the hospitals, care homes and schools inside it by how soon the fire can reach them. The coordinator gets that list on Telegram and presses Approve. No call can happen without a recorded approval — enforced in code, covered by a test. The voice agent says how far the fire is and in which direction, answers questions, and never invents facts: asked which road to use, it says it does not know and gives 112. Each call is classified from its transcript, and the model must quote the caller's own words as evidence — no quote, no confirmation. Every place that did not confirm goes back to the human with "call again" or "escalate to 112".
+
+It is a replay, not a live incident, and every call rings our own demo phone with the agent saying it is an exercise. The danger zone is a wind cone, not a fire model. Evac Caller does not replace ES-Alert or 112 — it works next to them, on the places where somebody has to be sure.
+
 ## Why it matters
 
 In the Valencia floods of October 2024, the alert reached phones late and many people did not act. The gap was not the alert; it was that nobody knew who had heard it. Evac Caller closes that gap for the places where a missed message costs the most, and it hands every unanswered place back to a human instead of hiding it in a dashboard.
