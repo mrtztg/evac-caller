@@ -1,7 +1,8 @@
 # Progress
 
-**Current milestone:** M3 (map dashboard)
-**Status (Sun 13:00, clock time):** M3 built, demo script written, reviewer and verifier running. Gate not passed yet.
+**Current milestone:** M4 (evals, code scan, submission)
+**Status (Sun 13:06, clock time):** M3 **done** (gate passed). README written. Next: Galtea, Norma, demo video, submit.
+**Nothing is tested with a real phone or a real browser click yet. The list of human tests is `docs/TEST-BEFORE-DEMO.md`. Run it before the demo.**
 **Real deadline: Sunday 14:30 CEST.** The times written in PLAN.md and in the M0-M2 notes below are plan times, not clock times; they are about 11 hours ahead of the real clock. Use `date`.
 
 ## M3 so far
@@ -13,6 +14,10 @@
 - Verified: `/api/incident` at the default hour returns 197 hotspots, counts 26/67/158 and the same first three places as `pnpm replay`. `scripts/check.sh` is OK (36 tests).
 - Next.js needed `resolve.extensionAlias` (`.js` -> `.ts`) because `packages/core` imports with `.js` endings.
 - Run it: `pnpm web` (port 3000) next to `pnpm bot`.
+- Verifier: every automated step passes; `/api/incident` matches `pnpm replay` character for character. Everything else needs a human.
+- Reviewer: PASS, no blockers. 6 majors, all fixed: the `all: unset` button styling, missing `res.ok`/`catch` on the dashboard fetches, `/api/replay-time` crashing on a bad body, `/api/replay-time` accepting any date, the map needing a `setView`, and the big one - moving the slider used to change the facts spoken on the phone for an already-approved place. The calls now use the hour the coordinator was shown (`rememberShownHour`, test in `apps/agent/src/bot/incident.test.ts`).
+- Known gap: `rememberShownHour` is one value per bot process, so it assumes one coordinator.
+- CARTO basemap tiles now need an API key and watermark every tile, so the map uses plain OpenStreetMap tiles darkened with a CSS filter.
 
 ## M2 so far
 - Other team (`eldtechnologies/hackbarna-wildfire`, "Ojo de Fuego"): Deepfire API + 3D globe + 5/10/20 km buffer rings, Los Gallardos fire. Ours: FIRMS + measured wind cone + OSM places, then approval and real phone calls. Different fire.
@@ -49,8 +54,8 @@
 - Places: now from the M2 replay (the M1 test fixture was removed).
 
 ## Next
-- M3 gate: reviewer + verifier results, then the user marks M3 done.
-- M4 (must be finished by 14:30): README (setup, architecture, data sources, limits), Galtea evals if time allows, Norma scan if time allows, push, submit.
+- M4 (must be finished by 14:30): README is done. Left: Galtea eval, Norma scan, demo video, submit.
+- Before the demo: run `docs/TEST-BEFORE-DEMO.md` (Telegram, phone, browser clicks). Save the call ID this time.
 
 ## Blockers
 - None.
