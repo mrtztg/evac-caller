@@ -100,6 +100,10 @@ body {
   color: var(--danger-2);
   border-color: rgba(255, 179, 71, 0.4);
 }
+.badge.problem {
+  color: var(--fail);
+  border-color: rgba(255, 92, 92, 0.5);
+}
 .badge.live {
   color: var(--live);
   border-color: rgba(58, 160, 255, 0.4);

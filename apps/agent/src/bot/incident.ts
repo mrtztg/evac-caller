@@ -28,8 +28,10 @@ export interface Incident {
   /** Spoken at the start of every call: this is an exercise with a replayed past fire, not a live fire. */
   call_context: string;
   incident_name: string;
-  /** The replayed moment. */
+  /** The replayed moment, in words. */
   replay_time: string;
+  /** The same moment as ISO UTC, so a later call can replay exactly the hour the coordinator saw. */
+  replay_time_iso: string;
   /** Latest satellite pass used: how old the fire data is. */
   data_time: string;
   wind: string;
@@ -38,8 +40,6 @@ export interface Incident {
   places: PlaceAtRisk[];
 }
 
-// The dashboard slider wins (it writes data/runtime/replay-time.txt), then REPLAY_TIME, then the default.
-
 /** Spoken and shown to people in Spain: "25 July, 15:02 Spanish time". */
 export const localTime = (iso: string) =>
   `${new Date(iso).toLocaleString("en-GB", { timeZone: "Europe/Madrid", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })} Spanish time`;
@@ -47,10 +47,23 @@ export const localTime = (iso: string) =>
 // Loaded once: the fixture does not change while the bot runs.
 let fixture: Fixture | undefined;
 
-export function loadIncident(): Incident {
+/**
+ * The hour the coordinator last saw a list of places for. The calls use this hour, not the hour the
+ * dashboard slider is on now, so moving the slider cannot change what the phone agent says about a
+ * place the coordinator already approved.
+ */
+let shownIso: string | null = null;
+
+export const rememberShownHour = (iso: string) => {
+  shownIso = iso;
+};
+export const shownHour = () => shownIso;
+
+/** Without `iso`: the dashboard slider wins, then REPLAY_TIME, then the default hour. */
+export function loadIncident(iso?: string): Incident {
   fixture ??= loadFixture(DEMO_FIRE);
   const fx = fixture;
-  const time = new Date(readReplayTime() || process.env.REPLAY_TIME || DEFAULT_REPLAY_TIME);
+  const time = new Date(iso || readReplayTime() || process.env.REPLAY_TIME || DEFAULT_REPLAY_TIME);
   if (Number.isNaN(time.getTime()))
     throw new Error(`REPLAY_TIME is not a date: ${process.env.REPLAY_TIME}`);
   const inc = incidentAt(fx, time);
@@ -59,6 +72,7 @@ export function loadIncident(): Incident {
     call_context: `This is an exercise, not a real emergency. It uses real data from a past fire, replayed at ${localTime(inc.time)}.`,
     incident_name: fx.meta.name,
     replay_time: localTime(inc.time),
+    replay_time_iso: inc.time,
     data_time: inc.data_time ? localTime(inc.data_time) : "no satellite detection yet",
     wind: inc.wind_text,
     counts: inc.counts,

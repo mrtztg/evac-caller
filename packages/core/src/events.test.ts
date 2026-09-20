@@ -50,3 +50,12 @@ test("the replay time is empty until the dashboard sets it", () => {
 test("a replay time that is not a date is refused", () => {
   expect(() => writeReplayTime("later")).toThrow(/not a date/);
 });
+
+test("a damaged replay time file reads as empty, so the bot falls back instead of crashing", () => {
+  writeFileSync(
+    join(process.env.EVAC_RUNTIME_DIR as string, "replay-time.txt"),
+    "2026-07-25T14:0",
+    "utf8",
+  );
+  expect(readReplayTime()).toBeNull();
+});

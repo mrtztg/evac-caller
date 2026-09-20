@@ -21,20 +21,29 @@ const localHour = (iso: string) =>
     minute: "2-digit",
   });
 
+/** Keeps the last good answer on screen: a broken request must never blank the demo. */
+async function getJson<T>(url: string): Promise<T> {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`${url} answered ${res.status}`);
+  return (await res.json()) as T;
+}
+
 export default function Page() {
   const [incident, setIncident] = useState<IncidentResponse | null>(null);
   const [events, setEvents] = useState<CallEvent[]>([]);
   const [index, setIndex] = useState<number | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+  const [problem, setProblem] = useState<string | null>(null);
 
   // First load: no hour asked for, so the API answers with the hour the bot is replaying.
   useEffect(() => {
-    void fetch("/api/incident")
-      .then((r) => r.json())
-      .then((data: IncidentResponse) => {
+    void getJson<IncidentResponse>("/api/incident")
+      .then((data) => {
         setIncident(data);
-        setIndex(data.hours.indexOf(data.time));
-      });
+        setIndex(Math.max(0, data.hours.indexOf(data.time)));
+        setProblem(null);
+      })
+      .catch((err: Error) => setProblem(err.message));
   }, []);
 
   // The slider: show the hour, and tell the bot to replay the same hour.
@@ -42,21 +51,27 @@ export default function Page() {
     setIndex(i);
     const time = hours[i];
     if (!time) return;
-    void fetch(`/api/incident?t=${encodeURIComponent(time)}`)
-      .then((r) => r.json())
-      .then(setIncident);
+    void getJson<IncidentResponse>(`/api/incident?t=${encodeURIComponent(time)}`)
+      .then((data) => {
+        // A slow earlier answer must not overwrite the hour that is on screen now.
+        setIncident((current) => (current && data.time !== time ? current : data));
+        setProblem(null);
+      })
+      .catch((err: Error) => setProblem(err.message));
     void fetch("/api/replay-time", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ time }),
-    });
+    }).catch(() => setProblem("could not tell the bot which hour to replay"));
   }, []);
 
   useEffect(() => {
     const load = () =>
-      fetch("/api/calls")
-        .then((r) => r.json())
-        .then((data: { events: CallEvent[] }) => setEvents(data.events));
+      getJson<{ events: CallEvent[] }>("/api/calls")
+        .then((data) => setEvents(data.events))
+        .catch(() => {
+          // One failed poll is not worth a message on stage; the next one is 2 s away.
+        });
     void load();
     const id = setInterval(load, CALLS_POLL_MS);
     return () => clearInterval(id);
@@ -71,8 +86,10 @@ export default function Page() {
       <Map incident={incident} selected={selected} onSelect={setSelected} />
 
       <div className="badges">
+        {problem ? <span className="badge problem">⚠ {problem}</span> : null}
         <span className="badge replay">
-          <span className="dot" /> REPLAY — real data from a past fire (25 Jul 2026)
+          <span className="dot" /> REPLAY — real data from a past fire
+          {incident ? ` (${dayHour(incident.time).slice(0, 6)} 2026)` : ""}
         </span>
         <span className="badge live">
           <span className="dot" /> LIVE CALLS via SLNG
@@ -218,8 +235,14 @@ function CallCard({ row }: { row: CallRow }) {
     row.call_id ? `call ${row.call_id}` : null,
     row.duration_s !== null ? `${Math.round(row.duration_s)} s` : null,
     row.api_latency_ms !== null ? `dispatch ${row.api_latency_ms} ms` : null,
-    row.latency_s?.e2e_avg !== null && row.latency_s
-      ? `voice e2e ${row.latency_s.e2e_avg} s, LLM ${row.latency_s.llm_ttft_avg} s, TTS ${row.latency_s.tts_ttfb_avg} s`
+    row.latency_s
+      ? [
+          row.latency_s.e2e_avg === null ? null : `voice e2e ${row.latency_s.e2e_avg} s`,
+          row.latency_s.llm_ttft_avg === null ? null : `LLM ${row.latency_s.llm_ttft_avg} s`,
+          row.latency_s.tts_ttfb_avg === null ? null : `TTS ${row.latency_s.tts_ttfb_avg} s`,
+        ]
+          .filter(Boolean)
+          .join(", ") || null
       : null,
     row.llm
       ? `classifier ${row.llm.model}, ${row.llm.latency_ms} ms, ${row.llm.input_tokens ?? "?"}+${row.llm.output_tokens ?? "?"} tokens`
@@ -238,8 +261,9 @@ function CallCard({ row }: { row: CallRow }) {
       {row.followed_up ? <div className="tag">{row.followed_up}</div> : null}
       {row.transcript.length ? (
         <div className="transcript">
-          {row.transcript.map((t) => (
-            <div key={`${t.speaker}-${t.text}`}>
+          {row.transcript.map((t, i) => (
+            // Two identical turns are possible, so the position in the call is the key.
+            <div key={`${i}-${t.speaker}`}>
               <b>{t.speaker}:</b> {t.text}
             </div>
           ))}

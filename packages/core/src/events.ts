@@ -1,6 +1,6 @@
 // What happened on the phone line, written by the Telegram bot and read by the dashboard.
 // One JSON object per line, append only, so both sides can restart without losing the demo.
-import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { appendFileSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { runtimeDir } from "./paths.js";
 
@@ -99,5 +99,8 @@ export function readReplayTime(): string | null {
 export function writeReplayTime(iso: string): void {
   if (Number.isNaN(new Date(iso).getTime())) throw new Error(`not a date: ${iso}`);
   ensureDir();
-  writeFileSync(replayFile(), `${iso}\n`, "utf8");
+  // Written to a temporary file and renamed, so the bot never reads half a line.
+  const tmp = `${replayFile()}.tmp`;
+  writeFileSync(tmp, `${iso}\n`, "utf8");
+  renameSync(tmp, replayFile());
 }

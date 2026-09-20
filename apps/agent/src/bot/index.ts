@@ -8,7 +8,7 @@ import { Memory } from "@mastra/memory";
 import type { ActionEvent } from "chat";
 import type { Approval } from "../slng/client.js";
 import { queueCalls } from "./calls.js";
-import { loadIncident } from "./incident.js";
+import { loadIncident, shownHour } from "./incident.js";
 import { NEBIUS_MODEL } from "./model.js";
 import { APPROVAL_KEY, createCallPlacesTool, placesAtRiskTool, THREAD_KEY } from "./tools.js";
 
@@ -57,7 +57,8 @@ const coordinator = new Agent({
           );
         }
         const thread = event.thread;
-        const incident = loadIncident();
+        // Same hour as the list the coordinator acted on, so Call again repeats the same facts.
+        const incident = loadIncident(shownHour() ?? undefined);
         const place = incident.places.find((p) => p.id === event.value);
         if ((event.actionId === "call_again" || event.actionId === "escalate_112") && !place) {
           // The replay hour changed since the card was sent: say so, never drop the press silently.

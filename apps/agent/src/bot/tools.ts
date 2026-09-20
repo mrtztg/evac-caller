@@ -1,7 +1,7 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { isApproval, queueCalls, type Thread } from "./calls.js";
-import { loadIncident } from "./incident.js";
+import { loadIncident, rememberShownHour, shownHour } from "./incident.js";
 
 /** Enough for a phone screen; the full ranked list is in the dashboard. */
 const LISTED = 8;
@@ -35,6 +35,8 @@ export const placesAtRiskTool = createTool({
   }),
   execute: async ({ name, type }) => {
     const { places, ...incident } = loadIncident();
+    // The calls will replay this hour, even if the dashboard slider moves before Approve.
+    rememberShownHour(incident.replay_time_iso);
     const matches = places.filter(
       (p) => (!type || p.type === type) && (!name || matchesName(p, name)),
     );
@@ -66,7 +68,8 @@ export function createCallPlacesTool(model: string) {
       if (!isApproval(approval) || !thread) {
         throw new Error("Refusing to call: no recorded approval from the Telegram Approve button");
       }
-      const incident = loadIncident();
+      // The hour the coordinator saw, not the hour the slider is on now.
+      const incident = loadIncident(shownHour() ?? undefined);
       const places = place_ids.map((id) => incident.places.find((p) => p.id === id));
       const unknown = place_ids.filter((_, i) => !places[i]);
       if (unknown.length) throw new Error(`Unknown place ids: ${unknown.join(", ")}`);
@@ -76,6 +79,7 @@ export function createCallPlacesTool(model: string) {
         status: "calls started",
         approved_by: approval.approvedBy,
         order: ordered.map((p) => p.name),
+        replayed_hour: incident.replay_time,
         note: "Every call rings the demo phone, never the real place. Results will be posted here after each call.",
       };
     },
