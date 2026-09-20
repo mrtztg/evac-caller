@@ -15,7 +15,6 @@
     "call:test": "pnpm --filter @evac/agent call:test",
     "call:status": "pnpm --filter @evac/agent call:status",
     "bot": "pnpm --filter @evac/agent bot",
-    "ask": "pnpm --filter @evac/agent ask",
     "data:fetch": "pnpm --filter @evac/core data:fetch",
     "replay": "pnpm --filter @evac/core replay",
     "web": "pnpm --filter @evac/web dev",

@@ -17,6 +17,3 @@ data/runtime
 
 # TypeScript incremental build info
 *.tsbuildinfo
-
-# Local Python venv for the Galtea eval
-.venv-galtea
