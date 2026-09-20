@@ -1,7 +1,7 @@
 "use client";
 
 import type * as L from "leaflet";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { IncidentResponse, Place } from "./types";
 
 /** Soonest arrival first: the colour of the place pin and of the danger zone ring. */
@@ -28,6 +28,8 @@ export default function Map({
   const leaflet = useRef<typeof L | null>(null);
   // Only the first incident sets the view, so the map does not jump when the slider moves.
   const framed = useRef(false);
+  // The incident can arrive before Leaflet does; this makes the drawing effect run again.
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -43,7 +45,9 @@ export default function Map({
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         })
         .addTo(map.current);
+      map.current.setView([39.83, -0.24], 11);
       layer.current = mod.layerGroup().addTo(map.current);
+      setReady(true);
     })();
     return () => {
       cancelled = true;
@@ -103,7 +107,7 @@ export default function Map({
       map.current.fitBounds(mod.latLngBounds(points).pad(1.2));
       framed.current = true;
     }
-  }, [incident, selected, onSelect]);
+  }, [ready, incident, selected, onSelect]);
 
   return <div id="map" />;
 }

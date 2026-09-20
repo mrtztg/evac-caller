@@ -134,15 +134,14 @@ export default function Page() {
               key={p.id}
               className={`place${p.id === selected ? " on" : ""}`}
               onClick={() => setSelected(p.id)}
-              style={{ all: "unset", display: "flex", width: "100%" }}
             >
               <span className="rank">{i + 1}</span>
               <span>
                 <span className="kind">{p.kind}</span>
-                <div className="place-name">{p.name}</div>
-                <div className="place-meta">
+                <span className="place-name">{p.name}</span>
+                <span className="place-meta">
                   {p.distance_km} km · fire to the {p.fire_direction} · {p.arrival_estimate}
-                </div>
+                </span>
                 {p.likely_empty ? (
                   <span className="tag">likely empty: {p.likely_empty}</span>
                 ) : null}
@@ -179,14 +178,13 @@ export default function Page() {
             <button
               type="button"
               key={hours[i]}
-              className={`bar${i === index ? " on" : ""}`}
-              style={{ all: "unset", flex: 1 }}
+              className="bar-slot"
               aria-label={`${hhmm(hours[i] ?? "")} UTC, ${n} hotspots`}
               onClick={() => goto(i, hours)}
             >
               <span
                 className={`bar${i === index ? " on" : ""}`}
-                style={{ display: "block", height: `${Math.max(2, (n / maxFront) * 46)}px` }}
+                style={{ height: `${Math.max(2, (n / maxFront) * 46)}px` }}
               />
             </button>
           ))}
